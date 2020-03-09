@@ -1,37 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package catchthebus;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Label;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
-/**
- *
- * @author User
- */
-public class GameGUI extends JFrame {
-    
+public class GameGUI extends JFrame{
     private JFrame frame;
     private JLabel lives;
     private JLabel money;
-    private JLabel pause;
+    private JButton pause;
+    private JButton tower;
+    private JLabel towerCost;
 
     
     public GameGUI() {
         
-        {//
+        {//Lives Label
         lives = new JLabel("lives-valtozo helye");
         lives.setHorizontalAlignment(JLabel.CENTER);
         lives.setPreferredSize(new Dimension(150, 40));
@@ -43,7 +32,7 @@ public class GameGUI extends JFrame {
         lives.setBackground(new java.awt.Color(189,189,189));
         }
         
-        {//
+        {//Money Label
         money = new JLabel("money-valtozo helye");
         money.setHorizontalAlignment(JLabel.CENTER);
         money.setPreferredSize(new Dimension(150, 40));
@@ -55,19 +44,32 @@ public class GameGUI extends JFrame {
         money.setBackground(new java.awt.Color(189,189,189));
         }
         
-        {//TODO javítani
+        {//Pause Button
+            pause = new JButton();
+            //pause.setBorder(BorderFactory.createLineBorder(Color.black));
+            pause.setIcon(new ImageIcon("src/Data/pause.png"));
+            pause.setBounds(1540,20,40,40);
+            pause.setBorder(null);
+            pause.setBackground(null);
+        }
         
-       // ImageIcon icon = new ImageIcon(getClass().getResource("C:\\Users\\User\\Desktop\\4FÉLÉV\\SZOFTTECH\\CatchTheBus\\src\\data\\pause.png"));
-        pause = new JLabel("");
-        Image img = new ImageIcon(this.getClass().getResource("data/pause.png")).getImage();
-        pause.setIcon((Icon) img);
-       // pause.setHorizontalAlignment(JLabel.CENTER);
-        pause.setPreferredSize(new Dimension(40, 40));
-        pause.setLayout(null);
-        pause.setBounds(1530, 20, 40, 40);
-        pause.setVisible(true);
-
-        
+        {//Tower1 Button + Cost Label
+            tower = new JButton();
+            //pause.setBorder(BorderFactory.createLineBorder(Color.black));
+            tower.setIcon(new ImageIcon("src/Data/group.png"));
+            tower.setBounds(1540,800,40,40);
+            tower.setBorder(null);
+            tower.setBackground(null);
+            
+            towerCost = new JLabel("cost");
+            towerCost.setHorizontalAlignment(JLabel.CENTER);
+            towerCost.setBounds(1540,845,40,20);
+            towerCost.setBorder(BorderFactory.createLineBorder(Color.black));
+            towerCost.setOpaque(true);
+            towerCost.setBackground(new java.awt.Color(189,189,189));
+            
+            
+            
         }
         
         
@@ -80,7 +82,10 @@ public class GameGUI extends JFrame {
         panel.add(lives);        
         panel.add(money);
         panel.add(pause);
-//ctrl shift lenyíl
+        panel.add(tower);
+        panel.add(towerCost);   
+        
+
         
        
         
@@ -94,8 +99,6 @@ public class GameGUI extends JFrame {
         frame.getContentPane().add(panel);
         frame.pack();
         frame.setVisible(true);
-
-        
     }
     
     
