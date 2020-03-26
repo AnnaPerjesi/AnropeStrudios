@@ -28,19 +28,18 @@ public class Sprite {
         this.height = height;
         this.image = image;
     }
-    
+
     public void draw(Graphics g) {
         g.drawImage(image, x, y, width, height, null);
     }
-    
-    
+
     public boolean collides(Sprite other) {
         Rectangle rect = new Rectangle(x, y, width, height);
-        Rectangle otherRect = new Rectangle(other.x, other.y, other.width, other.height);        
+        Rectangle otherRect = new Rectangle(other.x, other.y, other.width, other.height);
         return rect.intersects(otherRect);
     }
-    
-        public int getX() {
+
+    public int getX() {
         return x;
     }
 

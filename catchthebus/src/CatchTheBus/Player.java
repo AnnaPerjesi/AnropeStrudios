@@ -11,20 +11,26 @@ public class Player {
     private int lives;
     private final int STARTLIVES = 100;
     private final int STARTMONEY = 0;
+    private static Player player;
     
     public void reset(){
         this.lives = STARTLIVES;
         this.money = STARTMONEY;
     }
     
+    public static Player getPlayer(){
+        return player;
+    }
+    
     public void addMoney(int amount){
-        this.setMoney(this.getMoney()+amount);
-       // this.money += amount;
+        this.money += amount;
     }
     
     public void decreaseLife(){
-        this.setLives(this.getLives()-1);
-       // this.lives--;
+        this.lives--;
+    }
+    public void addLife(){
+        this.lives++;
     }
 
     public int getMoney() {
