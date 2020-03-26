@@ -29,6 +29,7 @@ public class GameEngine extends JPanel {
 
     private final int FPS = 60;
     private static boolean paused = false;
+    private static boolean isOver = false;
 
     
     private Timer newFrameTimer;
@@ -45,8 +46,6 @@ public class GameEngine extends JPanel {
 
         newFrameTimer = new Timer(5000 / FPS, new NewFrameListener());
         newFrameTimer.start();
-        System.out.println(newFrameTimer);
-
     }
 
     public ArrayList<Enemy> startRound() {
@@ -123,8 +122,9 @@ public class GameEngine extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            if (!GameEngine.paused) {
+            if (!GameEngine.paused && !isOver) {
                 for (int i=0; i<enemies.size(); i++) {
+                    isEnemyArrived();
                     enemies.get(i).move(level.getCoordinates(), level.getDirections());
                 }
             }
@@ -133,16 +133,19 @@ public class GameEngine extends JPanel {
 
     }
     
-    //NEW
     public static void setPaused(boolean paused) {
         GameEngine.paused = paused;
     }
-    
-    //NEW
-    public static void enemyArrived(){
-        System.out.println(enemies.size());
-        enemies.remove(0);
-        System.out.println(enemies.size());
+    public void isEnemyArrived(){
+         enemies.get(0).isArrived(level.getCoordinates(), level.getDirections());
+    }
+    public static void enemyArrived(Enemy enemy){
+        if(enemies.size() >= 2){
+        enemies.remove(enemy);
+        } else {
+            enemies.remove(enemy);
+            isOver = true;
+        }
         
     }
 
