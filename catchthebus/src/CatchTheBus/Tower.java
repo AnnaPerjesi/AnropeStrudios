@@ -12,7 +12,7 @@ public class Tower {
     private final double posX;
     private final double posY;
     /****************************************/
-    private final double lastAttack;
+    private final double lastAttack; /*COMMENT*/
     private double range;
     private double power;
     private double modifierIncrease = 1.3; //range and attack increase by upgarde?
