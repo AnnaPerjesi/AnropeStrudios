@@ -25,8 +25,9 @@ public class Enemy extends Sprite {
     private int counterDir = 0;
 
 
-    public Enemy(int x, int y, int width, int height, Image image) {
+    public Enemy(int x, int y, int width, int height, Image image, int dmg) {
         super(x, y, width, height, image);
+        dmg = this.dmg;
     }
 
     public void draw(Graphics g) {
