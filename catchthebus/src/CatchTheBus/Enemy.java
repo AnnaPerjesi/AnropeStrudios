@@ -35,43 +35,43 @@ public class Enemy extends Sprite {
     }
 
     public void move(ArrayList<Pair> cords, String dir) {
-        this.x += velx;
-        this.y += vely;
-        if (turn(cords)) {
-            switch (dir.charAt(counterDir)) {
-                case 'r':
-                    velx = speed;
-                    vely = 0;
-                    break;
-                case 'u':
-                    velx = 0;
-                    vely = -(speed);
-                    break;
-                case 'l':
-                    velx = -(speed);
-                    vely = 0;
-                    break;
-                case 'd':
-                    velx = 0;
-                    vely = speed;
-                    break;
+            this.x += velx;
+            this.y += vely;
+            
+            if (turn(cords)) {
+                switch (dir.charAt(counterDir)) {
+                    case 'r':
+                        velx = speed;
+                        vely = 0;
+                        break;
+                    case 'u':
+                        velx = 0;
+                        vely = -(speed);
+                        break;
+                    case 'l':
+                        velx = -(speed);
+                        vely = 0;
+                        break;
+                    case 'd':
+                        velx = 0;
+                        vely = speed;
+                        break;
+                }
+                counterDir++;
             }
-            counterDir++;
-            if(counterDir-1 == dir.length()){
-                System.out.println("Vége");
-                arrive();
-            }
-        }
+        
     }
 
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-    
     public boolean turn(ArrayList<Pair> cords){
         return (cords.get(counterDir).getX() == this.x && cords.get(counterDir).getY() == this.y);
     }
-    public void arrive(){
-        GameEngine.enemyArrived();
+    
+    public void isArrived(ArrayList<Pair> cords, String dir){
+        if(this.x == cords.get(dir.length()).getX() && this.y == cords.get(dir.length()).getY()-25){
+            GameEngine.enemyArrived(this);
+        }
     }
 }
