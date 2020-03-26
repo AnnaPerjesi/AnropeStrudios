@@ -57,7 +57,7 @@ public class Enemy extends Sprite {
                     break;
             }
             counterDir++;
-            if(counterDir == dir.length()){
+            if(counterDir-1 == dir.length()){
                 System.out.println("Vége");
                 arrive();
             }

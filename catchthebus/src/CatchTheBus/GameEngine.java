@@ -11,9 +11,11 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import static java.lang.System.in;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -45,9 +47,50 @@ public class GameEngine extends JPanel {
 
     public ArrayList<Enemy> startRound() {
         ArrayList<Enemy> enemies = new ArrayList();
-        Image enemyImage = new ImageIcon("src/data/pngs/pregnant.png").getImage();
-        Enemy first = new Enemy(225, 0, 50, 50, enemyImage);
-        enemies.add(first);
+        try {
+            File myObj = new File("src/data/enemies.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            String[] currencies = data.split(" ");
+            int startY = 0;
+            for (int i=0; i<currencies.length; i++) {
+                switch (currencies[i]) {
+                    case "p":
+                        Image pregnantImage = new ImageIcon("src/data/pngs/pregnant.png").getImage();
+                        Enemy pregnant = new Enemy(225, startY, 50, 50, pregnantImage, 2);
+                        enemies.add(pregnant);
+                        break;
+                    case "i":
+                        Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
+                        Enemy it = new Enemy(225, startY, 50, 50, itImage, 3);
+                        enemies.add(it);
+                        break;
+                    case "a":
+                        Image manImage = new ImageIcon("src/data/pngs/man.png").getImage();
+                        Enemy man = new Enemy(225, startY, 50, 50, manImage, 2);
+                        enemies.add(man);
+                        break;
+                    case "s":
+                        Image kidImage = new ImageIcon("src/data/pngs/kid.png").getImage();
+                        Enemy kid = new Enemy(225, startY, 50, 50, kidImage, 1);
+                        enemies.add(kid);
+                        break;
+                    case "b":
+                        Image bossImage = new ImageIcon("src/data/pngs/boss.png").getImage();
+                        Enemy boss = new Enemy(225, startY, 50, 50, bossImage, 5);
+                        enemies.add(boss);
+                        break;
+                    default: break;
+                }
+                startY = startY - 100;
+            }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
         return enemies;
     }
 
@@ -65,7 +108,9 @@ public class GameEngine extends JPanel {
     protected void paintComponent(Graphics grphcs) {
         super.paintComponent(grphcs);
         level.draw(grphcs);
-        enemies.get(0).draw(grphcs);
+        for (int i=0; i<enemies.size(); i++) {
+            enemies.get(i).draw(grphcs);
+        }
 
         this.setBackground(new java.awt.Color(223, 197, 161));
     }
@@ -75,7 +120,9 @@ public class GameEngine extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (!GameEngine.paused) {
-                enemies.get(0).move(level.getCoordinates(), level.getDirections());
+                for (int i=0; i<enemies.size(); i++) {
+                    enemies.get(i).move(level.getCoordinates(), level.getDirections());
+                }
             }
             repaint();
         }
