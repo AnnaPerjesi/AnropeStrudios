@@ -8,6 +8,7 @@ package catchthebus;
 import catchthebus.Level.Pair;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +19,7 @@ public class Enemy extends Sprite {
 
     /*LINE DELETED*/
     private int speed = 25;
-    /*NEW*/private static int dmg;
+    /*NEW*/private int dmg;
     private int velx =0;
     private int vely = speed;
     
@@ -27,7 +28,7 @@ public class Enemy extends Sprite {
 
     public Enemy(int x, int y, int width, int height, Image image, int dmg) {
         super(x, y, width, height, image);
-        dmg = this.dmg;
+        this.dmg = dmg;
     }
 
     public void draw(Graphics g) {
@@ -73,5 +74,15 @@ public class Enemy extends Sprite {
         if(this.x == cords.get(dir.length()).getX() && this.y == cords.get(dir.length()).getY()-25){
             GameEngine.enemyArrived(this);
         }
+    }
+    
+    public boolean collidesBus(Bus bus) {
+        Rectangle rect = new Rectangle(x, y, width, height);
+        Rectangle otherRect = new Rectangle(bus.x, bus.y, bus.width, bus.height);
+        return rect.intersects(otherRect);
+    }
+    
+    public int getDmg() {
+        return this.dmg;
     }
 }

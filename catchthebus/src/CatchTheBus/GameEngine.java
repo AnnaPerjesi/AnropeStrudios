@@ -36,11 +36,13 @@ public class GameEngine extends JPanel {
 
     private int levelNum = 0;
     private Level level;
+    private Player player;
     /*NEW*/private static ArrayList<Enemy> enemies;
 
     public GameEngine() {
         super();
-
+        player = new Player();
+        player.reset();
         restart();
         enemies = startRound();
 
@@ -104,7 +106,6 @@ public class GameEngine extends JPanel {
             Logger.getLogger(GameEngine.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         Image road = new ImageIcon("src/data/pngs/road.png").getImage();
-
     }
 
     @Override
@@ -114,21 +115,28 @@ public class GameEngine extends JPanel {
         for (int i=0; i<enemies.size(); i++) {
             enemies.get(i).draw(grphcs);
         }
-
         this.setBackground(new java.awt.Color(223, 197, 161));
     }
-
+    
     class NewFrameListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
+            
+            try {
             if (!GameEngine.paused && !isOver) {
                 for (int i=0; i<enemies.size(); i++) {
+                    if (enemies.get(i).collidesBus(level.getBus())) {
+                        player.decreaseLife(enemies.get(i).getDmg());
+                    }
                     isEnemyArrived();
                     enemies.get(i).move(level.getCoordinates(), level.getDirections());
                 }
             }
             repaint();
+            } catch (IndexOutOfBoundsException x) {
+                System.out.println("Ups");
+            }
         }
 
     }
@@ -147,6 +155,13 @@ public class GameEngine extends JPanel {
             isOver = true;
         }
         
+    }
+    
+    public int getPlayerLives() {
+        return this.player.getLives();
+    }
+    public int getPlayerMoney() {
+        return this.player.getMoney();
     }
 
 }

@@ -26,11 +26,11 @@ public class Player {
         this.money += amount;
     }
     
-    public void decreaseLife(){
-        this.lives--;
+    public void decreaseLife(int x){
+        this.lives = this.lives - x;
     }
-    public void addLife(){
-        this.lives++;
+    public void addLife(int x){
+        this.lives = this.lives + x;
     }
 
     public int getMoney() {
@@ -47,8 +47,5 @@ public class Player {
 
     public void setLives(int lives) {
         this.lives = lives;
-    }
-    
-    
-    
+    }      
 }

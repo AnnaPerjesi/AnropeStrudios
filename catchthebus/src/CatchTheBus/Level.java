@@ -27,6 +27,7 @@ public class Level {
     ArrayList<Road> roads;
     ArrayList<Pair> coordinates;
     String directions;
+    private Bus bus;
 
     public Level(String levelPath, String fileName) throws IOException {
         loadLevel(levelPath);
@@ -50,6 +51,8 @@ public class Level {
             }
             y++;
         }
+        Image busImage = new ImageIcon("src/data/pngs/bus.png").getImage();
+        bus = new Bus(175,790,150,75,busImage);
     }
 
     public void loadCoordinates(String fileName) throws FileNotFoundException, IOException {
@@ -81,7 +84,7 @@ public class Level {
         for (Road road : roads) {
             road.draw(g);
         }
-        
+        bus.draw(g);
     }
     
      public class Pair {
@@ -101,5 +104,9 @@ public class Level {
         public int getY() {
             return y;
         }
+    }
+     
+    public Bus getBus() {
+        return this.bus;
     }
 }

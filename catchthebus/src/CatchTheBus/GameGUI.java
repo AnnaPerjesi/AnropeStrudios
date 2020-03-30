@@ -35,9 +35,9 @@ public class GameGUI extends JFrame {
     private GameEngine gameArea;
 
     public GameGUI() {
-
+        gameArea = new GameEngine();
         {//Lives Label
-            lives = new JLabel("valtozo helye");
+            lives = new JLabel(Integer.toString(gameArea.getPlayerLives()));
             lives.setHorizontalAlignment(JLabel.CENTER);
             lives.setPreferredSize(new Dimension(150, 40));
             lives.setLayout(null);
@@ -55,7 +55,7 @@ public class GameGUI extends JFrame {
             coin.setBorder(null);
             coin.setBackground(null);
             
-            money = new JLabel("valtozo helye");
+            money = new JLabel(Integer.toString(gameArea.getPlayerMoney()));
             money.setHorizontalAlignment(JLabel.CENTER);
             money.setPreferredSize(new Dimension(150, 40));
             money.setLayout(null);
@@ -169,8 +169,6 @@ public class GameGUI extends JFrame {
             });
             
         }
-        gameArea = new GameEngine();
-
         gameArea.setLayout(null);
         gameArea.add(coin);
         gameArea.add(lives);
