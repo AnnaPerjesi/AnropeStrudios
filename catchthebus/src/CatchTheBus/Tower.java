@@ -1,7 +1,8 @@
 package catchthebus;
 
-import catchthebus.Player;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Tower extends Sprite {
 
@@ -10,12 +11,14 @@ public class Tower extends Sprite {
     private int refundCost;
     private int upgradeCost;
     private int level = 1;
-    private final int maxlevel = 10; /*IS IT ENOUHG?*/
+    private final int maxlevel = 10;
+    /*IS IT ENOUHG?*/
 
     /**
      * *************************************
      */
-    private final double lastAttack; /*COMMENT*/
+    private final double lastAttack;
+    /*COMMENT*/
 
     private double range;
     private double power;
@@ -26,9 +29,10 @@ public class Tower extends Sprite {
         lastAttack = 0;
     }
 
-    public Tower createTower(int x, int y, Image image) {
-        return new Tower(x, y, 50, 50, image);
+    public Tower createTower(Image image) {
+        return new Tower(x, y, 100, 100, image);
     }
+    
 
     /**
      * refund money to the player, when it sells tower
@@ -87,5 +91,4 @@ public class Tower extends Sprite {
     public double getModifierIncrease() {
         return modifierIncrease;
     }
-
 }

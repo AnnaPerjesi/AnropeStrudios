@@ -4,20 +4,21 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
 
 public class GameGUI extends JFrame {
 
     private final JFrame frame;
     private static JLabel lives;
     private final JLabel coin;
+    private final JLabel heart;
     private final JLabel money;
     private final JButton pause;
     private final JButton tower;
@@ -26,18 +27,48 @@ public class GameGUI extends JFrame {
     private final JLabel towerCost;
     private final JLabel towerCost2;
     private final JLabel towerCost3;
-    
+
     //NEW
     private final JLabel pBg;
     private final JLabel pWindow;
     private final JButton pResume;
     private final JButton pExit;
-
     private GameEngine gameArea;
+    private ArrayList<Tower> towers;
+    private int type;
+    Tower temp;
 
     public GameGUI() {
         gameArea = new GameEngine();
+        towers = new ArrayList<>();
+        towers = gameArea.getLevel().getAllTower();
+        gameArea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (gameArea.getShowTowers()) {
+                    boolean found = false;
+                    int x = e.getX();
+                    int y = e.getY();
+                    for (Tower tower : towers) {
+                        if (tower.getX() + 100 > x && tower.getX() < x && tower.getY() < y && tower.getY() + 100 > y) {
+                            temp = tower;
+                            found = true;
+                        }
+                    }
+                    if (found) {
+                        gameArea.addTower(temp, type);
+                        gameArea.changeShowTower();
+                    }
+                }
+            }
+        });
         {//Lives Label
+            heart = new JLabel();
+            heart.setIcon(new ImageIcon("src/data/pngs/heart.png"));
+            heart.setBounds(640, 25, 30, 30);
+            heart.setBorder(null);
+            heart.setBackground(null);
+            
             lives = new JLabel(Integer.toString(gameArea.getPlayerLives()));
             lives.setHorizontalAlignment(JLabel.CENTER);
             lives.setPreferredSize(new Dimension(150, 40));
@@ -52,10 +83,10 @@ public class GameGUI extends JFrame {
         {//Money Label
             coin = new JLabel();
             coin.setIcon(new ImageIcon("src/data/pngs/coin.png"));
-            coin.setBounds(820, 25, 30,30);
+            coin.setBounds(820, 25, 30, 30);
             coin.setBorder(null);
             coin.setBackground(null);
-            
+
             money = new JLabel(Integer.toString(gameArea.getPlayerMoney()));
             money.setHorizontalAlignment(JLabel.CENTER);
             money.setPreferredSize(new Dimension(150, 40));
@@ -74,15 +105,15 @@ public class GameGUI extends JFrame {
             pause.setBounds(1540, 20, 40, 40);
             pause.setBorder(null);
             pause.setBackground(null);
-            
+
             //NEW
-            pause.addActionListener(new ActionListener(){
+            pause.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     pauseGame();
                 }
             });
-                    }
+        }
 
         {//Tower1 Button + Cost Label
             /*AFROMAGYAR CSOPORT*/
@@ -91,10 +122,11 @@ public class GameGUI extends JFrame {
             tower.setBounds(1532, 780, 50, 50);
             tower.setBorder(null);
             tower.setBackground(null);
-            tower.addActionListener(new ActionListener(){
+            tower.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent e){
+                public void actionPerformed(ActionEvent e) {
                     gameArea.changeShowTower();
+                    type = 1;
                 }
             });
 
@@ -111,10 +143,11 @@ public class GameGUI extends JFrame {
             tower2.setBounds(1470, 780, 50, 50);
             tower2.setBorder(null);
             tower2.setBackground(null);
-            tower2.addActionListener(new ActionListener(){
+            tower2.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent e){
+                public void actionPerformed(ActionEvent e) {
                     gameArea.changeShowTower();
+                    type = 2;
                 }
             });
 
@@ -131,10 +164,11 @@ public class GameGUI extends JFrame {
             tower3.setBounds(1408, 780, 50, 50);
             tower3.setBorder(null);
             tower3.setBackground(null);
-            tower3.addActionListener(new ActionListener(){
+            tower3.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent e){
-                   gameArea.changeShowTower();
+                public void actionPerformed(ActionEvent e) {
+                    gameArea.changeShowTower();
+                    type = 3;
                 }
             });
 
@@ -146,50 +180,50 @@ public class GameGUI extends JFrame {
             towerCost3.setBackground(new java.awt.Color(189, 189, 189));
 
         }
-        
-        
+
         //NEW
         {/*PAUSE MENU*/
             //Pbg   TODO: Áttetsző réteg minden fölé
             pBg = new JLabel();
-            pBg.setBounds(0,0,1600,900);
-            pBg.setBackground(new java.awt.Color(10,10,10,200));
+            pBg.setBounds(0, 0, 1600, 900);
+            pBg.setBackground(new java.awt.Color(10, 10, 10, 200));
             pBg.setOpaque(true);
-            
+
             //window
             pWindow = new JLabel();
-            pWindow.setBounds(500,275,600,350);
-            pWindow.setBackground(new java.awt.Color(223, 197, 161,150));
+            pWindow.setBounds(500, 275, 600, 350);
+            pWindow.setBackground(new java.awt.Color(223, 197, 161, 150));
             pWindow.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             pWindow.setOpaque(true);
-            
+
             //resume btn
             pResume = new JButton("Resume");
-            pResume.setBounds(600,375,400,50);
+            pResume.setBounds(600, 375, 400, 50);
             pResume.setBackground(new java.awt.Color(189, 189, 189));
             pResume.setHorizontalAlignment(JLabel.CENTER);//NEW
-            pResume.addActionListener(new ActionListener(){
+            pResume.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     resumeGame();
                 }
             });
-            
+
             //exit btn
             pExit = new JButton("Exit");
-            pExit.setBounds(600,475,400,50);
+            pExit.setBounds(600, 475, 400, 50);
             pExit.setBackground(new java.awt.Color(189, 189, 189));
             pExit.setHorizontalAlignment(JLabel.CENTER);
-            pExit.addActionListener(new ActionListener(){
+            pExit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.exit(0);
                 }
             });
-            
+
         }
         gameArea.setLayout(null);
         gameArea.add(coin);
+        gameArea.add(heart);
         gameArea.add(lives);
         gameArea.add(money);
         gameArea.add(pause);
@@ -199,7 +233,7 @@ public class GameGUI extends JFrame {
         gameArea.add(towerCost2);
         gameArea.add(tower3);
         gameArea.add(towerCost3);
-        
+
         frame = new JFrame("Catch The Bus ~ Anrope Studios©");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(1600, 900));
@@ -210,25 +244,26 @@ public class GameGUI extends JFrame {
         frame.pack();
         frame.setVisible(true);
     }
-    
+
     //NEW
-    public void pauseGame(){
+    public void pauseGame() {
         gameArea.setPaused(true);  //Megállítja a játékot
         gameArea.remove(pause);
         gameArea.add(pWindow);
         gameArea.add(pResume);
         gameArea.add(pExit);
     }
+
     //NEW
-    public void resumeGame(){
+    public void resumeGame() {
         gameArea.setPaused(false);  //Elindítja a játékot
         gameArea.remove(pWindow);
         gameArea.remove(pResume);
         gameArea.remove(pExit);
         gameArea.add(pause);
     }
-    public static void refreshLives(int l){
+
+    public static void refreshLives(int l) {
         lives.setText(Integer.toString(l));
     }
-
 }

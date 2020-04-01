@@ -8,12 +8,14 @@ package catchthebus;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import javax.swing.JButton;
+
 
 /**
  *
  * @author Anyud
  */
-public class Sprite {
+public class Sprite extends JButton {
 
     protected int x;
     protected int y;

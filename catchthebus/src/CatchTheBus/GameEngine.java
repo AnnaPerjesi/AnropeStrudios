@@ -14,6 +14,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,12 +39,14 @@ public class GameEngine extends JPanel {
     private Level level;
     private Player player;
     private ArrayList<Tower> towers;
+    private ArrayList<Tower> realTowers;
     private boolean showTowers = false;
     /*NEW*/
     private static ArrayList<Enemy> enemies;
 
     public GameEngine() {
         super();
+        realTowers = new ArrayList<>();
         player = new Player();
         player.reset();
         restart();
@@ -125,6 +129,9 @@ public class GameEngine extends JPanel {
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).draw(grphcs);
         }
+        for (Tower tower : realTowers ) {
+            tower.draw(grphcs);
+        }
         this.setBackground(new java.awt.Color(223, 197, 161));
     }
 
@@ -166,5 +173,23 @@ public class GameEngine extends JPanel {
     
     public void changeShowTower() {
         this.showTowers = !this.showTowers;
+    }
+    
+    public void addTower(Tower tower, int type) {
+        // TODO - típus
+        if (type == 1) {
+            realTowers.add(tower.createTower(new ImageIcon("src/data/pngs/crowgrey.png").getImage()));
+            this.towers.remove(tower);
+        } else if ( type == 2 ) {
+            realTowers.add(tower.createTower(new ImageIcon("src/data/pngs/disabgrey.png").getImage()));
+            this.towers.remove(tower);
+        } else if ( type == 3 ) {
+            realTowers.add(tower.createTower(new ImageIcon("src/data/pngs/incoggrey.png").getImage()));
+            this.towers.remove(tower);
+        }
+    }
+    
+    public boolean getShowTowers() {
+        return this.showTowers;
     }
 }
