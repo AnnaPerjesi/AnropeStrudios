@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 public class GameGUI extends JFrame {
 
     private final JFrame frame;
-    private final JLabel lives;
+    private static JLabel lives;
     private final JLabel coin;
     private final JLabel money;
     private final JButton pause;
@@ -208,6 +208,8 @@ public class GameGUI extends JFrame {
         gameArea.remove(pExit);
         gameArea.add(pause);
     }
-    
+    public static void refreshLives(int l){
+        lives.setText(Integer.toString(l));
+    }
 
 }
