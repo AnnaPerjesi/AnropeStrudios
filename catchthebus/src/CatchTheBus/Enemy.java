@@ -22,6 +22,7 @@ public class Enemy extends Sprite {
     /*NEW*/private int dmg;
     private int velx =0;
     private int vely = speed;
+    private boolean isAlive;
     
     private int counterDir = 0;
 
@@ -29,6 +30,7 @@ public class Enemy extends Sprite {
     public Enemy(int x, int y, int width, int height, Image image, int dmg) {
         super(x, y, width, height, image);
         this.dmg = dmg;
+        this.isAlive = true;
     }
 
     public void draw(Graphics g) {
@@ -70,15 +72,13 @@ public class Enemy extends Sprite {
         return (cords.get(counterDir).getX() == this.x && cords.get(counterDir).getY() == this.y);
     }
     
-    public void isArrived(ArrayList<Pair> cords, String dir){
-        if(this.x == cords.get(dir.length()).getX() && this.y == cords.get(dir.length()).getY()-25){
-            GameEngine.enemyArrived(this);
-        }
+    public boolean getAlive(){
+        return this.isAlive;
     }
-    
     public boolean collidesBus(Bus bus) {
         Rectangle rect = new Rectangle(x, y, width, height);
         Rectangle otherRect = new Rectangle(bus.x, bus.y, bus.width, bus.height);
+        this.isAlive = false;
         return rect.intersects(otherRect);
     }
     
