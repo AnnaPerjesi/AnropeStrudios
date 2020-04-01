@@ -32,6 +32,7 @@ public class Player {
     }
     public void addLife(int x){
         this.lives = this.lives + x;
+        GameGUI.refreshLives(this.lives);
     }
 
     public int getMoney() {
