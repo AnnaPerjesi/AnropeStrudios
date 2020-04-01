@@ -8,7 +8,7 @@ package catchthebus;
 
 public class Player {
     private int money = 0;
-    private int lives;
+    private static int lives;
     private final int STARTLIVES = 100;
     private final int STARTMONEY = 0;
     private static Player player;
@@ -28,6 +28,7 @@ public class Player {
     
     public void decreaseLife(int x){
         this.lives = this.lives - x;
+        GameGUI.refreshLives(this.lives);
     }
     public void addLife(int x){
         this.lives = this.lives + x;
@@ -37,7 +38,7 @@ public class Player {
         return money;
     }
 
-    public int getLives() {
+    public static int getLives() {
         return lives;
     }
 
