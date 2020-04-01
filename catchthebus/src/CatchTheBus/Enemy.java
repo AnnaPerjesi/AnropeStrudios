@@ -75,6 +75,7 @@ public class Enemy extends Sprite {
     public boolean getAlive(){
         return this.isAlive;
     }
+    
     public boolean collidesBus(Bus bus) {
         Rectangle rect = new Rectangle(x, y, width, height);
         Rectangle otherRect = new Rectangle(bus.x, bus.y, bus.width, bus.height);
