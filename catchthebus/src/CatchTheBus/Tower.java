@@ -30,7 +30,7 @@ public class Tower extends Sprite {
     }
 
     public Tower createTower(Image image) {
-        return new Tower(x, y, 100, 100, image);
+        return new Tower(x-15, y-15, 80, 80, image);
     }
     
 
