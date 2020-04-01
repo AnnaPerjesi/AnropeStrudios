@@ -90,6 +90,12 @@ public class GameGUI extends JFrame {
             tower.setBounds(1532, 780, 50, 50);
             tower.setBorder(null);
             tower.setBackground(null);
+            tower.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    System.out.println("tower click");
+                }
+            });
 
             towerCost = new JLabel("cost");
             towerCost.setHorizontalAlignment(JLabel.CENTER);
@@ -104,6 +110,12 @@ public class GameGUI extends JFrame {
             tower2.setBounds(1470, 780, 50, 50);
             tower2.setBorder(null);
             tower2.setBackground(null);
+            tower.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    System.out.println("tower2 click");
+                }
+            });
 
             towerCost2 = new JLabel("cost");
             towerCost2.setHorizontalAlignment(JLabel.CENTER);
@@ -118,6 +130,12 @@ public class GameGUI extends JFrame {
             tower3.setBounds(1408, 780, 50, 50);
             tower3.setBorder(null);
             tower3.setBackground(null);
+            tower.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    System.out.println("tower3 click");
+                }
+            });
 
             towerCost3 = new JLabel("cost");
             towerCost3.setHorizontalAlignment(JLabel.CENTER);
