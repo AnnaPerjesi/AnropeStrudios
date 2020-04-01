@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -93,7 +94,7 @@ public class GameGUI extends JFrame {
             tower.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    System.out.println("tower click");
+                    gameArea.changeShowTower();
                 }
             });
 
@@ -110,10 +111,10 @@ public class GameGUI extends JFrame {
             tower2.setBounds(1470, 780, 50, 50);
             tower2.setBorder(null);
             tower2.setBackground(null);
-            tower.addActionListener(new ActionListener(){
+            tower2.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    System.out.println("tower2 click");
+                    gameArea.changeShowTower();
                 }
             });
 
@@ -130,10 +131,10 @@ public class GameGUI extends JFrame {
             tower3.setBounds(1408, 780, 50, 50);
             tower3.setBorder(null);
             tower3.setBackground(null);
-            tower.addActionListener(new ActionListener(){
+            tower3.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    System.out.println("tower3 click");
+                   gameArea.changeShowTower();
                 }
             });
 

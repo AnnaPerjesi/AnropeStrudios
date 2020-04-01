@@ -36,6 +36,8 @@ public class GameEngine extends JPanel {
     private int levelNum = 0;
     private Level level;
     private Player player;
+    private ArrayList<Tower> towers;
+    private boolean showTowers = false;
     /*NEW*/
     private static ArrayList<Enemy> enemies;
 
@@ -113,6 +115,13 @@ public class GameEngine extends JPanel {
     protected void paintComponent(Graphics grphcs) {
         super.paintComponent(grphcs);
         level.draw(grphcs);
+        if (showTowers) {
+            towers = new ArrayList<>();
+            towers = this.level.getAllTower();
+            for (Tower tower : towers ) {
+                tower.draw(grphcs);
+            }
+        }
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).draw(grphcs);
         }
@@ -123,8 +132,6 @@ public class GameEngine extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-
-            try {
                 if (!GameEngine.paused && !isOver) {
                     for (int i = 0; i < enemies.size(); i++) {
                         if (enemies.get(i).collidesBus(level.getBus())) {
@@ -137,9 +144,6 @@ public class GameEngine extends JPanel {
                 }
 
                 repaint();
-            } catch (IndexOutOfBoundsException x) {
-                System.out.println("Ups");
-            }
         }
 
     }
@@ -155,5 +159,12 @@ public class GameEngine extends JPanel {
     public int getPlayerMoney() {
         return this.player.getMoney();
     }
-
+    
+    public Level getLevel() {
+        return this.level;
+    }
+    
+    public void changeShowTower() {
+        this.showTowers = !this.showTowers;
+    }
 }

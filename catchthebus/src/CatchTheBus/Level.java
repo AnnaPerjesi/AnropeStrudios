@@ -25,6 +25,7 @@ public class Level {
     private final int ROAD_WIDTH = 100;
     private final int ROAD_HEIGHT = 100;
     ArrayList<Road> roads;
+    ArrayList<Tower> towers;
     ArrayList<Pair> coordinates;
     String directions;
     private Bus bus;
@@ -37,6 +38,7 @@ public class Level {
     public void loadLevel(String levelPath) throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(levelPath));
         roads = new ArrayList<>();
+        towers = new ArrayList<>();
         int y = 0;
         String line;
         //String stratLine = br.readLine();
@@ -46,6 +48,9 @@ public class Level {
                 if (type == 'r') {
                     Image image = new ImageIcon("src/data/pngs/road.png").getImage();
                     roads.add(new Road(x * ROAD_WIDTH, y * ROAD_HEIGHT, ROAD_WIDTH, ROAD_HEIGHT, image));
+                } else if ( type == '0') {
+                    Image image = new ImageIcon("src/data/pngs/x.png").getImage();
+                    towers.add(new Tower(x * ROAD_WIDTH,y * ROAD_HEIGHT ,ROAD_WIDTH, ROAD_HEIGHT, image));
                 }
                 x++;
             }
@@ -108,5 +113,9 @@ public class Level {
      
     public Bus getBus() {
         return this.bus;
+    }
+    
+    public ArrayList<Tower> getAllTower() {
+        return this.towers;
     }
 }
