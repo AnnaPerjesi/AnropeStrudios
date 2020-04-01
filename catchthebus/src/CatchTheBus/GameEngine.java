@@ -31,13 +31,13 @@ public class GameEngine extends JPanel {
     private static boolean paused = false;
     private static boolean isOver = false;
 
-    
     private Timer newFrameTimer;
 
     private int levelNum = 0;
     private Level level;
     private Player player;
-    /*NEW*/private static ArrayList<Enemy> enemies;
+    /*NEW*/
+    private static ArrayList<Enemy> enemies;
 
     public GameEngine() {
         super();
@@ -56,40 +56,41 @@ public class GameEngine extends JPanel {
             File myObj = new File("src/data/enemies.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
-            String data = myReader.nextLine();
-            String[] currencies = data.split(" ");
-            int startY = 0;
-            for (int i=0; i<currencies.length; i++) {
-                switch (currencies[i]) {
-                    case "p":
-                        Image pregnantImage = new ImageIcon("src/data/pngs/pregnant.png").getImage();
-                        Enemy pregnant = new Enemy(225, startY, 50, 50, pregnantImage, 2);
-                        enemies.add(pregnant);
-                        break;
-                    case "i":
-                        Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
-                        Enemy it = new Enemy(225, startY, 50, 50, itImage, 3);
-                        enemies.add(it);
-                        break;
-                    case "a":
-                        Image manImage = new ImageIcon("src/data/pngs/man.png").getImage();
-                        Enemy man = new Enemy(225, startY, 50, 50, manImage, 2);
-                        enemies.add(man);
-                        break;
-                    case "s":
-                        Image kidImage = new ImageIcon("src/data/pngs/kid.png").getImage();
-                        Enemy kid = new Enemy(225, startY, 50, 50, kidImage, 1);
-                        enemies.add(kid);
-                        break;
-                    case "b":
-                        Image bossImage = new ImageIcon("src/data/pngs/boss.png").getImage();
-                        Enemy boss = new Enemy(225, startY, 50, 50, bossImage, 5);
-                        enemies.add(boss);
-                        break;
-                    default: break;
+                String data = myReader.nextLine();
+                String[] currencies = data.split(" ");
+                int startY = 0;
+                for (int i = 0; i < currencies.length; i++) {
+                    switch (currencies[i]) {
+                        case "p":
+                            Image pregnantImage = new ImageIcon("src/data/pngs/pregnant.png").getImage();
+                            Enemy pregnant = new Enemy(225, startY, 50, 50, pregnantImage, 2);
+                            enemies.add(pregnant);
+                            break;
+                        case "i":
+                            Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
+                            Enemy it = new Enemy(225, startY, 50, 50, itImage, 3);
+                            enemies.add(it);
+                            break;
+                        case "a":
+                            Image manImage = new ImageIcon("src/data/pngs/man.png").getImage();
+                            Enemy man = new Enemy(225, startY, 50, 50, manImage, 2);
+                            enemies.add(man);
+                            break;
+                        case "s":
+                            Image kidImage = new ImageIcon("src/data/pngs/kid.png").getImage();
+                            Enemy kid = new Enemy(225, startY, 50, 50, kidImage, 1);
+                            enemies.add(kid);
+                            break;
+                        case "b":
+                            Image bossImage = new ImageIcon("src/data/pngs/boss.png").getImage();
+                            Enemy boss = new Enemy(225, startY, 50, 50, bossImage, 5);
+                            enemies.add(boss);
+                            break;
+                        default:
+                            break;
+                    }
+                    startY = startY - 100;
                 }
-                startY = startY - 100;
-            }
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -112,54 +113,45 @@ public class GameEngine extends JPanel {
     protected void paintComponent(Graphics grphcs) {
         super.paintComponent(grphcs);
         level.draw(grphcs);
-        for (int i=0; i<enemies.size(); i++) {
+        for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).draw(grphcs);
         }
         this.setBackground(new java.awt.Color(223, 197, 161));
     }
-    
+
     class NewFrameListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            
+
             try {
-            if (!GameEngine.paused && !isOver) {
-                for (int i=0; i<enemies.size(); i++) {
-                    if (enemies.get(i).collidesBus(level.getBus())) {
-                        player.decreaseLife(enemies.get(i).getDmg());
+                if (!GameEngine.paused && !isOver) {
+                    for (int i = 0; i < enemies.size(); i++) {
+                        if (enemies.get(i).collidesBus(level.getBus())) {
+                            player.decreaseLife(enemies.get(i).getDmg());
+                            enemies.remove(i);
+                        } else {
+                            enemies.get(i).move(level.getCoordinates(), level.getDirections());
+                        }
                     }
-                    isEnemyArrived();
-                    enemies.get(i).move(level.getCoordinates(), level.getDirections());
                 }
-            }
-            repaint();
+
+                repaint();
             } catch (IndexOutOfBoundsException x) {
                 System.out.println("Ups");
             }
         }
 
     }
-    
+
     public static void setPaused(boolean paused) {
         GameEngine.paused = paused;
     }
-    public void isEnemyArrived(){
-         enemies.get(0).isArrived(level.getCoordinates(), level.getDirections());
-    }
-    public static void enemyArrived(Enemy enemy){
-        if(enemies.size() >= 2){
-        enemies.remove(enemy);
-        } else {
-            enemies.remove(enemy);
-            isOver = true;
-        }
-        
-    }
-    
+
     public int getPlayerLives() {
         return this.player.getLives();
     }
+
     public int getPlayerMoney() {
         return this.player.getMoney();
     }
