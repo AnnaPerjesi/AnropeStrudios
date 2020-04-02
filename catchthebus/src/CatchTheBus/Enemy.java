@@ -19,13 +19,13 @@ public class Enemy extends Sprite {
 
     /*LINE DELETED*/
     private int speed = 25;
-    /*NEW*/private int dmg;
-    private int velx =0;
+    /*NEW*/
+    private int dmg;
+    private int velx = 0;
     private int vely = speed;
     private boolean isAlive;
-    
-    private int counterDir = 0;
 
+    private int counterDir = 0;
 
     public Enemy(int x, int y, int width, int height, Image image, int dmg) {
         super(x, y, width, height, image);
@@ -38,51 +38,58 @@ public class Enemy extends Sprite {
     }
 
     public void move(ArrayList<Pair> cords, String dir) {
-            this.x += velx;
-            this.y += vely;
-            
-            if (turn(cords)) {
-                switch (dir.charAt(counterDir)) {
-                    case 'r':
-                        velx = speed;
-                        vely = 0;
-                        break;
-                    case 'u':
-                        velx = 0;
-                        vely = -(speed);
-                        break;
-                    case 'l':
-                        velx = -(speed);
-                        vely = 0;
-                        break;
-                    case 'd':
-                        velx = 0;
-                        vely = speed;
-                        break;
-                }
-                counterDir++;
+        this.x += velx;
+        this.y += vely;
+
+        if (turn(cords)) {
+            switch (dir.charAt(counterDir)) {
+                case 'r':
+                    velx = speed;
+                    vely = 0;
+                    break;
+                case 'u':
+                    velx = 0;
+                    vely = -(speed);
+                    break;
+                case 'l':
+                    velx = -(speed);
+                    vely = 0;
+                    break;
+                case 'd':
+                    velx = 0;
+                    vely = speed;
+                    break;
             }
-        
+            counterDir++;
+        }
+
     }
 
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-    public boolean turn(ArrayList<Pair> cords){
+
+    public boolean turn(ArrayList<Pair> cords) {
         return (cords.get(counterDir).getX() == this.x && cords.get(counterDir).getY() == this.y);
     }
-    
-    public boolean getAlive(){
+
+    public boolean getAlive() {
         return this.isAlive;
     }
-    
+
     public boolean collidesBus(Bus bus) {
         Rectangle rect = new Rectangle(x, y, width, height);
         Rectangle otherRect = new Rectangle(bus.x, bus.y, bus.width, bus.height);
         this.isAlive = false;
         return rect.intersects(otherRect);
     }
-    
+
+    public boolean collideBullet(Bullet bullet) {
+        Rectangle rect = new Rectangle(x, y, width, height);
+        Rectangle otherRect = new Rectangle(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
+        return rect.intersects(otherRect);
+    }
+
     public int getDmg() {
         return this.dmg;
     }
