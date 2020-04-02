@@ -65,7 +65,7 @@ public class GameGUI extends JFrame {
         {//Lives Label
             heart = new JLabel();
             heart.setIcon(new ImageIcon("src/data/pngs/heart.png"));
-            heart.setBounds(640, 25, 30, 30);
+            heart.setBounds(640, 25, 35, 30); //zavart, hogy levágja a szélét
             heart.setBorder(null);
             heart.setBackground(null);
             
