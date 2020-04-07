@@ -28,6 +28,12 @@ public class Tower extends Sprite {
         super(x, y, width, height, image);
         lastAttack = 0;
     }
+    
+    /**
+     * Method to create new Tower object
+     * @param image
+     * @return 
+     */
 
     public Tower createTower(Image image) {
         return new Tower(x-15, y-15, 80, 80, image);
@@ -47,10 +53,20 @@ public class Tower extends Sprite {
      *
      * @return
      */
-    public boolean upgrade() {
+    public boolean upgrade(Tower tower) {
         if (level < maxlevel && Player.getPlayer().getMoney() >= upgradeCost) {
             level += 1;
             Player.getPlayer().addMoney(-1 * upgradeCost);
+            if(level<5){
+                /*TODO*/
+                tower.setRange(getRange()*1.3);
+                tower.setPower(getPower()*1.3);
+            }
+            else{
+                
+                /*TODO IDK which i have clicked on*/
+            
+            }
             return true;
         }
         return false;
@@ -82,6 +98,14 @@ public class Tower extends Sprite {
 
     public double getRange() {
         return range;
+    }
+
+    public void setRange(double range) {
+        this.range = range;
+    }
+
+    public void setPower(double power) {
+        this.power = power;
     }
 
     public double getPower() {
