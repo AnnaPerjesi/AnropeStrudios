@@ -24,6 +24,7 @@ public class Enemy extends Sprite {
     private int velx = 0;
     private int vely = speed;
     private boolean isAlive;
+    private int health;
 
     private int counterDir = 0;
 
@@ -31,6 +32,7 @@ public class Enemy extends Sprite {
         super(x, y, width, height, image);
         this.dmg = dmg;
         this.isAlive = true;
+        this.health = 50;
     }
 
     public void draw(Graphics g) {
@@ -68,7 +70,7 @@ public class Enemy extends Sprite {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-
+    
     public boolean turn(ArrayList<Pair> cords) {
         return (cords.get(counterDir).getX() == this.x && cords.get(counterDir).getY() == this.y);
     }
@@ -76,6 +78,12 @@ public class Enemy extends Sprite {
     public boolean getAlive() {
         return this.isAlive;
     }
+    
+    /**
+     * Method tells us if enemies cathed the bus or not
+     * @param bus
+     * @return 
+     */
 
     public boolean collidesBus(Bus bus) {
         Rectangle rect = new Rectangle(x, y, width, height);
@@ -92,5 +100,18 @@ public class Enemy extends Sprite {
 
     public int getDmg() {
         return this.dmg;
+    }
+    
+    
+    /**
+     * Enemy get damage from tower (bullet) and this decrese it's health
+     * @param damage 
+     */
+    public void takeDamage(double damage) {
+        this.health -= 5; /*nyilván ide a damage jön, ami vagy a toronyból érkezik, vagy a Bullet classból*/
+        if (this.health <= 0) {
+            this.isAlive = false;
+        }
+
     }
 }
