@@ -59,6 +59,9 @@ public class GameGUI extends JFrame {
                         gameArea.addTower(temp, type);
                         gameArea.changeShowTower();
                     }
+                } else {
+                    /*TODO upgrade*/
+                    
                 }
             }
         });
@@ -68,7 +71,7 @@ public class GameGUI extends JFrame {
             heart.setBounds(640, 25, 35, 30); //zavart, hogy levágja a szélét
             heart.setBorder(null);
             heart.setBackground(null);
-            
+
             lives = new JLabel(Integer.toString(gameArea.getPlayerLives()));
             lives.setHorizontalAlignment(JLabel.CENTER);
             lives.setPreferredSize(new Dimension(150, 40));
@@ -183,7 +186,9 @@ public class GameGUI extends JFrame {
 
         //NEW
         {/*PAUSE MENU*/
+
             //Pbg   TODO: Áttetsző réteg minden fölé
+
             pBg = new JLabel();
             pBg.setBounds(0, 0, 1600, 900);
             pBg.setBackground(new java.awt.Color(10, 10, 10, 200));
