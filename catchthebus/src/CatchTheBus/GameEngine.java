@@ -60,7 +60,7 @@ public class GameEngine extends JPanel {
     public ArrayList<Enemy> startRound() {
         ArrayList<Enemy> enemies = new ArrayList();
         try {
-            File myObj = new File("src/data/enemies.txt");
+            File myObj = new File("src/data/wave1.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
