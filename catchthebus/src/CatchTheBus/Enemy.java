@@ -107,7 +107,7 @@ public class Enemy extends Sprite {
      * Enemy get damage from tower (bullet) and this decrese it's health
      * @param damage 
      */
-    public void takeDamage(double damage) {
+    public void takeDamage() {
         this.health -= 5; /*nyilván ide a damage jön, ami vagy a toronyból érkezik, vagy a Bullet classból*/
         if (this.health <= 0) {
             this.isAlive = false;
