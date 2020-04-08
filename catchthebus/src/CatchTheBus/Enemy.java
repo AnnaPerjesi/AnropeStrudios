@@ -28,11 +28,11 @@ public class Enemy extends Sprite {
 
     private int counterDir = 0;
 
-    public Enemy(int x, int y, int width, int height, Image image, int dmg) {
+    public Enemy(int x, int y, int width, int height, Image image, int dmg, boolean isAlive) {
         super(x, y, width, height, image);
+        this.health = 4;
         this.dmg = dmg;
-        this.isAlive = true;
-        this.health = 50;
+        this.isAlive = isAlive;
     }
 
     public void draw(Graphics g) {
@@ -88,8 +88,10 @@ public class Enemy extends Sprite {
     public boolean collidesBus(Bus bus) {
         Rectangle rect = new Rectangle(x, y, width, height);
         Rectangle otherRect = new Rectangle(bus.x, bus.y, bus.width, bus.height);
-        this.isAlive = false;
         return rect.intersects(otherRect);
+    }
+    public void kill(){
+        this.isAlive = false;
     }
 
     public boolean collideBullet(Bullet bullet) {
@@ -109,9 +111,6 @@ public class Enemy extends Sprite {
      */
     public void takeDamage() {
         this.health -= 5; /*nyilván ide a damage jön, ami vagy a toronyból érkezik, vagy a Bullet classból*/
-        if (this.health <= 0) {
-            this.isAlive = false;
-        }
-
+        this.isAlive = (this.health > 0);
     }
 }
