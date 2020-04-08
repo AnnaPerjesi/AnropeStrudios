@@ -60,7 +60,7 @@ public class GameEngine extends JPanel {
     public ArrayList<Enemy> startRound() {
         ArrayList<Enemy> enemies = new ArrayList();
         try {
-            File myObj = new File("src/data/enemies1.txt");
+            File myObj = new File("src/data/enemies.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -70,27 +70,27 @@ public class GameEngine extends JPanel {
                     switch (currencies[i]) {
                         case "p":
                             Image pregnantImage = new ImageIcon("src/data/pngs/pregnant.png").getImage();
-                            Enemy pregnant = new Enemy(225, startY, 50, 50, pregnantImage, 2);
+                            Enemy pregnant = new Enemy(225, startY, 50, 50, pregnantImage, 2, true);
                             enemies.add(pregnant);
                             break;
                         case "i":
                             Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
-                            Enemy it = new Enemy(225, startY, 50, 50, itImage, 3);
+                            Enemy it = new Enemy(225, startY, 50, 50, itImage, 3,true);
                             enemies.add(it);
                             break;
                         case "a":
                             Image manImage = new ImageIcon("src/data/pngs/man.png").getImage();
-                            Enemy man = new Enemy(225, startY, 50, 50, manImage, 2);
+                            Enemy man = new Enemy(225, startY, 50, 50, manImage, 2,true);
                             enemies.add(man);
                             break;
                         case "s":
                             Image kidImage = new ImageIcon("src/data/pngs/kid.png").getImage();
-                            Enemy kid = new Enemy(225, startY, 50, 50, kidImage, 1);
+                            Enemy kid = new Enemy(225, startY, 50, 50, kidImage, 1,true);
                             enemies.add(kid);
                             break;
                         case "b":
                             Image bossImage = new ImageIcon("src/data/pngs/boss.png").getImage();
-                            Enemy boss = new Enemy(225, startY, 50, 50, bossImage, 5);
+                            Enemy boss = new Enemy(225, startY, 50, 50, bossImage, 5,true);
                             enemies.add(boss);
                             break;
                         default:
@@ -140,27 +140,36 @@ public class GameEngine extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
+            
                 if (!GameEngine.paused && !isOver) {
+
                     timer++;
-                    if(timer % 100 == 0){
-                        System.out.println("bum-bum");
-                        for(int i = 0; i<enemies.size(); i++){
+                    if(timer % 10 == 0){
+                        //TODO torony eléri-e, ha igen -> lő
+                        
+                        
+                        
+                        /*for(int i = 0; i<enemies.size(); i++){
                             enemies.get(i).takeDamage();
-                        }
+                        }*/
                     }
                     for (int i = 0; i < enemies.size(); i++) {
+                        
                         if (enemies.get(i).collidesBus(level.getBus())) {
                             player.decreaseLife(enemies.get(i).getDmg());
+                            enemies.get(i).kill();
                         } else {
+                            System.out.println(enemies.get(0).getAlive());
                             enemies.get(i).move(level.getCoordinates(), level.getDirections());
                         }
                     }
+                    
                     for(int i = 0; i<enemies.size(); i++){
                         if(!enemies.get(i).getAlive()){
                             enemies.remove(i);
                         }
                     }
-                 System.out.println(timer);
+                 //System.out.println(timer);
                 }
                 
 
