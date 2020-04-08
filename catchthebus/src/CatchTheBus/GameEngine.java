@@ -32,6 +32,7 @@ public class GameEngine extends JPanel {
     private final int FPS = 60;
     private static boolean paused = false;
     private static boolean isOver = false;
+    private int timer = 0;
 
     private Timer newFrameTimer;
 
@@ -59,7 +60,7 @@ public class GameEngine extends JPanel {
     public ArrayList<Enemy> startRound() {
         ArrayList<Enemy> enemies = new ArrayList();
         try {
-            File myObj = new File("src/data/enemies.txt");
+            File myObj = new File("src/data/enemies1.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -140,15 +141,28 @@ public class GameEngine extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ae) {
                 if (!GameEngine.paused && !isOver) {
+                    timer++;
+                    if(timer % 100 == 0){
+                        System.out.println("bum-bum");
+                        for(int i = 0; i<enemies.size(); i++){
+                            enemies.get(i).takeDamage();
+                        }
+                    }
                     for (int i = 0; i < enemies.size(); i++) {
                         if (enemies.get(i).collidesBus(level.getBus())) {
                             player.decreaseLife(enemies.get(i).getDmg());
-                            enemies.remove(i);
                         } else {
                             enemies.get(i).move(level.getCoordinates(), level.getDirections());
                         }
                     }
+                    for(int i = 0; i<enemies.size(); i++){
+                        if(!enemies.get(i).getAlive()){
+                            enemies.remove(i);
+                        }
+                    }
+                 System.out.println(timer);
                 }
+                
 
                 repaint();
         }
