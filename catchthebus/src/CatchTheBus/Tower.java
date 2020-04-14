@@ -22,10 +22,12 @@ public class Tower extends Sprite {
 
     private double range;
     private double power;
-    private double modifierIncrease = 1.3; //range and attack increase by upgarde?
+    private double modifierIncrease = 1.3; //range and attack increase by upgarde!
 
-    public Tower(int x, int y, int width, int height, Image image) {
+    public Tower(int x, int y, int width, int height,double dmg, double range, Image image) {
         super(x, y, width, height, image);
+        this.power = dmg;
+        this.range = range;
         lastAttack = 0;
     }
     
@@ -35,8 +37,8 @@ public class Tower extends Sprite {
      * @return 
      */
 
-    public Tower createTower(Image image) {
-        return new Tower(x-15, y-15, 80, 80, image);
+    public Tower createTower(double dmg, double range, Image image) {
+        return new Tower(x-15, y-15, 80, 80,dmg, range, image);
     }
     
 
@@ -114,5 +116,9 @@ public class Tower extends Sprite {
 
     public double getModifierIncrease() {
         return modifierIncrease;
+    }
+    
+    public void shoot(Enemy firstEnemy){
+        firstEnemy.takeDamage(this.power);
     }
 }

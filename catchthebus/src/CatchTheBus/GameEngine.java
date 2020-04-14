@@ -54,7 +54,7 @@ public class GameEngine extends JPanel {
         enemies = startRound();
 
         newFrameTimer = new Timer(5000 / FPS, new NewFrameListener());
-        newFrameTimer.start();
+        startTimer();
     }
 
     public ArrayList<Enemy> startRound() {
@@ -147,12 +147,18 @@ public class GameEngine extends JPanel {
                     timer++;
                     if(timer % 10 == 0){
                         //TODO torony eléri-e, ha igen -> lő
-                        
-                        
-                        
-                        /*for(int i = 0; i<enemies.size(); i++){
-                            enemies.get(i).takeDamage();
-                        }*/
+                        for(Tower tw : realTowers){
+                            boolean found = false;
+                            int i = 0;
+                            while(!found && i < enemies.size()){
+                                Enemy enemy = enemies.get(i);
+                                if(inRange(enemy,tw)){
+                                    found = true;
+                                    tw.shoot(enemy);
+                                }
+                                i++;
+                            }
+                        }
                     }
                     for (int i = 0; i < enemies.size(); i++) {
                         
@@ -160,7 +166,6 @@ public class GameEngine extends JPanel {
                             player.decreaseLife(enemies.get(i).getDmg());
                             enemies.get(i).kill();
                         } else {
-                            System.out.println(enemies.get(0).getAlive());
                             enemies.get(i).move(level.getCoordinates(), level.getDirections());
                         }
                     }
@@ -186,7 +191,10 @@ public class GameEngine extends JPanel {
         }
 
     }
-
+    
+    public boolean getPaused(){
+        return this.paused;
+    }
     public static void setPaused(boolean paused) {
         GameEngine.paused = paused;
     }
@@ -204,19 +212,19 @@ public class GameEngine extends JPanel {
     }
     
     public void changeShowTower() {
-        this.showTowers = !this.showTowers;
+        if(!paused) this.showTowers = !this.showTowers;
     }
     
     public void addTower(Tower tower, int type) {
         // TODO - típus
         if (type == 1) {
-            realTowers.add(tower.createTower(new ImageIcon("src/data/pngs/crowgrey.png").getImage()));
+            realTowers.add(tower.createTower(10,150,new ImageIcon("src/data/pngs/crowgrey.png").getImage()));
             this.towers.remove(tower);
         } else if ( type == 2 ) {
-            realTowers.add(tower.createTower(new ImageIcon("src/data/pngs/disabgrey.png").getImage()));
+            realTowers.add(tower.createTower(5,200,new ImageIcon("src/data/pngs/disabgrey.png").getImage()));
             this.towers.remove(tower);
         } else if ( type == 3 ) {
-            realTowers.add(tower.createTower(new ImageIcon("src/data/pngs/incoggrey.png").getImage()));
+            realTowers.add(tower.createTower(5,500,new ImageIcon("src/data/pngs/incoggrey.png").getImage()));
             this.towers.remove(tower);
         }
     }
@@ -241,6 +249,17 @@ public class GameEngine extends JPanel {
         this.levelNum = levelNum;
     }
     
+    public boolean inRange(Enemy target, Tower tw){
+        double x = Math.abs(target.getX() - tw.getX());
+        double y = Math.abs(target.getY() - tw.getY());
+        
+        double z = Math.sqrt(x*x + y*y);
+        
+        return (z<tw.getRange());
+    }
     
+    public void startTimer(){
+        newFrameTimer.start();
+    }
     
 }
