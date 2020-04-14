@@ -63,7 +63,7 @@ public class GameEngine extends JPanel {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 String[] currencies = data.split(" ");
-                int startY = 0;
+                int startY = -100;
                 for (int i = 0; i < currencies.length; i++) {
                     switch (currencies[i]) {
                         case "p":
