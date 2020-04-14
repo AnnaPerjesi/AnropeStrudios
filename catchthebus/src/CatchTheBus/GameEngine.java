@@ -52,7 +52,7 @@ public class GameEngine extends JPanel {
         enemies = startRound(wave);
 
         
-        newFrameTimer = new Timer(2000 / FPS, new NewFrameListener());
+        newFrameTimer = new Timer(5000 / FPS, new NewFrameListener());
         newFrameTimer.start();
     }
 
