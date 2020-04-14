@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package catchthebus;
+import java.io.IOException;
 
 /**
  *
@@ -14,8 +15,8 @@ public class CatchTheBus {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        GameGUI barmi = new GameGUI();
+    public static void main(String[] args) throws IOException {
+        GameStart start = new GameStart();
     }
     
 }
