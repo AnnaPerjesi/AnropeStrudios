@@ -24,13 +24,13 @@ public class Enemy extends Sprite {
     private int velx = 0;
     private int vely = speed;
     private boolean isAlive;
-    private int health;
+    private double health;
 
     private int counterDir = 0;
 
     public Enemy(int x, int y, int width, int height, Image image, int dmg, boolean isAlive) {
         super(x, y, width, height, image);
-        this.health = 4;
+        this.health = 15;
         this.dmg = dmg;
         this.isAlive = isAlive;
     }
@@ -78,6 +78,9 @@ public class Enemy extends Sprite {
     public boolean getAlive() {
         return this.isAlive;
     }
+    public double getHealth(){
+        return this.health;
+    }
     
     /**
      * Method tells us if enemies cathed the bus or not
@@ -109,8 +112,8 @@ public class Enemy extends Sprite {
      * Enemy get damage from tower (bullet) and this decrese it's health
      * @param damage 
      */
-    public void takeDamage() {
-        this.health -= 5; /*nyilván ide a damage jön, ami vagy a toronyból érkezik, vagy a Bullet classból*/
+    public void takeDamage(double damage) {
+        this.health -= damage;
         this.isAlive = (this.health > 0);
     }
 }

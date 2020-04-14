@@ -50,7 +50,7 @@ public class Level {
                     roads.add(new Road(x * ROAD_WIDTH, y * ROAD_HEIGHT, ROAD_WIDTH, ROAD_HEIGHT, image));
                 } else if ( type == '0') {
                     Image image = new ImageIcon("src/data/pngs/x.png").getImage();
-                    towers.add(new Tower(x * ROAD_WIDTH+25,y * ROAD_HEIGHT+25 ,ROAD_WIDTH/2, ROAD_HEIGHT/2, image));
+                    towers.add(new Tower(x * ROAD_WIDTH+25,y * ROAD_HEIGHT+25 ,ROAD_WIDTH/2, ROAD_HEIGHT/2, 0, 0, image));
                 }
                 x++;
             }
