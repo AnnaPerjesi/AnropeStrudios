@@ -31,11 +31,20 @@ public class Level {
     private Bus bus;
 
     public Level(String levelPath, String fileName) throws IOException {
-        loadLevel(levelPath);
+        int x = 0;
+        String S = levelPath.substring(levelPath.length() - 5);
+        char c = S.charAt(0);
+        switch(c) {
+            case '1': x = 40; break;
+            case '2': x = -5; break;
+            case '3': x = 3; break;
+            default: x = 0;
+        }
+        loadLevel(levelPath, x);
         loadCoordinates(fileName);
     }
 
-    public void loadLevel(String levelPath) throws FileNotFoundException, IOException {
+    public void loadLevel(String levelPath, int look) throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(levelPath));
         roads = new ArrayList<>();
         towers = new ArrayList<>();
@@ -51,13 +60,19 @@ public class Level {
                 } else if ( type == '0') {
                     Image image = new ImageIcon("src/data/pngs/x.png").getImage();
                     towers.add(new Tower(x * ROAD_WIDTH+25,y * ROAD_HEIGHT+25 ,ROAD_WIDTH/2, ROAD_HEIGHT/2, 0, 0, image));
+                } else if ( type == 'b') {
+                    if (look == 3) {
+                        Image busImage = new ImageIcon("src/data/pngs/bus_r.png").getImage();
+                        bus = new Bus(x * ROAD_WIDTH - 20,y * ROAD_HEIGHT - 90,100,300,busImage);
+                    } else {
+                        Image busImage = new ImageIcon("src/data/pngs/bus.png").getImage();
+                        bus = new Bus(x * ROAD_WIDTH - 100,y * ROAD_HEIGHT - look,300,100,busImage);
+                    }
                 }
                 x++;
             }
             y++;
         }
-        Image busImage = new ImageIcon("src/data/pngs/bus.png").getImage();
-        bus = new Bus(175,790,150,75,busImage);
     }
 
     public void loadCoordinates(String fileName) throws FileNotFoundException, IOException {

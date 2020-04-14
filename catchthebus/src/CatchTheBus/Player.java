@@ -7,7 +7,7 @@ package catchthebus;
 
 
 public class Player {
-    private int money = 0;
+    private static int money = 0;
     private static int lives;
     private final int STARTLIVES = 100;
     private final int STARTMONEY = 0;
@@ -24,6 +24,7 @@ public class Player {
     
     public void addMoney(int amount){
         this.money += amount;
+        GameGUI.refreshMoney(this.money);
     }
     
     public void decreaseLife(int x){

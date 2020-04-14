@@ -20,6 +20,12 @@ public class GameStart extends JFrame {
     private final JFrame frame;
     private JPanel start;
     private JLabel menuLabel;
+    private JLabel bus;
+    private JLabel brand;
+    private JLabel logo;
+    private JLabel anna;
+    private JLabel robi;
+    private JLabel peti;
     private final JButton play;
     private final JButton exit;
     private final int ROAD_WIDTH = 100;
@@ -28,16 +34,45 @@ public class GameStart extends JFrame {
     public GameStart() throws FileNotFoundException, IOException {
         start = new JPanel();
         start.setBackground(new java.awt.Color(223, 197, 161));
-            
+        
+        anna = new JLabel("Perjési Anna - valami");
+        anna.setHorizontalAlignment(JLabel.CENTER);
+        anna.setBounds(1145, 630, 300, 150);
+        
+        robi = new JLabel("Csékei Róbert - CEO");
+        robi.setHorizontalAlignment(JLabel.CENTER);
+        robi.setBounds(1145, 600, 300, 150);
+        
+        peti = new JLabel("Pukánszky Péter - valami");
+        peti.setHorizontalAlignment(JLabel.CENTER);
+        peti.setBounds(1145, 660, 300, 150);
+        
+        logo = new JLabel("Catch The Bus - logo");
+        logo.setHorizontalAlignment(JLabel.CENTER);
+        logo.setBounds(650, 50, 300, 150);
+        
+        brand = new JLabel("Anrope Studios© - logo");
+        brand.setHorizontalAlignment(JLabel.CENTER);
+        brand.setBounds(1145, 500, 300, 150);
+        
+        bus = new JLabel();
+        bus.setIcon(new ImageIcon("src/data/pngs/bus.png"));
+        bus.setOpaque(true);
+        bus.setBounds(100, 760, 300, 100);
+        bus.setBorder(null);
+        bus.setBackground(null);
+        
         menuLabel = new JLabel();
-        menuLabel.setBackground(new java.awt.Color(223, 197, 161));
-        menuLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        menuLabel.setBounds(600, 200, 400, 250);
+        menuLabel.setOpaque(true);
+        menuLabel.setBounds(600, 275, 400, 250);
+        menuLabel.setBackground(new java.awt.Color(245, 245, 245));
+        menuLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         
         {
         play = new JButton("Play");
-        play.setBounds(750, 300, 150, 70);
-        play.setBackground(null);
+        play.setBounds(725, 315, 150, 70);
+        play.setBackground(new java.awt.Color(199, 206, 217));
+        play.setBorderPainted(false);
         play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,8 +83,9 @@ public class GameStart extends JFrame {
         
         {
         exit = new JButton("Exit");
-        exit.setBounds(750, 400, 150, 70);
-        exit.setBackground(null);
+        exit.setBounds(725, 415, 150, 70);
+        exit.setBorderPainted(false);
+        exit.setBackground(new java.awt.Color(199, 206, 217));
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -59,10 +95,16 @@ public class GameStart extends JFrame {
         }
 
         start.setLayout(null);
-        start.add(menuLabel);
-        drawGame("src/data/level1.txt");
+        start.add(anna);
+        start.add(robi);
+        start.add(peti);
+        start.add(logo);
+        start.add(brand);
+        start.add(bus);
         start.add(play);
         start.add(exit);
+        start.add(menuLabel);
+        drawGame("src/data/level1.txt");
         frame = new JFrame("Catch The Bus ~ Anrope Studios©");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(1600, 900));
@@ -71,7 +113,6 @@ public class GameStart extends JFrame {
         frame.getContentPane().add(start);
         frame.pack();
         frame.setVisible(true);
-    
     }
     
     public void startGame() {
@@ -86,7 +127,7 @@ public class GameStart extends JFrame {
         while ((line = br.readLine()) != null) {
             int x = 0;
             for (char type : line.toCharArray()) {
-                if (type == 'r' || type == 'b') {
+                if (type == 'r'/*|| type == 'b'*/) {
                     JLabel road = new JLabel();
                     road.setIcon(new ImageIcon("src/data/pngs/road.png"));
                     road.setBounds(x * ROAD_WIDTH, y * ROAD_HEIGHT, ROAD_WIDTH, ROAD_HEIGHT);

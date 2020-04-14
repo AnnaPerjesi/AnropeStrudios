@@ -19,8 +19,9 @@ public class GameGUI extends JFrame {
     private static JLabel lives;
     private final JLabel coin;
     private final JLabel heart;
-    private final JLabel money;
+    private static JLabel money;
     private final JButton pause;
+    private static JLabel level;
     private final JButton tower;
     private final JButton tower2;
     private final JButton tower3;
@@ -28,7 +29,7 @@ public class GameGUI extends JFrame {
     private final JLabel towerCost2;
     private final JLabel towerCost3;
     private final JButton startRound;
-    private final JLabel roundCounter;
+    private static JLabel roundCounter;
 
     //NEW
     private final JLabel pBg;
@@ -121,6 +122,15 @@ public class GameGUI extends JFrame {
                 }
             });
         }
+        
+        {//Level Label
+            level = new JLabel("Level "+Integer.toString(gameArea.getLevelNum()));
+            level.setHorizontalAlignment(JLabel.CENTER);
+            level.setBounds(10, 20, 100, 40);
+            level.setOpaque(true);
+            level.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+            level.setBackground(new java.awt.Color(189, 189, 189));
+        }
 
         {//Tower1 Button + Cost Label
             /*AFROMAGYAR CSOPORT*/
@@ -199,7 +209,7 @@ public class GameGUI extends JFrame {
               }
             });
             
-            roundCounter = new JLabel("9/11 rounds");
+            roundCounter = new JLabel(Integer.toString(gameArea.getWave())+"/5 rounds");
             roundCounter.setHorizontalAlignment(JLabel.CENTER);
             roundCounter.setBounds(1488, 835, 90, 20);
             roundCounter.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -254,6 +264,7 @@ public class GameGUI extends JFrame {
         }
         gameArea.setLayout(null);
         gameArea.add(coin);
+        gameArea.add(level);
         gameArea.add(heart);
         gameArea.add(lives);
         gameArea.add(money);
@@ -298,5 +309,17 @@ public class GameGUI extends JFrame {
 
     public static void refreshLives(int l) {
         lives.setText(Integer.toString(l));
+    }
+    
+    public static void refreshWaves(int w) {
+        roundCounter.setText(Integer.toString(w)+"/5 rounds");
+    }
+    
+    public static void refreshLevel(int a) {
+        level.setText("Level "+Integer.toString(a));
+    }
+    
+    public static void refreshMoney(int a) {
+        money.setText(Integer.toString(a));
     }
 }

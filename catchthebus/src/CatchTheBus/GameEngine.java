@@ -29,11 +29,12 @@ public class GameEngine extends JPanel {
     private static boolean paused = false;
     private static boolean isOver = false;
     private int timer = 0;
-
+    private int wave = 1;
+    private int levelNum = 1;
     private Timer newFrameTimer;
     public boolean started = false;
 
-    private int levelNum = 0;
+
     private Level level;
     private Player player;
     private ArrayList<Tower> towers;
@@ -48,22 +49,27 @@ public class GameEngine extends JPanel {
         player = new Player();
         player.reset();
         restart();
-        enemies = startRound();
+        enemies = startRound(wave);
 
         
-        newFrameTimer = new Timer(5000 / FPS, new NewFrameListener());
+        newFrameTimer = new Timer(2000 / FPS, new NewFrameListener());
         newFrameTimer.start();
     }
 
-    public ArrayList<Enemy> startRound() {
+    public ArrayList<Enemy> startRound(int line) {
         ArrayList<Enemy> enemies = new ArrayList();
         try {
-            File myObj = new File("src/data/wave1.txt");
+            File myObj = new File("src/data/waves.txt");
             Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
+            int counter = 0;
+            do {
                 String data = myReader.nextLine();
-                String[] currencies = data.split(" ");
-                int startY = -100;
+                counter++;
+            }
+            while (counter != line);
+            String data = myReader.nextLine();
+            String[] currencies = data.split(" ");
+            int startY = -100;
                 for (int i = 0; i < currencies.length; i++) {
                     switch (currencies[i]) {
                         case "p":
@@ -96,7 +102,6 @@ public class GameEngine extends JPanel {
                     }
                     startY = startY - 100;
                 }
-            }
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
@@ -107,12 +112,10 @@ public class GameEngine extends JPanel {
 
     public void restart() {
         try {
-           // level = new Level("src/data/level" + getLevelNum() + ".txt", "src/data/coordinates" + getLevelNum() +".txt");
-            level = new Level("src/data/level1.txt", "src/data/coordinates1.txt");
+            level = new Level("src/data/level" + getLevelNum() + ".txt", "src/data/coordinates" + getLevelNum() +".txt");
         } catch (IOException ex) {
             Logger.getLogger(GameEngine.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        Image road = new ImageIcon("src/data/pngs/road.png").getImage();
     }
 
     @Override
@@ -163,6 +166,7 @@ public class GameEngine extends JPanel {
                         if (enemies.get(i).collidesBus(level.getBus())) {
                             player.decreaseLife(enemies.get(i).getDmg());
                             enemies.get(i).kill();
+                            player.addMoney(-5);
                         } else {
                             enemies.get(i).move(level.getCoordinates(), level.getDirections());
                         }
@@ -171,18 +175,30 @@ public class GameEngine extends JPanel {
                     for(int i = 0; i<enemies.size(); i++){
                         if(!enemies.get(i).getAlive()){
                             enemies.remove(i);
+                            player.addMoney(5);
                         }
                     }
                  //System.out.println(timer);
                 }
                 /*NEW MAYBE WRONG SOLUTION*/
-                if(isOver()){
-                    if(levelNum<5){
-                        levelNum++;
-                    }else{
-                        levelNum=0;
-                    }
+                if(isOver() && wave < 5){
+                    started = false;
+                    wave++;
+                    GameGUI.refreshWaves(wave);
                     restart();
+                    enemies = startRound(wave);
+                } else if (isOver() && wave >= 5) {
+                    started = false;
+                    wave = 1;
+                    levelNum++;
+                    GameGUI.refreshWaves(wave);
+                    GameGUI.refreshLevel(levelNum);
+                    restart();
+                    enemies = startRound(wave);
+                }
+                
+                if(player.getLives() == 0) {
+                    /* TODO */
                 }
 
                 repaint();
@@ -261,4 +277,7 @@ public class GameEngine extends JPanel {
         started = true;
     }
     
+    public int getWave() {
+        return this.wave;
+    }
 }
