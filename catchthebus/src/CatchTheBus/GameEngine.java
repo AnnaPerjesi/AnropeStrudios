@@ -109,6 +109,7 @@ public class GameEngine extends JPanel {
 
     public void restart() {
         try {
+           // level = new Level("src/data/level" + getLevelNum() + ".txt", "src/data/coordinates" + getLevelNum() +".txt");
             level = new Level("src/data/level1.txt", "src/data/coordinates1.txt");
         } catch (IOException ex) {
             Logger.getLogger(GameEngine.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -171,7 +172,15 @@ public class GameEngine extends JPanel {
                     }
                  //System.out.println(timer);
                 }
-                
+                /*NEW MAYBE WRONG SOLUTION*/
+                if(isOver()){
+                    if(levelNum<5){
+                        levelNum++;
+                    }else{
+                        levelNum=0;
+                    }
+                    restart();
+                }
 
                 repaint();
         }
@@ -215,4 +224,23 @@ public class GameEngine extends JPanel {
     public boolean getShowTowers() {
         return this.showTowers;
     }
+    
+    /**
+     * Tell taht if there are enemies on the screen or not
+     * @return 
+     */
+    public boolean isOver(){
+       return enemies.isEmpty();
+    }
+
+    public int getLevelNum() {
+        return levelNum;
+    }
+
+    public void setLevelNum(int levelNum) {
+        this.levelNum = levelNum;
+    }
+    
+    
+    
 }
