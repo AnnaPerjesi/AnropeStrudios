@@ -1,8 +1,4 @@
 /*
-
-
-
-
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -35,6 +31,7 @@ public class GameEngine extends JPanel {
     private int timer = 0;
 
     private Timer newFrameTimer;
+    public boolean started = false;
 
     private int levelNum = 0;
     private Level level;
@@ -53,8 +50,9 @@ public class GameEngine extends JPanel {
         restart();
         enemies = startRound();
 
+        
         newFrameTimer = new Timer(5000 / FPS, new NewFrameListener());
-        startTimer();
+        newFrameTimer.start();
     }
 
     public ArrayList<Enemy> startRound() {
@@ -142,7 +140,7 @@ public class GameEngine extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ae) {
             
-                if (!GameEngine.paused && !isOver) {
+                if (!GameEngine.paused && !isOver && started) {
 
                     timer++;
                     if(timer % 10 == 0){
@@ -259,7 +257,8 @@ public class GameEngine extends JPanel {
     }
     
     public void startTimer(){
-        newFrameTimer.start();
+        
+        started = true;
     }
     
 }
