@@ -5,8 +5,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Tower extends Sprite {
-
-    //TODO enum?? FREEZE, DOUBLESHOOT..etc?
     private int buyingCost;
     private int refundCost;
     private int upgradeCost;
@@ -26,6 +24,7 @@ public class Tower extends Sprite {
 
     public Tower(int x, int y, int width, int height,double dmg, double range, Image image) {
         super(x, y, width, height, image);
+        this.buyingCost = 15;
         this.power = dmg;
         this.range = range;
         lastAttack = 0;

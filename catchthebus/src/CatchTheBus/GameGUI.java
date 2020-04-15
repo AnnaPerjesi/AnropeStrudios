@@ -25,9 +25,9 @@ public class GameGUI extends JFrame {
     private final JButton tower;
     private final JButton tower2;
     private final JButton tower3;
-    private final JLabel towerCost;
-    private final JLabel towerCost2;
-    private final JLabel towerCost3;
+    private static JLabel towerCost;
+    private static JLabel towerCost2;
+    private static JLabel towerCost3;
     private final JButton startRound;
     private static JLabel roundCounter;
 
@@ -321,5 +321,16 @@ public class GameGUI extends JFrame {
     
     public static void refreshMoney(int a) {
         money.setText(Integer.toString(a));
+    }
+    
+    public static void refreshCost1(int c){
+        towerCost.setText(Integer.toString(c));
+    }
+    public static void refreshCost2(int c){
+        towerCost2.setText(Integer.toString(c));
+    }
+    
+    public static void refreshCost3(int c){
+        towerCost3.setText(Integer.toString(c));
     }
 }
