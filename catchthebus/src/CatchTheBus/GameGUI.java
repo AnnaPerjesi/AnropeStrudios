@@ -215,7 +215,7 @@ public class GameGUI extends JFrame {
                 }
             });
 
-            roundCounter = new JLabel(Integer.toString(gameArea.getWave()) + "/5 rounds");
+            roundCounter = new JLabel(Integer.toString(gameArea.getWave()) + "/10 rounds");
             roundCounter.setHorizontalAlignment(JLabel.CENTER);
             roundCounter.setBounds(1488, 835, 90, 20);
             roundCounter.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -316,7 +316,7 @@ public class GameGUI extends JFrame {
     }
 
     public static void refreshWaves(int w) {
-        roundCounter.setText(Integer.toString(w) + "/5 rounds");
+        roundCounter.setText(Integer.toString(w) + "/10 rounds");
     }
 
     public static void refreshLevel(int a) {

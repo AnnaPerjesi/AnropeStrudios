@@ -34,6 +34,7 @@ public class GameEngine extends JPanel {
     private int levelNum = 4;
     private Timer newFrameTimer;
     public boolean started = false;
+    public static int speed = 5000;
 
     private Level level;
     private static Player player;
@@ -51,7 +52,7 @@ public class GameEngine extends JPanel {
         restart();
         enemies = startRound(wave);
 
-        newFrameTimer = new Timer(2000 / FPS, new NewFrameListener());
+        newFrameTimer = new Timer(speed / FPS, new NewFrameListener());
         newFrameTimer.start();
     }
 
