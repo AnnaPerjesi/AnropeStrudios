@@ -1,6 +1,11 @@
 
-p i a s b b b p i a s i s s b a a b b b b b b
-b b b a s b b b b b
-p p p p i i i i a a
-s s s s s a a
-b b b a a
+p p p
+p p i i
+p pi i a a
+p p p i a a a
+p a a a i s s
+s s s s s s s s s
+p p p i i s s i a a
+p i i i i s s s a a a
+p p p s s s i i i a a a
+p p i i a a s s p i a s b
