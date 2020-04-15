@@ -6,6 +6,7 @@
 package catchthebus;
 
 import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -15,14 +16,16 @@ public class Bullet extends Sprite {
 
     private int x;
     private int y;
-    private int width;
-    private int height;
+    private int width = 25;
+    private int height = 25;
     private int velx;
     private int vely;
+    public boolean visible;
     Image image;
 
-    public Bullet(int x, int y, int width, int height, Image image) {
+    public Bullet(int x, int y,int height, int width, Image image) {
         super(x, y, width, height, image);
+        this.visible = false;
     }
 
     public int getX() {
@@ -40,5 +43,14 @@ public class Bullet extends Sprite {
     public int getVely() {
         return vely;
     }
-
+    public void show(){
+        this.visible = true;
+    }
+    public void move(Enemy enemy){
+        //TODO move to dir
+        this.visible = false;
+    }
+    public boolean getVisibility(){
+        return this.visible;
+    }
 }
