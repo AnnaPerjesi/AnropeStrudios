@@ -31,7 +31,7 @@ public class GameEngine extends JPanel {
     private static boolean isOver = false;
     private int timer = 0;
     private int wave = 1;
-    private int levelNum = 1;
+    private int levelNum = 4;
     private Timer newFrameTimer;
     public boolean started = false;
 
@@ -72,27 +72,27 @@ public class GameEngine extends JPanel {
                 switch (currencies[i]) {
                     case "p":
                         Image pregnantImage = new ImageIcon("src/data/pngs/pregnant.png").getImage();
-                        Enemy pregnant = new Enemy(225, startY, 50, 50, pregnantImage, 2, true);
+                        Enemy pregnant = new Enemy(225, startY, 50, 50, pregnantImage, 2, true, 5, 1);
                         enemies.add(pregnant);
                         break;
                     case "i":
                         Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
-                        Enemy it = new Enemy(225, startY, 50, 50, itImage, 3, true);
+                        Enemy it = new Enemy(225, startY, 50, 50, itImage, 3, true, 10, 2);
                         enemies.add(it);
                         break;
                     case "a":
                         Image manImage = new ImageIcon("src/data/pngs/man.png").getImage();
-                        Enemy man = new Enemy(225, startY, 50, 50, manImage, 2, true);
+                        Enemy man = new Enemy(225, startY, 50, 50, manImage, 2, true, 15, 3);
                         enemies.add(man);
                         break;
                     case "s":
                         Image kidImage = new ImageIcon("src/data/pngs/kid.png").getImage();
-                        Enemy kid = new Enemy(225, startY, 50, 50, kidImage, 1, true);
+                        Enemy kid = new Enemy(225, startY, 50, 50, kidImage, 1, true, 5, 4);
                         enemies.add(kid);
                         break;
                     case "b":
                         Image bossImage = new ImageIcon("src/data/pngs/boss.png").getImage();
-                        Enemy boss = new Enemy(225, startY, 50, 50, bossImage, 5, true);
+                        Enemy boss = new Enemy(225, startY, 50, 50, bossImage, 5, true, 25, 5);
                         enemies.add(boss);
                         break;
                     default:
@@ -172,20 +172,29 @@ public class GameEngine extends JPanel {
 
                 for (int i = 0; i < enemies.size(); i++) {
                     if (!enemies.get(i).getAlive()) {
+                        switch(enemies.get(i).getType())
+                        {
+                            case 1: player.addMoney(enemies.get(i).getWorth()); break;
+                            case 2: player.addMoney(enemies.get(i).getWorth()); break;
+                            case 3: player.addMoney(enemies.get(i).getWorth()); break;
+                            case 4: player.addMoney(enemies.get(i).getWorth()); break;
+                            case 5: player.addMoney(enemies.get(i).getWorth()); break;
+                            default: player.addMoney(enemies.get(i).getWorth()); break;
+                        }
+                        GameGUI.refreshImage();
                         enemies.remove(i);
-                        player.addMoney(5);
                     }
                 }
                 //System.out.println(timer);
             }
             /*NEW MAYBE WRONG SOLUTION*/
-            if (isOver() && wave < 5) {
+            if (isOver() && wave < 10) {
                 started = false;
                 wave++;
                 GameGUI.refreshWaves(wave);
                 restart();
                 enemies = startRound(wave);
-            } else if (isOver() && wave >= 5) {
+            } else if (isOver() && wave >= 10) {
                 started = false;
                 wave = 1;
                 levelNum++;
@@ -260,19 +269,19 @@ public class GameEngine extends JPanel {
             realTowers.add(tower.createTower(10, 150, new ImageIcon("src/data/pngs/crowgrey.png").getImage()));
             player.setMoney(player.getMoney()-10);
             GameGUI.refreshMoney(player.getMoney());
-            GameGUI.affordable(10,type);
+            GameGUI.refreshImage();
             this.towers.remove(tower);
         } else if (type == 2) {
             realTowers.add(tower.createTower(5, 200, new ImageIcon("src/data/pngs/disabgrey.png").getImage()));
             player.setMoney(player.getMoney()-15);
             GameGUI.refreshMoney(player.getMoney());
-            GameGUI.affordable(15,type);
+            GameGUI.refreshImage();
             this.towers.remove(tower);
         } else if (type == 3) {
             realTowers.add(tower.createTower(5, 500, new ImageIcon("src/data/pngs/incoggrey.png").getImage()));
             player.setMoney(player.getMoney()-20);
             GameGUI.refreshMoney(player.getMoney());
-            GameGUI.affordable(20,type);
+            GameGUI.refreshImage();
             this.towers.remove(tower);
         }
     }
