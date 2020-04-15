@@ -122,9 +122,9 @@ public class GameGUI extends JFrame {
                 }
             });
         }
-        
+
         {//Level Label
-            level = new JLabel("Level "+Integer.toString(gameArea.getLevelNum()));
+            level = new JLabel("Level " + Integer.toString(gameArea.getLevelNum()));
             level.setHorizontalAlignment(JLabel.CENTER);
             level.setBounds(10, 20, 100, 40);
             level.setOpaque(true);
@@ -135,15 +135,17 @@ public class GameGUI extends JFrame {
         {//Tower1 Button + Cost Label
             /*AFROMAGYAR CSOPORT*/
             tower = new JButton();
-            tower.setIcon(affordable( 10, 1));
+            tower.setIcon(affordable(10, 1));
             tower.setBounds(1432, 780, 50, 50);
             tower.setBorder(null);
             tower.setBackground(null);
             tower.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    gameArea.changeShowTower();
-                    type = 1;
+                    if (gameArea.getPlayerMoney() >= 10) {
+                        gameArea.changeShowTower();
+                        type = 1;
+                    }
                 }
             });
 
@@ -156,15 +158,17 @@ public class GameGUI extends JFrame {
 
             /*KEREKESSZÉKES*/
             tower2 = new JButton();
-            tower2.setIcon(affordable( 15, 2));
+            tower2.setIcon(affordable(15, 2));
             tower2.setBounds(1370, 780, 50, 50);
             tower2.setBorder(null);
             tower2.setBackground(null);
             tower2.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    gameArea.changeShowTower();
-                    type = 2;
+                    if (gameArea.getPlayerMoney() >= 15) {
+                        gameArea.changeShowTower();
+                        type = 2;
+                    }
                 }
             });
 
@@ -177,15 +181,17 @@ public class GameGUI extends JFrame {
 
             /*ELLENŐR*/
             tower3 = new JButton();
-            tower3.setIcon(affordable( 20, 3));
+            tower3.setIcon(affordable(20, 3));
             tower3.setBounds(1308, 780, 50, 50);
             tower3.setBorder(null);
             tower3.setBackground(null);
             tower3.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    gameArea.changeShowTower();
-                    type = 3;
+                    if (gameArea.getPlayerMoney() >= 20) {
+                        gameArea.changeShowTower();
+                        type = 3;
+                    }
                 }
             });
             towerCost3 = new JLabel("20");
@@ -202,23 +208,21 @@ public class GameGUI extends JFrame {
             startRound.setBounds(1483, 730, 100, 100);
             startRound.setBorder(null);
             startRound.setBackground(null);
-            startRound.addActionListener(new ActionListener(){
-              @Override
-              public void actionPerformed(ActionEvent e){
-                  gameArea.startTimer();
-              }
+            startRound.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gameArea.startTimer();
+                }
             });
-            
-            roundCounter = new JLabel(Integer.toString(gameArea.getWave())+"/5 rounds");
+
+            roundCounter = new JLabel(Integer.toString(gameArea.getWave()) + "/5 rounds");
             roundCounter.setHorizontalAlignment(JLabel.CENTER);
             roundCounter.setBounds(1488, 835, 90, 20);
             roundCounter.setBorder(BorderFactory.createLineBorder(Color.black));
             roundCounter.setOpaque(true);
             roundCounter.setBackground(new java.awt.Color(189, 189, 189));
-            
+
         }
-        
-        
 
         //NEW
         {/*PAUSE MENU*/
@@ -310,44 +314,53 @@ public class GameGUI extends JFrame {
     public static void refreshLives(int l) {
         lives.setText(Integer.toString(l));
     }
-    
+
     public static void refreshWaves(int w) {
-        roundCounter.setText(Integer.toString(w)+"/5 rounds");
+        roundCounter.setText(Integer.toString(w) + "/5 rounds");
     }
-    
+
     public static void refreshLevel(int a) {
-        level.setText("Level "+Integer.toString(a));
+        level.setText("Level " + Integer.toString(a));
     }
-    
+
     public static void refreshMoney(int a) {
         money.setText(Integer.toString(a));
     }
-    
-    public static void refreshCost1(int c){
+
+    public static void refreshCost1(int c) {
         towerCost.setText(Integer.toString(c));
     }
-    public static void refreshCost2(int c){
+
+    public static void refreshCost2(int c) {
         towerCost2.setText(Integer.toString(c));
     }
-    
-    public static void refreshCost3(int c){
+
+    public static void refreshCost3(int c) {
         towerCost3.setText(Integer.toString(c));
     }
-    
+
     public ImageIcon affordable(int x, int type) {
-        if ( gameArea.getPlayerMoney() < x ) {
+        if (gameArea.getPlayerMoney() < x) {
             switch (type) {
-                case 1: return new ImageIcon("src/data/pngs/crowred.png");
-                case 2: return new ImageIcon("src/data/pngs/disabred.png");
-                case 3: return new ImageIcon("src/data/pngs/incogred.png");
-                default: return new ImageIcon("src/data/pngs/x.png");
+                case 1:
+                    return new ImageIcon("src/data/pngs/crowred.png");
+                case 2:
+                    return new ImageIcon("src/data/pngs/disabred.png");
+                case 3:
+                    return new ImageIcon("src/data/pngs/incogred.png");
+                default:
+                    return new ImageIcon("src/data/pngs/x.png");
             }
         } else {
             switch (type) {
-                case 1: return new ImageIcon("src/data/pngs/crowgrey.png");
-                case 2: return new ImageIcon("src/data/pngs/disabgrey.png");
-                case 3: return new ImageIcon("src/data/pngs/incoggrey.png");
-                default: return new ImageIcon("src/data/pngs/x.png");
+                case 1:
+                    return new ImageIcon("src/data/pngs/crowgrey.png");
+                case 2:
+                    return new ImageIcon("src/data/pngs/disabgrey.png");
+                case 3:
+                    return new ImageIcon("src/data/pngs/incoggrey.png");
+                default:
+                    return new ImageIcon("src/data/pngs/x.png");
             }
         }
     }
