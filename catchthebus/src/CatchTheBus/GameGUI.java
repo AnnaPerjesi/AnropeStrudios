@@ -22,9 +22,9 @@ public class GameGUI extends JFrame {
     private static JLabel money;
     private final JButton pause;
     private static JLabel level;
-    private final JButton tower;
-    private final JButton tower2;
-    private final JButton tower3;
+    private static JButton tower;
+    private static JButton tower2;
+    private static JButton tower3;
     private static JLabel towerCost;
     private static JLabel towerCost2;
     private static JLabel towerCost3;
@@ -366,9 +366,9 @@ public class GameGUI extends JFrame {
     }
     
     
-    public void refreshImage(){
-        affordable(10,1);
-        affordable(15,2);
-        affordable(20,3);
+    public static void refreshImage(){
+        tower.setIcon(affordable(10,1));
+        tower2.setIcon(affordable(15,2));
+        tower3.setIcon(affordable(20,3));
     }
 }
