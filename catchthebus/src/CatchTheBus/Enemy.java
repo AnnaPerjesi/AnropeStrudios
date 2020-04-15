@@ -23,16 +23,20 @@ public class Enemy extends Sprite {
     private int dmg;
     private int velx = 0;
     private int vely = speed;
+    private int worth;
+    private int type;
     private boolean isAlive;
     private double health;
 
     private int counterDir = 0;
 
-    public Enemy(int x, int y, int width, int height, Image image, int dmg, boolean isAlive) {
+    public Enemy(int x, int y, int width, int height, Image image, int dmg, boolean isAlive, int worth, int type) {
         super(x, y, width, height, image);
         this.health = 15;
         this.dmg = dmg;
         this.isAlive = isAlive;
+        this.worth = worth;
+        this.type = type;
     }
 
     public void draw(Graphics g) {
@@ -107,6 +111,13 @@ public class Enemy extends Sprite {
         return this.dmg;
     }
     
+    public int getWorth() {
+        return this.worth;
+    }
+    
+    public int getType() {
+        return this.type;
+    }
     
     /**
      * Enemy get damage from tower (bullet) and this decrese it's health
