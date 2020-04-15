@@ -34,6 +34,7 @@ public class GameEngine extends JPanel {
     private int levelNum = 1;
     private Timer newFrameTimer;
     public boolean started = false;
+    public static int speed = 5000;
 
     private Level level;
     private static Player player;
@@ -51,7 +52,7 @@ public class GameEngine extends JPanel {
         restart();
         enemies = startRound(wave);
 
-        newFrameTimer = new Timer(2000 / FPS, new NewFrameListener());
+        newFrameTimer = new Timer(speed / FPS, new NewFrameListener());
         newFrameTimer.start();
     }
 
@@ -179,13 +180,13 @@ public class GameEngine extends JPanel {
                 //System.out.println(timer);
             }
             /*NEW MAYBE WRONG SOLUTION*/
-            if (isOver() && wave < 5) {
+            if (isOver() && wave < 10) {
                 started = false;
                 wave++;
                 GameGUI.refreshWaves(wave);
                 restart();
                 enemies = startRound(wave);
-            } else if (isOver() && wave >= 5) {
+            } else if (isOver() && wave >= 10) {
                 started = false;
                 wave = 1;
                 levelNum++;
