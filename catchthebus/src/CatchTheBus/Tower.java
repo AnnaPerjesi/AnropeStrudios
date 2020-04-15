@@ -3,6 +3,7 @@ package catchthebus;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class Tower extends Sprite {
     private int buyingCost;
@@ -21,6 +22,8 @@ public class Tower extends Sprite {
     private double range;
     private double power;
     private double modifierIncrease = 1.3; //range and attack increase by upgarde!
+    
+    private Bullet bullet;
 
     public Tower(int x, int y, int width, int height,double dmg, double range, Image image) {
         super(x, y, width, height, image);
@@ -28,6 +31,7 @@ public class Tower extends Sprite {
         this.power = dmg;
         this.range = range;
         lastAttack = 0;
+        this.bullet = new Bullet(this.x+26, this.y+26, 25, 25, new ImageIcon("src/data/pngs/circle.png").getImage());
     }
     
     /**
@@ -119,5 +123,14 @@ public class Tower extends Sprite {
     
     public void shoot(Enemy firstEnemy){
         firstEnemy.takeDamage(this.power);
+    }
+    public void showBullet(){
+        this.bullet.show();
+    }
+    public void moveBullet(Enemy enemy){
+        this.bullet.move(enemy);
+    }
+    public Bullet getBullet(){
+        return this.bullet;
     }
 }
