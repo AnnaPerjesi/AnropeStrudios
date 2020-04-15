@@ -36,7 +36,7 @@ public class GameEngine extends JPanel {
     public boolean started = false;
 
     private Level level;
-    private Player player;
+    private static Player player;
     private ArrayList<Tower> towers;
     private ArrayList<Tower> realTowers;
     private boolean showTowers = false;
@@ -240,8 +240,8 @@ public class GameEngine extends JPanel {
         return this.player.getLives();
     }
 
-    public int getPlayerMoney() {
-        return this.player.getMoney();
+    public static int getPlayerMoney() {
+        return player.getMoney();
     }
 
     public Level getLevel() {
@@ -260,16 +260,19 @@ public class GameEngine extends JPanel {
             realTowers.add(tower.createTower(10, 150, new ImageIcon("src/data/pngs/crowgrey.png").getImage()));
             player.setMoney(player.getMoney()-10);
             GameGUI.refreshMoney(player.getMoney());
+            GameGUI.affordable(10,type);
             this.towers.remove(tower);
         } else if (type == 2) {
             realTowers.add(tower.createTower(5, 200, new ImageIcon("src/data/pngs/disabgrey.png").getImage()));
             player.setMoney(player.getMoney()-15);
             GameGUI.refreshMoney(player.getMoney());
+            GameGUI.affordable(15,type);
             this.towers.remove(tower);
         } else if (type == 3) {
             realTowers.add(tower.createTower(5, 500, new ImageIcon("src/data/pngs/incoggrey.png").getImage()));
             player.setMoney(player.getMoney()-20);
             GameGUI.refreshMoney(player.getMoney());
+            GameGUI.affordable(20,type);
             this.towers.remove(tower);
         }
     }

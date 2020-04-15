@@ -36,7 +36,7 @@ public class GameGUI extends JFrame {
     private final JLabel pWindow;
     private final JButton pResume;
     private final JButton pExit;
-    private GameEngine gameArea;
+    private static GameEngine gameArea;
     private ArrayList<Tower> towers;
     private int type;
     Tower temp;
@@ -339,7 +339,7 @@ public class GameGUI extends JFrame {
         towerCost3.setText(Integer.toString(c));
     }
 
-    public ImageIcon affordable(int x, int type) {
+    public static ImageIcon affordable(int x, int type) {
         if (gameArea.getPlayerMoney() < x) {
             switch (type) {
                 case 1:

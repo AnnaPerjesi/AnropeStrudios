@@ -36,7 +36,7 @@ public class Player {
         GameGUI.refreshLives(this.lives);
     }
 
-    public int getMoney() {
+    public static int getMoney() {
         return money;
     }
 
