@@ -63,6 +63,9 @@ public class Level {
                     } else if ( c == '1') {
                         Image busImage = new ImageIcon("src/data/pngs/bus.png").getImage();
                         bus = new Bus(x * ROAD_WIDTH - 100,y * ROAD_HEIGHT - 40,300,100,busImage);
+                    } else if ( c == '4') {
+                        Image busImage = new ImageIcon("src/data/pngs/bus_r.png").getImage();
+                        bus = new Bus(x * ROAD_WIDTH - 20,y * ROAD_HEIGHT - 90,100,300,busImage);
                     }
                 }
                 x++;
