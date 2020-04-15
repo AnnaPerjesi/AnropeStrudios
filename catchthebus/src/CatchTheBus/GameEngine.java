@@ -31,7 +31,7 @@ public class GameEngine extends JPanel {
     private static boolean isOver = false;
     private int timer = 0;
     private int wave = 1;
-    private int levelNum = 4;
+    private int levelNum = 5;
     private Timer newFrameTimer;
     public boolean started = false;
     public static int speed = 5000;

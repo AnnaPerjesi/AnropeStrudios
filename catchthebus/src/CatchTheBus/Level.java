@@ -54,18 +54,15 @@ public class Level {
                     Image image = new ImageIcon("src/data/pngs/x.png").getImage();
                     towers.add(new Tower(x * ROAD_WIDTH+25,y * ROAD_HEIGHT+25 ,ROAD_WIDTH/2, ROAD_HEIGHT/2, 0, 0, image));
                 } else if ( type == 'b') {
-                    if (c == '3') {
+                    if (c == '3' || c == '4' ) {
                         Image busImage = new ImageIcon("src/data/pngs/bus_r.png").getImage();
                         bus = new Bus(x * ROAD_WIDTH - 20,y * ROAD_HEIGHT - 90,100,300,busImage);
                     } else if ( c == '2') {
                         Image busImage = new ImageIcon("src/data/pngs/bus.png").getImage();
                         bus = new Bus(x * ROAD_WIDTH - 100,y * ROAD_HEIGHT,300,100,busImage);
-                    } else if ( c == '1') {
+                    } else if ( c == '1' || c == '5' ) {
                         Image busImage = new ImageIcon("src/data/pngs/bus.png").getImage();
                         bus = new Bus(x * ROAD_WIDTH - 100,y * ROAD_HEIGHT - 40,300,100,busImage);
-                    } else if ( c == '4') {
-                        Image busImage = new ImageIcon("src/data/pngs/bus_r.png").getImage();
-                        bus = new Bus(x * ROAD_WIDTH - 20,y * ROAD_HEIGHT - 90,100,300,busImage);
                     }
                 }
                 x++;
