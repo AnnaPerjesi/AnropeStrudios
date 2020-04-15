@@ -364,4 +364,11 @@ public class GameGUI extends JFrame {
             }
         }
     }
+    
+    
+    public void refreshImage(){
+        affordable(10,1);
+        affordable(15,2);
+        affordable(20,3);
+    }
 }
