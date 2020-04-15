@@ -1,2 +1,0 @@
-git config --global user.email "ziuhld@inf.elte.hu"
-git config --global user.name "Pukánszky Péter"
