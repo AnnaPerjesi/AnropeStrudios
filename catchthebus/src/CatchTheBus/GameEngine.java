@@ -191,6 +191,11 @@ public class GameEngine extends JPanel {
                     started = false;
                     wave = 1;
                     levelNum++;
+                    /*VALAMI bibi, nem tudom még mi*/
+                    realTowers.clear();
+                    player.setMoney(50);
+                    GameGUI.refreshMoney(50);
+                    /**********************************/
                     GameGUI.refreshWaves(wave);
                     GameGUI.refreshLevel(levelNum);
                     restart();
