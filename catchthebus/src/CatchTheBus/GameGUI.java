@@ -232,6 +232,7 @@ public class GameGUI extends JFrame {
             pBg = new JLabel();
             pBg.setBounds(0, 0, 1600, 900);
             pBg.setBackground(new java.awt.Color(10, 10, 10, 200));
+
             pBg.setOpaque(true);
 
             //window
@@ -240,6 +241,7 @@ public class GameGUI extends JFrame {
             pWindow.setBackground(new java.awt.Color(223, 197, 161, 150));
             pWindow.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             pWindow.setOpaque(true);
+           // pWindow.setOpaque(true);
 
             //resume btn
             pResume = new JButton("Resume");
@@ -297,9 +299,10 @@ public class GameGUI extends JFrame {
     public void pauseGame() {
         gameArea.setPaused(true);  //Megállítja a játékot
         gameArea.remove(pause);
-        gameArea.add(pWindow);
         gameArea.add(pResume);
         gameArea.add(pExit);
+        gameArea.add(pWindow);
+        
     }
 
     //NEW
