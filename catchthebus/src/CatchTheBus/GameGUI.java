@@ -135,7 +135,7 @@ public class GameGUI extends JFrame {
         {//Tower1 Button + Cost Label
             /*AFROMAGYAR CSOPORT*/
             tower = new JButton();
-            tower.setIcon(new ImageIcon("src/data/pngs/crowgrey.png"));
+            tower.setIcon(affordable( 10, 1));
             tower.setBounds(1432, 780, 50, 50);
             tower.setBorder(null);
             tower.setBackground(null);
@@ -147,7 +147,7 @@ public class GameGUI extends JFrame {
                 }
             });
 
-            towerCost = new JLabel("cost");
+            towerCost = new JLabel("10");
             towerCost.setHorizontalAlignment(JLabel.CENTER);
             towerCost.setBounds(1432, 835, 50, 20);
             towerCost.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -156,7 +156,7 @@ public class GameGUI extends JFrame {
 
             /*KEREKESSZÉKES*/
             tower2 = new JButton();
-            tower2.setIcon(new ImageIcon("src/data/pngs/disabgrey.png"));
+            tower2.setIcon(affordable( 15, 2));
             tower2.setBounds(1370, 780, 50, 50);
             tower2.setBorder(null);
             tower2.setBackground(null);
@@ -168,7 +168,7 @@ public class GameGUI extends JFrame {
                 }
             });
 
-            towerCost2 = new JLabel("cost");
+            towerCost2 = new JLabel("15");
             towerCost2.setHorizontalAlignment(JLabel.CENTER);
             towerCost2.setBounds(1370, 835, 50, 20);
             towerCost2.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -177,7 +177,7 @@ public class GameGUI extends JFrame {
 
             /*ELLENŐR*/
             tower3 = new JButton();
-            tower3.setIcon(new ImageIcon("src/data/pngs/incoggrey.png"));
+            tower3.setIcon(affordable( 20, 3));
             tower3.setBounds(1308, 780, 50, 50);
             tower3.setBorder(null);
             tower3.setBackground(null);
@@ -188,7 +188,7 @@ public class GameGUI extends JFrame {
                     type = 3;
                 }
             });
-            towerCost3 = new JLabel("cost");
+            towerCost3 = new JLabel("20");
             towerCost3.setHorizontalAlignment(JLabel.CENTER);
             towerCost3.setBounds(1308, 835, 50, 20);
             towerCost3.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -332,5 +332,23 @@ public class GameGUI extends JFrame {
     
     public static void refreshCost3(int c){
         towerCost3.setText(Integer.toString(c));
+    }
+    
+    public ImageIcon affordable(int x, int type) {
+        if ( gameArea.getPlayerMoney() < x ) {
+            switch (type) {
+                case 1: return new ImageIcon("src/data/pngs/crowred.png");
+                case 2: return new ImageIcon("src/data/pngs/disabred.png");
+                case 3: return new ImageIcon("src/data/pngs/incogred.png");
+                default: return new ImageIcon("src/data/pngs/x.png");
+            }
+        } else {
+            switch (type) {
+                case 1: return new ImageIcon("src/data/pngs/crowgrey.png");
+                case 2: return new ImageIcon("src/data/pngs/disabgrey.png");
+                case 3: return new ImageIcon("src/data/pngs/incoggrey.png");
+                default: return new ImageIcon("src/data/pngs/x.png");
+            }
+        }
     }
 }

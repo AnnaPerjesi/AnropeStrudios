@@ -51,7 +51,7 @@ public class GameEngine extends JPanel {
         restart();
         enemies = startRound(wave);
 
-        newFrameTimer = new Timer(5000 / FPS, new NewFrameListener());
+        newFrameTimer = new Timer(2000 / FPS, new NewFrameListener());
         newFrameTimer.start();
     }
 
@@ -192,6 +192,8 @@ public class GameEngine extends JPanel {
                 /*VALAMI bibi, nem tudom még mi*/
                 realTowers.clear();
                 player.setMoney(50);
+                player.setLives(100);
+                GameGUI.refreshLives(100);
                 GameGUI.refreshMoney(50);
                 /**
                  * *******************************
@@ -205,8 +207,14 @@ public class GameEngine extends JPanel {
             if (player.getLives() <= 0) {
                 enemies.clear();
                 if ((JOptionPane.showConfirmDialog(null, "Do you want to start a New Game?", "GAME OVER", JOptionPane.YES_NO_OPTION)) == JOptionPane.YES_OPTION) {
-                    setLevelNum(0);
-
+                    started = false;
+                    setLevelNum(1);
+                    wave = 1;
+                    enemies = startRound(wave);
+                    player.setLives(100);
+                    GameGUI.refreshLives(100);
+                    player.setMoney(50);
+                    GameGUI.refreshMoney(50);
                     restart();
                     repaint();
 

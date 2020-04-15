@@ -31,20 +31,13 @@ public class Level {
     private Bus bus;
 
     public Level(String levelPath, String fileName) throws IOException {
-        int x = 0;
         String S = levelPath.substring(levelPath.length() - 5);
         char c = S.charAt(0);
-        switch(c) {
-            case '1': x = 40; break;
-            case '2': x = -5; break;
-            case '3': x = 3; break;
-            default: x = 0;
-        }
-        loadLevel(levelPath, x);
+        loadLevel(levelPath, c);
         loadCoordinates(fileName);
     }
 
-    public void loadLevel(String levelPath, int look) throws FileNotFoundException, IOException {
+    public void loadLevel(String levelPath, char c) throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(levelPath));
         roads = new ArrayList<>();
         towers = new ArrayList<>();
@@ -61,12 +54,15 @@ public class Level {
                     Image image = new ImageIcon("src/data/pngs/x.png").getImage();
                     towers.add(new Tower(x * ROAD_WIDTH+25,y * ROAD_HEIGHT+25 ,ROAD_WIDTH/2, ROAD_HEIGHT/2, 0, 0, image));
                 } else if ( type == 'b') {
-                    if (look == 3) {
+                    if (c == '3') {
                         Image busImage = new ImageIcon("src/data/pngs/bus_r.png").getImage();
                         bus = new Bus(x * ROAD_WIDTH - 20,y * ROAD_HEIGHT - 90,100,300,busImage);
-                    } else {
+                    } else if ( c == '2') {
                         Image busImage = new ImageIcon("src/data/pngs/bus.png").getImage();
-                        bus = new Bus(x * ROAD_WIDTH - 100,y * ROAD_HEIGHT - look,300,100,busImage);
+                        bus = new Bus(x * ROAD_WIDTH - 100,y * ROAD_HEIGHT,300,100,busImage);
+                    } else if ( c == '1') {
+                        Image busImage = new ImageIcon("src/data/pngs/bus.png").getImage();
+                        bus = new Bus(x * ROAD_WIDTH - 100,y * ROAD_HEIGHT - 40,300,100,busImage);
                     }
                 }
                 x++;

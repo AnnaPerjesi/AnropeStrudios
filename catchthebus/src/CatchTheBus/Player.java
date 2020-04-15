@@ -10,7 +10,7 @@ public class Player {
     private static int money = 0;
     private static int lives;
     private final int STARTLIVES = 100;
-    private final int STARTMONEY = 0;
+    private final int STARTMONEY = 50;
     private static Player player;
     
     public void reset(){
