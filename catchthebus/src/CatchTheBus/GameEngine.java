@@ -5,17 +5,13 @@
  */
 package catchthebus;
 
-import catchthebus.Level.Pair;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import static java.lang.System.in;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -29,7 +25,6 @@ public class GameEngine extends JPanel {
     private final int FPS = 60;
     private static boolean paused = false;
     private static boolean isOver = false;
-    private int timer = 0;
     private int wave = 1;
     private int levelNum = 1;
     private Timer newFrameTimer;
@@ -133,7 +128,7 @@ public class GameEngine extends JPanel {
         }
         for (Tower tower : realTowers) {
             tower.draw(grphcs);
-            if(tower.getBullet().getVisibility()){
+            if (tower.getBullet().getVisibility()) {
                 tower.getBullet().draw(grphcs);
             }
         }
@@ -146,24 +141,13 @@ public class GameEngine extends JPanel {
         public void actionPerformed(ActionEvent ae) {
 
             if (!GameEngine.paused && !isOver && started) {
+                /*TODO máshogy? minden toronynak*/
 
-                timer++;
-                if (timer % 10 == 0) {
-                    for (Tower tw : realTowers) {
-                        tw.showBullet();
-                        boolean found = false;
-                        int i = 0;
-                        while (!found && i < enemies.size()) {
-                            Enemy enemy = enemies.get(i);
-                            if (inRange(enemy, tw)) {
-                                found = true;
-                                tw.shoot(enemy);
-                                tw.moveBullet(enemy);
-                            }
-                            i++;
-                        }
-                    }
+                for (Tower tw : realTowers) {
+                    tw.shoot(enemies);
+
                 }
+
                 for (int i = 0; i < enemies.size(); i++) {
 
                     if (enemies.get(i).collidesBus(level.getBus())) {
@@ -177,14 +161,25 @@ public class GameEngine extends JPanel {
 
                 for (int i = 0; i < enemies.size(); i++) {
                     if (!enemies.get(i).getAlive()) {
-                        switch(enemies.get(i).getType())
-                        {
-                            case 1: player.addMoney(enemies.get(i).getWorth()); break;
-                            case 2: player.addMoney(enemies.get(i).getWorth()); break;
-                            case 3: player.addMoney(enemies.get(i).getWorth()); break;
-                            case 4: player.addMoney(enemies.get(i).getWorth()); break;
-                            case 5: player.addMoney(enemies.get(i).getWorth()); break;
-                            default: player.addMoney(enemies.get(i).getWorth()); break;
+                        switch (enemies.get(i).getType()) {
+                            case 1:
+                                player.addMoney(enemies.get(i).getWorth());
+                                break;
+                            case 2:
+                                player.addMoney(enemies.get(i).getWorth());
+                                break;
+                            case 3:
+                                player.addMoney(enemies.get(i).getWorth());
+                                break;
+                            case 4:
+                                player.addMoney(enemies.get(i).getWorth());
+                                break;
+                            case 5:
+                                player.addMoney(enemies.get(i).getWorth());
+                                break;
+                            default:
+                                player.addMoney(enemies.get(i).getWorth());
+                                break;
                         }
                         GameGUI.refreshImage();
                         enemies.remove(i);
@@ -272,19 +267,19 @@ public class GameEngine extends JPanel {
         // TODO - típus
         if (type == 1) {
             realTowers.add(tower.createTower(10, 150, new ImageIcon("src/data/pngs/crowgrey.png").getImage()));
-            player.setMoney(player.getMoney()-10);
+            player.setMoney(player.getMoney() - 10);
             GameGUI.refreshMoney(player.getMoney());
             GameGUI.refreshImage();
             this.towers.remove(tower);
         } else if (type == 2) {
             realTowers.add(tower.createTower(5, 200, new ImageIcon("src/data/pngs/disabgrey.png").getImage()));
-            player.setMoney(player.getMoney()-15);
+            player.setMoney(player.getMoney() - 15);
             GameGUI.refreshMoney(player.getMoney());
             GameGUI.refreshImage();
             this.towers.remove(tower);
         } else if (type == 3) {
             realTowers.add(tower.createTower(5, 500, new ImageIcon("src/data/pngs/incoggrey.png").getImage()));
-            player.setMoney(player.getMoney()-20);
+            player.setMoney(player.getMoney() - 20);
             GameGUI.refreshMoney(player.getMoney());
             GameGUI.refreshImage();
             this.towers.remove(tower);
@@ -310,15 +305,6 @@ public class GameEngine extends JPanel {
 
     public void setLevelNum(int levelNum) {
         this.levelNum = levelNum;
-    }
-
-    public boolean inRange(Enemy target, Tower tw) {
-        double x = Math.abs(target.getX() - tw.getX());
-        double y = Math.abs(target.getY() - tw.getY());
-
-        double z = Math.sqrt(x * x + y * y);
-
-        return (z < tw.getRange());
     }
 
     public void startTimer() {

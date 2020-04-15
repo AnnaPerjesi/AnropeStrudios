@@ -32,7 +32,7 @@ public class Enemy extends Sprite {
 
     public Enemy(int x, int y, int width, int height, Image image, int dmg, boolean isAlive, int worth, int type) {
         super(x, y, width, height, image);
-        this.health = 15;
+        this.health = 50;
         this.dmg = dmg;
         this.isAlive = isAlive;
         this.worth = worth;
