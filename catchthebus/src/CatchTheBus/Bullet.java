@@ -21,10 +21,12 @@ public class Bullet extends Sprite {
     private int velx;
     private int vely;
     public boolean visible;
+    Point location = new Point(0, 0);
     Image image;
 
     public Bullet(int x, int y,int height, int width, Image image) {
         super(x, y, width, height, image);
+        //location.setLocation(x,y);
         this.visible = false;
     }
 
@@ -48,9 +50,43 @@ public class Bullet extends Sprite {
     }
     public void move(Enemy enemy){
         //TODO move to dir
+        
+       /* int x = location.getX();
+        int y = location.getY();
+        x += this.x;
+        y += this.y;
+        location.setLocation(x, y);*/
+              
         this.visible = false;
     }
     public boolean getVisibility(){
         return this.visible;
     }
+
+    public void setLocation(Point location) {
+        this.location = location;
+    }
+    
+    public class Point {
+
+        private int x;
+        private int y;
+
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+    }
+
+    
+    
+    
 }
