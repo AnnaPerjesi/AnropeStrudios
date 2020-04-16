@@ -1,6 +1,7 @@
 package catchthebus;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class Tower extends Sprite {
 
     public Tower(int x, int y, int width, int height, double dmg, double range, Image image) {
         super(x, y, width, height, image);
+        
         this.buyingCost = 15;
         this.power = dmg;
         this.range = range;
@@ -126,12 +128,12 @@ public class Tower extends Sprite {
         if (timer < 10) {
             timer++;
         } else {
-            showBullet();
             boolean found = false;
             int i = 0;
             while (!found && i < enemies.size()) {
                 Enemy enemy = enemies.get(i);
                 if (inRange(enemy)) {
+                    showBullet();
                     found = true;
                     firstEnemy = enemy;
                 }
@@ -139,7 +141,7 @@ public class Tower extends Sprite {
             }
             if(found){
                 firstEnemy.takeDamage(this.power);
-                moveBullet(firstEnemy);
+                //moveBullet(firstEnemy);
                 timer = 0;
             }
 
@@ -170,5 +172,14 @@ public class Tower extends Sprite {
 
     public Bullet getBullet() {
         return this.bullet;
+    }
+
+    public boolean bulletCollide() {
+        Rectangle rect = new Rectangle(firstEnemy.getX(), firstEnemy.getY(), firstEnemy.getWidth(), firstEnemy.getHeight());
+        Rectangle otherRect = new Rectangle(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
+        return rect.intersects(otherRect);
+    }
+    public Enemy getFirstEnemy(){
+        return firstEnemy;
     }
 }

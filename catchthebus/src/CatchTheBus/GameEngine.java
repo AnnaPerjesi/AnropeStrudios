@@ -130,8 +130,10 @@ public class GameEngine extends JPanel {
             tower.draw(grphcs);
             if (tower.getBullet().getVisibility()) {
                 tower.getBullet().draw(grphcs);
+
             }
         }
+
         this.setBackground(new java.awt.Color(223, 197, 161));
     }
 
@@ -141,13 +143,12 @@ public class GameEngine extends JPanel {
         public void actionPerformed(ActionEvent ae) {
 
             if (!GameEngine.paused && !isOver && started) {
-                /*TODO máshogy? minden toronynak*/
-
                 for (Tower tw : realTowers) {
                     tw.shoot(enemies);
-
+                    if (tw.getBullet().getVisibility()) {
+                        repaint();
+                    }
                 }
-
                 for (int i = 0; i < enemies.size(); i++) {
 
                     if (enemies.get(i).collidesBus(level.getBus())) {
@@ -185,7 +186,6 @@ public class GameEngine extends JPanel {
                         enemies.remove(i);
                     }
                 }
-                //System.out.println(timer);
             }
             /*NEW MAYBE WRONG SOLUTION*/
             if (isOver() && wave < 10) {

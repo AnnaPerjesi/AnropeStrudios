@@ -2,6 +2,7 @@ package catchthebus;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -51,9 +52,9 @@ public class GameStart extends JFrame {
         logo.setIcon(new ImageIcon("src/data/pngs/proba.png"));
         logo.setHorizontalAlignment(JLabel.CENTER);
         logo.setBounds(380, 50, 910, 200);
-        logo.setBackground(new java.awt.Color(223, 197, 161, 150));
+        logo.setBackground(new java.awt.Color(223,197,161,50));
         logo.setOpaque(true);
-
+        
         brand = new JLabel("Anrope Studios© - logo");
         brand.setHorizontalAlignment(JLabel.CENTER);
         brand.setBounds(1145, 500, 300, 150);
@@ -73,15 +74,17 @@ public class GameStart extends JFrame {
          */
         menuLabel = new JLabel();
         menuLabel.setBounds(600, 275, 400, 250);
-        menuLabel.setBackground(new java.awt.Color(223, 197, 161, 150));
-        menuLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        menuLabel.setBackground(new java.awt.Color(255,255,255,100));
+        menuLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         menuLabel.setOpaque(true);
 
         {
             play = new JButton("Play");
             play.setBounds(725, 315, 150, 70);
-            play.setBackground(new java.awt.Color(199, 206, 217));
-            play.setBorderPainted(false);
+            play.setBackground(new java.awt.Color(39, 39, 39));
+            play.setForeground(new java.awt.Color(233, 233, 233));
+            play.setFont(new Font("Arial", Font.PLAIN, 30));
+            //play.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             play.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -93,8 +96,10 @@ public class GameStart extends JFrame {
         {
             exit = new JButton("Exit");
             exit.setBounds(725, 415, 150, 70);
-            exit.setBorderPainted(false);
-            exit.setBackground(new java.awt.Color(199, 206, 217));
+            exit.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+            exit.setBackground(new java.awt.Color(39, 39, 39));
+            exit.setForeground(new java.awt.Color(233, 233, 233));
+            exit.setFont(new Font("Arial", Font.PLAIN, 30));
             exit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
