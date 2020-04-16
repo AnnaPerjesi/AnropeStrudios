@@ -29,12 +29,13 @@ public class GameEngine extends JPanel {
     private int levelNum = 1;
     private Timer newFrameTimer;
     public boolean started = false;
-    public static int speed = 5000;
+    public int speed = 1000;
 
     private Level level;
     private static Player player;
     private ArrayList<Tower> towers;
     private ArrayList<Tower> realTowers;
+    private ArrayList<Bullet> bullets;
     private boolean showTowers = false;
     /*NEW*/
     private static ArrayList<Enemy> enemies;
@@ -42,6 +43,7 @@ public class GameEngine extends JPanel {
     public GameEngine() {
         super();
         realTowers = new ArrayList<>();
+        bullets = new ArrayList<>();
         player = new Player();
         player.reset();
         restart();
@@ -123,14 +125,15 @@ public class GameEngine extends JPanel {
                 tower.draw(grphcs);
             }
         }
-        for (int i = 0; i < enemies.size(); i++) {
-            enemies.get(i).draw(grphcs);
+        for(Enemy enemy : enemies){
+            enemy.draw(grphcs);
         }
         for (Tower tower : realTowers) {
             tower.draw(grphcs);
-            if (tower.getBullet().getVisibility()) {
-                tower.getBullet().draw(grphcs);
-
+        }
+        for (Bullet bullet : bullets) {
+            if(bullet.getVisibility()){
+                bullet.draw(grphcs);
             }
         }
 
@@ -143,14 +146,15 @@ public class GameEngine extends JPanel {
         public void actionPerformed(ActionEvent ae) {
 
             if (!GameEngine.paused && !isOver && started) {
-                for (Tower tw : realTowers) {
-                    tw.shoot(enemies);
-                    if (tw.getBullet().getVisibility()) {
-                        repaint();
+                for (int i = 0; i < realTowers.size(); i++) {
+                    Tower tower = realTowers.get(i);
+                    Bullet bullet = bullets.get(i);
+                    tower.shoot(enemies, bullet);
+                    if(bullet.getHasDir()){
+                        bullet.move(tower.getFirstEnemy());
                     }
                 }
                 for (int i = 0; i < enemies.size(); i++) {
-
                     if (enemies.get(i).collidesBus(level.getBus())) {
                         player.decreaseLife(enemies.get(i).getDmg());
                         enemies.get(i).kill();
@@ -200,6 +204,7 @@ public class GameEngine extends JPanel {
                 levelNum++;
                 /*VALAMI bibi, nem tudom még mi*/
                 realTowers.clear();
+                bullets.clear();
                 player.setMoney(50);
                 player.setLives(100);
                 GameGUI.refreshLives(100);
@@ -281,25 +286,29 @@ public class GameEngine extends JPanel {
     }
 
     public void addTower(Tower tower, int type) {
-        // TODO - típus
-        if (type == 1) {
-            realTowers.add(tower.createTower(10, 150, new ImageIcon("src/data/pngs/crowgrey.png").getImage()));
-            player.setMoney(player.getMoney() - 10);
+        
+        { //tower
+            Image img = new ImageIcon().getImage();
+            if (type == 1) {
+                img = new ImageIcon("src/data/pngs/crowgrey.png").getImage();
+                player.setMoney(player.getMoney() - 10);
+            } else if (type == 2) {
+                img = new ImageIcon("src/data/pngs/disabgrey.png").getImage();
+                player.setMoney(player.getMoney() - 15);
+            } else {
+                img = new ImageIcon("src/data/pngs/incoggrey.png").getImage();
+                player.setMoney(player.getMoney() - 20);
+            }
+            realTowers.add(tower.createTower(10, 150, img));
             GameGUI.refreshMoney(player.getMoney());
             GameGUI.refreshImage();
             this.towers.remove(tower);
-        } else if (type == 2) {
-            realTowers.add(tower.createTower(5, 200, new ImageIcon("src/data/pngs/disabgrey.png").getImage()));
-            player.setMoney(player.getMoney() - 15);
-            GameGUI.refreshMoney(player.getMoney());
-            GameGUI.refreshImage();
-            this.towers.remove(tower);
-        } else if (type == 3) {
-            realTowers.add(tower.createTower(5, 500, new ImageIcon("src/data/pngs/incoggrey.png").getImage()));
-            player.setMoney(player.getMoney() - 20);
-            GameGUI.refreshMoney(player.getMoney());
-            GameGUI.refreshImage();
-            this.towers.remove(tower);
+        }
+        { // Bullet for the tower
+            int bulletX = tower.getX() + 15;
+            int bulletY = tower.getY() - 15;
+            Bullet bullet = new Bullet(bulletX, bulletY, 20, 20, new ImageIcon("src/data/pngs/circle.png").getImage());
+            bullets.add(bullet);
         }
     }
 
@@ -308,7 +317,7 @@ public class GameEngine extends JPanel {
     }
 
     /**
-     * Tell taht if there are enemies on the screen or not
+     * Tell that if there are enemies on the screen or not
      *
      * @return
      */

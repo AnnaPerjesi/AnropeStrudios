@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Enemy extends Sprite {
 
     /*LINE DELETED*/
-    private int speed = 25;
+    private int speed = 5;
     /*NEW*/
     private int dmg;
     private int velx = 0;
@@ -32,7 +32,7 @@ public class Enemy extends Sprite {
 
     public Enemy(int x, int y, int width, int height, Image image, int dmg, boolean isAlive, int worth, int type) {
         super(x, y, width, height, image);
-        this.health = 50;
+        this.health = 20;
         this.dmg = dmg;
         this.isAlive = isAlive;
         this.worth = worth;
@@ -101,11 +101,11 @@ public class Enemy extends Sprite {
         this.isAlive = false;
     }
 
-    public boolean collideBullet(Bullet bullet) {
+    /*public boolean collideBullet(Bullet bullet) {
         Rectangle rect = new Rectangle(x, y, width, height);
         Rectangle otherRect = new Rectangle(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
         return rect.intersects(otherRect);
-    }
+    }*/
 
     public int getDmg() {
         return this.dmg;

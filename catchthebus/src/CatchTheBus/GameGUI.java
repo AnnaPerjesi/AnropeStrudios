@@ -54,7 +54,7 @@ public class GameGUI extends JFrame {
                         int x = e.getX();
                         int y = e.getY();
                         for (Tower tower : towers) {
-                            if (tower.getX() + 100 > x && tower.getX() < x && tower.getY() < y && tower.getY() + 100 > y) {
+                            if (tower.getX() + 50 > x && tower.getX() < x && tower.getY() < y && tower.getY() + 50 > y) {
                                 temp = tower;
                                 found = true;
                             }

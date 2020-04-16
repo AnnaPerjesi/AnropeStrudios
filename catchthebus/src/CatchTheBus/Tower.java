@@ -25,19 +25,18 @@ public class Tower extends Sprite {
     private double range;
     private double power;
     private double modifierIncrease = 1.3; //range and attack increase by upgarde!
-    private static int timer = 0;
-    private  Enemy firstEnemy;
+    private int timer = 0;
+    private Enemy firstEnemy;
 
     private Bullet bullet;
 
     public Tower(int x, int y, int width, int height, double dmg, double range, Image image) {
         super(x, y, width, height, image);
-        
+
         this.buyingCost = 15;
         this.power = dmg;
         this.range = range;
-        lastAttack = 0;
-        this.bullet = new Bullet(this.x + 26, this.y + 26, 25, 25, new ImageIcon("src/data/pngs/circle.png").getImage());
+        this.lastAttack = 0;
     }
 
     /**
@@ -124,27 +123,25 @@ public class Tower extends Sprite {
         return modifierIncrease;
     }
 
-    public void shoot(ArrayList<Enemy> enemies) {
-        if (timer < 10) {
+    public void shoot(ArrayList<Enemy> enemies, Bullet bullet) {
+        boolean found = false;
+        if (timer < 100) {
             timer++;
         } else {
-            boolean found = false;
+            bullet.show();
             int i = 0;
             while (!found && i < enemies.size()) {
                 Enemy enemy = enemies.get(i);
                 if (inRange(enemy)) {
-                    showBullet();
                     found = true;
                     firstEnemy = enemy;
+                    bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
+                    firstEnemy.takeDamage(this.power);
+                    timer = 0;
                 }
                 i++;
             }
-            if(found){
-                firstEnemy.takeDamage(this.power);
-                //moveBullet(firstEnemy);
-                timer = 0;
-            }
-
+            found = false;
         }
     }
 
@@ -162,14 +159,6 @@ public class Tower extends Sprite {
         return (z < this.getRange());
     }
 
-    public void showBullet() {
-        this.bullet.show();
-    }
-
-    public void moveBullet(Enemy enemy) {
-        this.bullet.move(enemy);
-    }
-
     public Bullet getBullet() {
         return this.bullet;
     }
@@ -179,7 +168,8 @@ public class Tower extends Sprite {
         Rectangle otherRect = new Rectangle(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
         return rect.intersects(otherRect);
     }
-    public Enemy getFirstEnemy(){
+
+    public Enemy getFirstEnemy() {
         return firstEnemy;
     }
 }

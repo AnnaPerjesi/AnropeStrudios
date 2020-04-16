@@ -5,7 +5,9 @@
  */
 package catchthebus;
 
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
 /**
@@ -14,98 +16,73 @@ import javax.swing.ImageIcon;
  */
 public class Bullet extends Sprite {
 
-    private int x;
-    private int y;
-    private int width = 25;
-    private int height = 25;
-    private int velx;
-    private int vely;
+    //Is it drawn
     public boolean visible;
-    Point location = new Point(0, 0);
+
+    //Bullet directions
+    private int dirX;
+    private int dirY;
+    private boolean hasDir;
+
+    //Default position
+    private int defX;
+    private int defY;
+
     Image image;
 
     public Bullet(int x, int y, int height, int width, Image image) {
         super(x, y, width, height, image);
-        this.x = x;
-        this.y = y;
-        //location.setLocation(x,y);
-        this.visible = false;
-        velx = 25;
-        vely = 25;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getVelx() {
-        return velx;
-    }
-
-    public int getVely() {
-        return vely;
+        defX = x;
+        defY = y;
+        visible = false;
+        hasDir = false;
     }
 
     public void show() {
-        this.visible = true;
+        visible = true;
     }
 
     public void move(Enemy enemy) {
-        //TODO move to dir
-        int eX = enemy.getX();
-        int eY = enemy.getY();
-        //System.out.println(this.x + ", " + this.y);
-        
-        if(this.x < eX){
-            this.x += 50;
-        } else if(this.x > eX){
-            this.x -= 50;
+        dirX = enemy.getX();
+        dirY = enemy.getY();
+        if (getHasDir()) {
+            if (x < dirX) {
+                x += 25;
+            } else if (x > dirX) {
+                x -= 25;
+            }
+            if (y < dirY) {
+                y += 25;
+            } else if (y > dirY) {
+                y -= 25;
+            }
         }
-        
-        if(this.y < eX){
-            this.y += 50;
-        } else if(this.y > eX){
-            this.y -= 50;
+        if ((Math.abs(x - dirX) < 25 && Math.abs(y - dirY) < 25) || collideEnemy(enemy)){
+            hit();
         }
-        
-        
-        
-        
-        //System.out.println(this.x + ", " + this.y);
-        if(eX == this.x && eY == this.y){
-            this.visible = false;
-        }
+    }
+
+    public void hit() {
+        visible = false;
+        x = defX;
+        y = defY;
+        hasDir = false;
+    }
+
+    public boolean collideEnemy(Enemy enemy) {
+        Rectangle rect = new Rectangle(x, y, width, height);
+        Rectangle otherRect = new Rectangle(enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getHeight());
+        return rect.intersects(otherRect);
     }
 
     public boolean getVisibility() {
-        return this.visible;
+        return visible;
     }
 
-    public void setLocation(Point location) {
-        this.location = location;
+    public void setHasDir(int x, int y) {
+        hasDir = true;
     }
-
-    public class Point {
-
-        private int x;
-        private int y;
-
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
-        }
+    public boolean getHasDir(){
+        return hasDir;
     }
-
 }
