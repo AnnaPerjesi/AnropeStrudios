@@ -28,6 +28,8 @@ public class Bullet extends Sprite {
         super(x, y, width, height, image);
         //location.setLocation(x,y);
         this.visible = false;
+        velx = 25;
+        vely = 25;
     }
 
     public int getX() {
