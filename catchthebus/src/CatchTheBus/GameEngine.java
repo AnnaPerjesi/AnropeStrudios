@@ -232,6 +232,23 @@ public class GameEngine extends JPanel {
                 }
             }
 
+            if ((isOver() && wave >= 10 && levelNum == 5)) {
+                if ((JOptionPane.showConfirmDialog(null, "Do you want to start a New Game?", "YOU WON", JOptionPane.YES_NO_OPTION)) == JOptionPane.YES_OPTION) {
+                    started = false;
+                    setLevelNum(1);
+                    wave = 1;
+                    enemies = startRound(wave);
+                    player.setLives(100);
+                    GameGUI.refreshLives(100);
+                    player.setMoney(50);
+                    GameGUI.refreshMoney(50);
+                    restart();
+                    repaint();
+                } else {
+                    System.exit(-1);
+                }
+            }
+
             repaint();
         }
 
