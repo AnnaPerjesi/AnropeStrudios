@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import views.*;
@@ -27,13 +22,13 @@ public class GameEngine extends JPanel {
     private static boolean paused = false;
     private static boolean isOver = false;
     private int wave = 1;
-    private int levelNum = 5;
+    private int levelNum = 1;
     private Timer newFrameTimer;
     public boolean started = false;
-    public int speed = 500;
+    public int speed = 1000;
 
     private Level level;
-    private static Player player;
+    private Player player;
     private ArrayList<Tower> towers;
     private ArrayList<Tower> realTowers;
     private ArrayList<Bullet> bullets;
@@ -274,8 +269,8 @@ public class GameEngine extends JPanel {
         return this.player.getLives();
     }
 
-    public static int getPlayerMoney() {
-        return player.getMoney();
+    public int getPlayerMoney() {
+        return this.player.getMoney();
     }
 
     public Level getLevel() {

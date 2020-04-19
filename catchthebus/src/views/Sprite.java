@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
 import java.awt.Graphics;
@@ -11,10 +6,6 @@ import java.awt.Rectangle;
 import javax.swing.JButton;
 
 
-/**
- *
- * @author Anyud
- */
 public class Sprite extends JButton {
 
     protected int x;
@@ -41,6 +32,7 @@ public class Sprite extends JButton {
         return rect.intersects(otherRect);
     }
 
+    @Override
     public int getX() {
         return x;
     }
@@ -49,6 +41,7 @@ public class Sprite extends JButton {
         this.x = x;
     }
 
+    @Override
     public int getY() {
         return y;
     }
@@ -57,6 +50,7 @@ public class Sprite extends JButton {
         this.y = y;
     }
 
+    @Override
     public int getWidth() {
         return width;
     }
@@ -65,6 +59,7 @@ public class Sprite extends JButton {
         this.width = width;
     }
 
+    @Override
     public int getHeight() {
         return height;
     }

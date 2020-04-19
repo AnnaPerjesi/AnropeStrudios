@@ -1,32 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
 import java.awt.Image;
 import java.awt.Rectangle;
 
-/**
- *
- * @author User
- */
 public class Bullet extends Sprite {
 
-    //Is it drawn
     public boolean visible;
-
-    //Bullet directions
     private int dirX;
     private int dirY;
     private boolean hasDir;
-
-    //Default position
-    private int defX;
-    private int defY;
-
-    Image image;
+    private final int defX;
+    private final int defY;
 
     public Bullet(int x, int y, int height, int width, Image image) {
         super(x, y, width, height, image);
@@ -36,6 +20,7 @@ public class Bullet extends Sprite {
         hasDir = false;
     }
 
+    @Override
     public void show() {
         visible = true;
     }
@@ -72,6 +57,8 @@ public class Bullet extends Sprite {
         Rectangle otherRect = new Rectangle(enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getHeight());
         return rect.intersects(otherRect);
     }
+    
+    // GETTER - SETTER
 
     public boolean getVisibility() {
         return visible;

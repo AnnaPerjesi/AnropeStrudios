@@ -43,6 +43,7 @@ public class Tower extends Sprite {
 
     /**
      * refund money to the player, when it sells tower
+     *
      * @param player
      */
     public void refundTower(Player player) {
@@ -66,7 +67,6 @@ public class Tower extends Sprite {
                 tower.setRange(getRange() * 1.3);
                 tower.setPower(getPower() * 1.3);
             } else {
-
                 /*TODO IDK which i have clicked on*/
             }
             return true;
@@ -92,29 +92,30 @@ public class Tower extends Sprite {
                 }
                 i++;
             }
-            //found = false;
         }
     }
-    
+
     /**
      *
      * @param target
      * @return
      */
     public boolean inRange(Enemy target) {
-        double x = Math.abs(target.getX() - this.x);
-        double y = Math.abs(target.getY() - this.y);
+        double a = Math.abs(target.getX() - this.x);
+        double b = Math.abs(target.getY() - this.y);
 
-        double z = Math.sqrt(x * x + y * y);
+        double z = Math.sqrt(a * a + b * b);
 
         return (z < this.getRange());
     }
-    
+
     public boolean bulletCollide() {
         Rectangle rect = new Rectangle(firstEnemy.getX(), firstEnemy.getY(), firstEnemy.getWidth(), firstEnemy.getHeight());
         Rectangle otherRect = new Rectangle(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
         return rect.intersects(otherRect);
     }
+    
+    // GETTER - SETTER
     
     public int getBuyingCost() {
         return buyingCost;
@@ -160,12 +161,9 @@ public class Tower extends Sprite {
         return modifierIncrease;
     }
 
-
-
     public Bullet getBullet() {
         return this.bullet;
     }
-
 
     public Enemy getFirstEnemy() {
         return firstEnemy;

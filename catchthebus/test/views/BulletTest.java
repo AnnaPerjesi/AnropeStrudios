@@ -6,6 +6,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class BulletTest {
+
+    
     @Test
     public void TestCollideEnemy() {
         Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();

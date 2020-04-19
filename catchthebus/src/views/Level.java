@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
-import views.Road;
-import views.Tower;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.BufferedReader;
@@ -16,11 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author User
- */
-public class Level {
+public final class Level {
 
     private final int ROAD_WIDTH = 100;
     private final int ROAD_HEIGHT = 100;
@@ -31,8 +20,7 @@ public class Level {
     private Bus bus;
 
     public Level(String levelPath, String fileName) throws IOException {
-        String S = levelPath.substring(levelPath.length() - 5);
-        char c = S.charAt(0);
+        char c = levelPath.substring(levelPath.length() - 5).charAt(0);
         loadLevel(levelPath, c);
         loadCoordinates(fileName);
     }
@@ -43,7 +31,6 @@ public class Level {
         towers = new ArrayList<>();
         int y = 0;
         String line;
-        //String stratLine = br.readLine();
         while ((line = br.readLine()) != null) {
             int x = 0;
             for (char type : line.toCharArray()) {
@@ -84,18 +71,7 @@ public class Level {
             coordinates.add(p);
         }
     }
-    public ArrayList<Pair> getCoordinates(){
-        
-        return coordinates;
-    }
-
-    public String getDirections() {
-        return directions;
-    }
     
-    
-    
-    /*TODO COLLIDE LETÉVENDŐ TORONY*/
     public void draw(Graphics g) {
         for (Road road : roads) {
             road.draw(g);
@@ -105,8 +81,8 @@ public class Level {
     
      public class Pair {
 
-        private int x;
-        private int y;
+        private final int x;
+        private final int y;
 
         public Pair(int x, int y) {
             this.x = x;
@@ -122,8 +98,19 @@ public class Level {
         }
     }
      
+    // GETTER - SETTER
+     
     public Bus getBus() {
         return this.bus;
+    }
+    
+    public String getDirections() {
+        return directions;
+    }
+    
+    public ArrayList<Pair> getCoordinates(){
+        
+        return coordinates;
     }
     
     public ArrayList<Tower> getAllTower() {

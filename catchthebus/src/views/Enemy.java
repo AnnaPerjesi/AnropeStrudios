@@ -1,34 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
-import views.Sprite;
 import views.Level.Pair;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-/**
- *
- * @author User
- */
+
 public class Enemy extends Sprite {
 
-    /*LINE DELETED*/
     private int speed = 5;
-    /*NEW*/
-    private int dmg;
+    private final int dmg;
     private int velx = 0;
     private int vely = speed;
-    private int worth;
-    private int type;
+    private final int worth;
+    private final int type;
     private boolean isAlive;
     private double health;
-
     private int counterDir = 0;
 
     public Enemy(int x, int y, int width, int height, Image image, int dmg, boolean isAlive, int worth, int type) {
@@ -40,6 +28,7 @@ public class Enemy extends Sprite {
         this.type = type;
     }
 
+    @Override
     public void draw(Graphics g) {
         g.drawImage(image, x, y, width, height, null);
     }
@@ -69,22 +58,6 @@ public class Enemy extends Sprite {
             }
             counterDir++;
         }
-
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-    
-    public boolean turn(ArrayList<Pair> cords) {
-        return (cords.get(counterDir).getX() == this.x && cords.get(counterDir).getY() == this.y);
-    }
-
-    public boolean getAlive() {
-        return this.isAlive;
-    }
-    public double getHealth(){
-        return this.health;
     }
     
     /**
@@ -92,21 +65,40 @@ public class Enemy extends Sprite {
      * @param bus
      * @return 
      */
-
     public boolean collidesBus(Bus bus) {
         Rectangle rect = new Rectangle(x, y, width, height);
         Rectangle otherRect = new Rectangle(bus.x, bus.y, bus.width, bus.height);
         return rect.intersects(otherRect);
     }
+
+    public boolean turn(ArrayList<Pair> cords) {
+        return (cords.get(counterDir).getX() == this.x && cords.get(counterDir).getY() == this.y);
+    }
+    
     public void kill(){
         this.isAlive = false;
     }
-
-    /*public boolean collideBullet(Bullet bullet) {
-        Rectangle rect = new Rectangle(x, y, width, height);
-        Rectangle otherRect = new Rectangle(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
-        return rect.intersects(otherRect);
-    }*/
+    
+    /**
+     * Enemy get damage from tower (bullet) and this decrese it's health
+     * @param damage 
+     */
+    public void takeDamage(double damage) {
+        this.health -= damage;
+        this.isAlive = (this.health > 0);
+    }
+    
+    // GETTER - SETTER
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+    
+    public boolean getAlive() {
+        return this.isAlive;
+    }
+    public double getHealth(){
+        return this.health;
+    }
 
     public int getDmg() {
         return this.dmg;
@@ -118,14 +110,5 @@ public class Enemy extends Sprite {
     
     public int getType() {
         return this.type;
-    }
-    
-    /**
-     * Enemy get damage from tower (bullet) and this decrese it's health
-     * @param damage 
-     */
-    public void takeDamage(double damage) {
-        this.health -= damage;
-        this.isAlive = (this.health > 0);
     }
 }
