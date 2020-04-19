@@ -1,0 +1,17 @@
+name: Pukánszky Péter # kulcs-érték párok
+age: 22
+details: semmi # beágyazott kollekció
+givenname: Péter
+familyname: Pukánszky
+birthyear: 1998
+languages: # értékek listája (tömb)
+- Hungarian
+- English
+- German
+# több soros szöveg
+intro_multi: |
+asd asd asd asd
+introduction
+intro_single: >
+asd asd asd asd
+introduction
