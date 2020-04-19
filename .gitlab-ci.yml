@@ -17,10 +17,10 @@ build_game:
     - ant jar
 
 # Test
-test_model:
-  stage: test
-  script:
-    - >
-      ant test
-      -Dlibs.junit_4.classpath=/usr/share/java/junit4.jar
-      -Dlibs.hamcrest.classpath=/usr/share/java/hamcrest-core.jar
+#test_model:
+#  stage: test
+#  script:
+#    - >
+#      ant test
+#      -Dlibs.junit_4.classpath=/usr/share/java/junit4.jar
+#      -Dlibs.hamcrest.classpath=/usr/share/java/hamcrest-core.jar
