@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 
 public class Bullet extends Sprite {
 
-    public boolean visible;
+    private boolean visible;
     private int dirX;
     private int dirY;
     private boolean hasDir;

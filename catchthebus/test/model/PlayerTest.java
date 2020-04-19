@@ -1,24 +1,15 @@
-
 package model;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-
-/**
- *
- * @author Anna
- */
 public class PlayerTest {
     
-
-
     /**
      * Test of addMoney method, of class Player.
      */
     @Test
     public void testAddMoney() {
-        System.out.println("addMoney");
         int amount = 0;
         Player instance = new Player(100,50);
         instance.addMoney(amount);
@@ -26,7 +17,6 @@ public class PlayerTest {
     }
     @Test
     public void testAddMoney5() {
-        System.out.println("addMoney");
         int amount = 5;
         Player instance = new Player(100,50);
         instance.addMoney(amount);
@@ -34,7 +24,6 @@ public class PlayerTest {
     }
     @Test
     public void testAddMoneyM5() {
-        System.out.println("addMoney");
         int amount = -10;
         Player instance = new Player(100,50);
         instance.addMoney(amount);
@@ -46,7 +35,6 @@ public class PlayerTest {
      */
     @Test
     public void testDecreaseLife() {
-        System.out.println("decreaseLife");
         int x = 0;
         Player instance = new Player(100,50);
         instance.decreaseLife(x);
@@ -55,7 +43,6 @@ public class PlayerTest {
     }
     @Test
     public void testDecreaseLife12() {
-        System.out.println("decreaseLife");
         int x = 12;
         Player instance = new Player(100,50);
         instance.decreaseLife(x);
@@ -64,7 +51,6 @@ public class PlayerTest {
     }
     @Test
     public void testDecreaseLifeM5() {
-        System.out.println("decreaseLife");
         int x = -5;
         Player instance = new Player(100,50);
         instance.decreaseLife(x);
@@ -77,7 +63,6 @@ public class PlayerTest {
      */
     @Test
     public void testAddLife() {
-        System.out.println("addLife");
         int x = 0;
         Player instance = new Player(100,50);
         instance.addLife(x);
@@ -86,7 +71,6 @@ public class PlayerTest {
     }
     @Test
     public void testAddLife20() {
-        System.out.println("addLife");
         int x = 20;
         Player instance = new Player(100,50);
         instance.addLife(x);
@@ -95,7 +79,6 @@ public class PlayerTest {
     }
     @Test
     public void testAddLifeM20() {
-        System.out.println("addLife");
         int x = -20;
         Player instance = new Player(100,50);
         instance.addLife(x);

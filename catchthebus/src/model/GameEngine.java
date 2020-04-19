@@ -309,8 +309,8 @@ public class GameEngine extends JPanel {
             GameGUI.refreshMoney(player.getMoney());
             GameGUI.refreshImage();
             this.towers.remove(tower);
-        }
-        { // Bullet for the tower
+        } 
+       { // Bullet for the tower
             int bulletX = tower.getX() + 15;
             int bulletY = tower.getY() - 15;
             Bullet bullet = new Bullet(bulletX, bulletY, 20, 20, new ImageIcon("src/data/pngs/circle.png").getImage());

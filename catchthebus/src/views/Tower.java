@@ -108,12 +108,6 @@ public class Tower extends Sprite {
 
         return (z < this.getRange());
     }
-
-    public boolean bulletCollide() {
-        Rectangle rect = new Rectangle(firstEnemy.getX(), firstEnemy.getY(), firstEnemy.getWidth(), firstEnemy.getHeight());
-        Rectangle otherRect = new Rectangle(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
-        return rect.intersects(otherRect);
-    }
     
     // GETTER - SETTER
     
