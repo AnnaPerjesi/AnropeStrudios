@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GameEngine extends JPanel {
+public final class GameEngine extends JPanel {
+
     private final int maxWave = 10;
     private final int FPS = 60;
     private static boolean paused = false;
@@ -62,21 +63,21 @@ public class GameEngine extends JPanel {
             String data = myReader.nextLine();
             String[] currencies = data.split(" ");
             int startY = -100;
-            for (int i = 0; i < currencies.length; i++) {
-                switch (currencies[i]) {
+            for (String currencie : currencies) {
+                switch (currencie) {
                     case "p":
                         Image pregnantImage = new ImageIcon("src/data/pngs/pregnant.png").getImage();
-                        Enemy pregnant = new Enemy(225, startY, 50, 50, pregnantImage, 3, 40, true, 2, 1);
+                        Enemy pregnant = new Enemy(225, startY, 50, 50, pregnantImage, 3, 30, true, 2, 1);
                         enemies.add(pregnant);
                         break;
                     case "i":
                         Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
-                        Enemy it = new Enemy(225, startY, 50, 50, itImage, 3, 25, true, 3, 2);
+                        Enemy it = new Enemy(225, startY, 50, 50, itImage, 3, 20, true, 3, 2);
                         enemies.add(it);
                         break;
                     case "a":
                         Image manImage = new ImageIcon("src/data/pngs/man.png").getImage();
-                        Enemy man = new Enemy(225, startY, 50, 50, manImage, 2, 30, true, 2, 3);
+                        Enemy man = new Enemy(225, startY, 50, 50, manImage, 2, 20, true, 2, 3);
                         enemies.add(man);
                         break;
                     case "s":
@@ -150,21 +151,20 @@ public class GameEngine extends JPanel {
                         bullet.move(tower.getFirstEnemy());
                     }
                 }
-                for (int i = 0; i < enemies.size(); i++) {
-                    if (enemies.get(i).collidesBus(level.getBus())) {
-                        player.decreaseLife(enemies.get(i).getDmg());
+                enemies.forEach((enemy) -> {
+                    if (enemy.collidesBus(level.getBus())) {
+                        enemy.kill();
+                        player.decreaseLife(enemy.getDmg());
+                        player.addMoney(-enemy.getWorth());
                         GameGUI.refreshLives(player.getLives());
-                        enemies.get(i).kill();
-                        player.addMoney(-5);
                         GameGUI.refreshMoney(player.getMoney());
                     } else {
-                        enemies.get(i).move(level.getCoordinates(), level.getDirections());
+                        enemy.move(level.getCoordinates(), level.getDirections());
                     }
-                }
-
+                });
                 for (int i = 0; i < enemies.size(); i++) {
                     if (!enemies.get(i).getAlive()) {
-                        switch (enemies.get(i).getType()) {
+                        /*switch (enemies.get(i).getType()) {
                             case 1:
                                 player.addMoney(enemies.get(i).getWorth());
                                 GameGUI.refreshMoney(player.getMoney());
@@ -189,33 +189,18 @@ public class GameEngine extends JPanel {
                                 player.addMoney(enemies.get(i).getWorth());
                                 GameGUI.refreshMoney(player.getMoney());
                                 break;
-                        }
+                        }*/
+                        player.addMoney(enemies.get(i).getWorth());
+                        GameGUI.refreshMoney(player.getMoney());
                         GameGUI.refreshImage();
                         enemies.remove(i);
                     }
                 }
             }
-            /*NEW MAYBE WRONG SOLUTION*/
             if (isOver() && wave < maxWave) {
                 nextWave();
             } else if (isOver() && wave >= maxWave && levelNum != 5) {
-                started = false;
-                wave = 1;
-                levelNum++;
-                level.reset();
-                /*VALAMI bibi, nem tudom még mi*/
-                towers.clear();
-                realTowers.clear();
-                bullets.clear();
-                player.setMoney(50);
-                GameGUI.refreshMoney(50);
-                /**
-                 * *******************************
-                 */
-                GameGUI.refreshWaves(wave);
-                GameGUI.refreshLevel(levelNum);
-                restart();
-                enemies = startRound(wave);
+                nextLevel();
             }
             /*TODO fix this*/
             if (player.getLives() <= 0) {
@@ -231,7 +216,6 @@ public class GameEngine extends JPanel {
                     GameGUI.refreshMoney(50);
                     restart();
                     repaint();
-
                 } else {
                     System.exit(-1);
                 }
@@ -264,17 +248,79 @@ public class GameEngine extends JPanel {
     public void nextWave() {
         started = false;
         wave++;
+        levelNum++;
         GameGUI.refreshWaves(wave);
-        //restart();
         enemies = startRound(wave);
+    }
+
+    public void nextLevel() {
+        started = false;
+        wave = 1;
+        clearData();
+        player.setMoney(50);
+        GameGUI.refreshMoney(50);
+        GameGUI.refreshWaves(wave);
+        GameGUI.refreshLevel(levelNum);
+        restart();
+        enemies = startRound(wave);
+    }
+
+    public void clearData() {
+        level.reset();
+        towers.clear();
+        realTowers.clear();
+        bullets.clear();
+    }
+
+    public void addTower(Tower tower, int type) {
+
+        { //tower
+            Tower tw;
+            switch (type) {
+                case 2:
+                    player.setMoney(player.getMoney() - 15);
+                    tw = tower.createTower(15, 250, new ImageIcon("src/data/pngs/disabgrey.png").getImage());
+                    break;
+                case 3:
+                    player.setMoney(player.getMoney() - 20);
+                    tw = tower.createTower(20, 400, new ImageIcon("src/data/pngs/incoggrey.png").getImage());
+                    break;
+                default:
+                    player.setMoney(player.getMoney() - 10);
+                    tw = tower.createTower(10, 150, new ImageIcon("src/data/pngs/crowgrey.png").getImage());
+                    break;
+            }
+            realTowers.add(tw);
+            GameGUI.refreshMoney(player.getMoney());
+            GameGUI.refreshImage();
+            this.towers.remove(tower);
+        }
+
+        { // Bullet for the tower
+            int bulletX = tower.getX() + 15;
+            int bulletY = tower.getY() - 15;
+            Bullet bullet = new Bullet(bulletX, bulletY, 20, 20, new ImageIcon("src/data/pngs/circle.png").getImage());
+            bullets.add(bullet);
+        }
+    }
+
+    /*
+    Getters
+     */
+    public boolean isOver() {
+        return enemies.isEmpty();
+    }
+
+    public Level getLevel() {
+        return this.level;
+    }
+
+    public int getLevelNum() {
+        return levelNum;
     }
 
     public boolean getPaused() {
         return this.paused;
-    }
-
-    public static void setPaused(boolean paused) {
-        GameEngine.paused = paused;
     }
 
     public int getPlayerLives() {
@@ -285,74 +331,36 @@ public class GameEngine extends JPanel {
         return this.player.getMoney();
     }
 
-    public Level getLevel() {
-        return this.level;
-    }
-
-    public void changeShowTower() {
-        if (!paused) {
-            this.showTowers = !this.showTowers;
-        }
-    }
-
-    public void addTower(Tower tower, int type) {
-
-        { //tower
-            Image img = new ImageIcon().getImage();
-            if (type == 1) {
-                img = new ImageIcon("src/data/pngs/crowgrey.png").getImage();
-                player.setMoney(player.getMoney() - 10);
-            } else if (type == 2) {
-                img = new ImageIcon("src/data/pngs/disabgrey.png").getImage();
-                player.setMoney(player.getMoney() - 15);
-            } else {
-                img = new ImageIcon("src/data/pngs/incoggrey.png").getImage();
-                player.setMoney(player.getMoney() - 20);
-            }
-            realTowers.add(tower.createTower(10, 150, img));
-            GameGUI.refreshMoney(player.getMoney());
-            GameGUI.refreshImage();
-            this.towers.remove(tower);
-        }
-        { // Bullet for the tower
-            int bulletX = tower.getX() + 15;
-            int bulletY = tower.getY() - 15;
-            Bullet bullet = new Bullet(bulletX, bulletY, 20, 20, new ImageIcon("src/data/pngs/circle.png").getImage());
-            bullets.add(bullet);
-        }
-    }
-
     public boolean getShowTowers() {
         return this.showTowers;
     }
 
-    /**
-     * Tell that if there are enemies on the screen or not
-     *
-     * @return
-     */
-    public boolean isOver() {
-        return enemies.isEmpty();
-    }
-
-    public int getLevelNum() {
-        return levelNum;
-    }
-
-    public void setLevelNum(int levelNum) {
-        this.levelNum = levelNum;
-    }
-
-    public void startTimer() {
-
-        started = true;
+    public ArrayList<Tower> getTowers() {
+        return this.towers;
     }
 
     public int getWave() {
         return this.wave;
     }
 
-    public ArrayList<Tower> getTowers() {
-        return this.towers;
+    /*
+    Setters
+     */
+    public void changeShowTower() {
+        if (!paused) {
+            this.showTowers = !this.showTowers;
+        }
+    }
+
+    public void setLevelNum(int levelNum) {
+        this.levelNum = levelNum;
+    }
+
+    public static void setPaused(boolean paused) {
+        GameEngine.paused = paused;
+    }
+
+    public void startTimer() {
+        started = true;
     }
 }
