@@ -41,9 +41,11 @@ public class GameGUI extends JFrame {
     private ArrayList<Tower> towers;
     private int type;
     Tower temp;
+    private int maxWave;
 
     public GameGUI() {
         gameArea = new GameEngine();
+        maxWave = gameArea.getMaxWave();
         towers = new ArrayList<>();
         towers = gameArea.getLevel().getAllTower();
         gameArea.addMouseListener(new MouseAdapter() {
@@ -196,7 +198,7 @@ public class GameGUI extends JFrame {
                     }
                 }
             });
-            towerCost3 = new JLabel("20");
+            towerCost3 = new JLabel("30");
             towerCost3.setHorizontalAlignment(JLabel.CENTER);
             towerCost3.setBounds(1308, 835, 50, 20);
             towerCost3.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -217,7 +219,7 @@ public class GameGUI extends JFrame {
                 }
             });
 
-            roundCounter = new JLabel(Integer.toString(gameArea.getWave()) + "/10 rounds");
+            roundCounter = new JLabel(Integer.toString(gameArea.getWave()) + "/" + maxWave + " rounds");
             roundCounter.setHorizontalAlignment(JLabel.CENTER);
             roundCounter.setBounds(1488, 835, 90, 20);
             roundCounter.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -243,7 +245,7 @@ public class GameGUI extends JFrame {
             pWindow.setBackground(new java.awt.Color(223, 197, 161, 150));
             pWindow.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             pWindow.setOpaque(true);
-           // pWindow.setOpaque(true);
+            // pWindow.setOpaque(true);
 
             //resume btn
             pResume = new JButton("Resume");
@@ -304,7 +306,7 @@ public class GameGUI extends JFrame {
         gameArea.add(pResume);
         gameArea.add(pExit);
         gameArea.add(pWindow);
-        
+
     }
 
     //NEW
@@ -369,11 +371,10 @@ public class GameGUI extends JFrame {
             }
         }
     }
-    
-    
-    public static void refreshImage(){
-        tower.setIcon(affordable(10,1));
-        tower2.setIcon(affordable(15,2));
-        tower3.setIcon(affordable(20,3));
+
+    public static void refreshImage() {
+        tower.setIcon(affordable(10, 1));
+        tower2.setIcon(affordable(15, 2));
+        tower3.setIcon(affordable(20, 3));
     }
 }

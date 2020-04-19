@@ -18,7 +18,7 @@ import javax.swing.Timer;
 
 public final class GameEngine extends JPanel {
 
-    private final int maxWave = 10;
+    private final int maxWave = 30;
     private final int FPS = 60;
     private static boolean paused = false;
     private static boolean isOver = false;
@@ -72,7 +72,7 @@ public final class GameEngine extends JPanel {
                         break;
                     case "i":
                         Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
-                        Enemy it = new Enemy(225, startY, 50, 50, itImage, 3, 20, true, 3, 2);
+                        Enemy it = new Enemy(225, startY, 50, 50, itImage, 3, 25, true, 3, 2);
                         enemies.add(it);
                         break;
                     case "a":
@@ -282,8 +282,8 @@ public final class GameEngine extends JPanel {
                     tw = tower.createTower(15, 250, new ImageIcon("src/data/pngs/disabgrey.png").getImage());
                     break;
                 case 3:
-                    player.setMoney(player.getMoney() - 20);
-                    tw = tower.createTower(20, 400, new ImageIcon("src/data/pngs/incoggrey.png").getImage());
+                    player.setMoney(player.getMoney() - 30);
+                    tw = tower.createTower(20, 350, new ImageIcon("src/data/pngs/incoggrey.png").getImage());
                     break;
                 default:
                     player.setMoney(player.getMoney() - 10);
@@ -319,6 +319,10 @@ public final class GameEngine extends JPanel {
         return levelNum;
     }
 
+    public int getMaxWave(){
+        return this.maxWave;
+    }
+    
     public boolean getPaused() {
         return this.paused;
     }
