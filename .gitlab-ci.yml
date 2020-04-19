@@ -1,10 +1,6 @@
-name: Pukánszky Péter # kulcs-érték párok
-age: 22
-details: semmi # beágyazott kollekció
-givenname: Péter
-familyname: Pukánszky
-birthyear: 1998
-languages: # értékek listája (tömb)
-- Hungarian
-- English
-- German
+build_program:
+script:
+- apt-get update -qq
+- apt-get install –yqq openjdk-11-jdk ant
+- ant compile
+- ant jar
