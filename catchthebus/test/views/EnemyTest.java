@@ -48,8 +48,8 @@ public class EnemyTest {
     public void TestTakeDamage() {
         Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
         Enemy enemy = new Enemy(200, 200, 50, 50, itImage, 3, 25, true, 3, 2);
-        enemy.takeDamage(19);
-        assertTrue("Take Damage -19", 1 == enemy.getHealth());
+        enemy.takeDamage(20);
+        assertTrue("Take Damage -20", 5 == enemy.getHealth());
         assertTrue("Take Damage Alive == True", enemy.getAlive());
     }
     
@@ -58,7 +58,7 @@ public class EnemyTest {
         Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
         Enemy enemy = new Enemy(200, 200, 50, 50, itImage, 3, 25, true, 3, 2);
         enemy.takeDamage(-50);
-        assertTrue("Take Damage 50", 70 == enemy.getHealth());
+        assertTrue("Take Damage 50", 75 == enemy.getHealth());
         assertTrue("Take Damage Alive == True", enemy.getAlive());
     }
     
@@ -67,7 +67,7 @@ public class EnemyTest {
         Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
         Enemy enemy = new Enemy(200, 200, 50, 50, itImage, 3, 25, true, 3, 2);
         enemy.takeDamage(50);
-        assertTrue("Take Damage -50", -30 == enemy.getHealth());
+        assertTrue("Take Damage -50", -25 == enemy.getHealth());
         assertFalse("Take Damage Alive == False", enemy.getAlive());
     }
     
