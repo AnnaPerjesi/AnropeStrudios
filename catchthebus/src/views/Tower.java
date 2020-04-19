@@ -37,7 +37,7 @@ public class Tower extends Sprite {
      * @param image
      * @return
      */
-    public Tower createTower(double dmg, double range, Image image) {
+    public Tower createTower(double dmg, double range, Image image) { //Creates real towers instead of X-es
         return new Tower(x - 15, y - 15, 80, 80, dmg, range, image);
     }
 
