@@ -45,7 +45,7 @@ public class GameEngine extends JPanel {
         super();
         realTowers = new ArrayList<>();
         bullets = new ArrayList<>();
-        player = new Player();
+        player = new Player(100, 50);
         player.reset();
         restart();
         enemies = startRound(wave);
@@ -158,8 +158,10 @@ public class GameEngine extends JPanel {
                 for (int i = 0; i < enemies.size(); i++) {
                     if (enemies.get(i).collidesBus(level.getBus())) {
                         player.decreaseLife(enemies.get(i).getDmg());
+                        GameGUI.refreshLives(player.getLives());
                         enemies.get(i).kill();
                         player.addMoney(-5);
+                        GameGUI.refreshMoney(player.getMoney());
                     } else {
                         enemies.get(i).move(level.getCoordinates(), level.getDirections());
                     }
@@ -170,21 +172,27 @@ public class GameEngine extends JPanel {
                         switch (enemies.get(i).getType()) {
                             case 1:
                                 player.addMoney(enemies.get(i).getWorth());
+                                GameGUI.refreshMoney(player.getMoney());
                                 break;
                             case 2:
                                 player.addMoney(enemies.get(i).getWorth());
+                                GameGUI.refreshMoney(player.getMoney());
                                 break;
                             case 3:
                                 player.addMoney(enemies.get(i).getWorth());
+                                GameGUI.refreshMoney(player.getMoney());
                                 break;
                             case 4:
                                 player.addMoney(enemies.get(i).getWorth());
+                                GameGUI.refreshMoney(player.getMoney());
                                 break;
                             case 5:
                                 player.addMoney(enemies.get(i).getWorth());
+                                GameGUI.refreshMoney(player.getMoney());
                                 break;
                             default:
                                 player.addMoney(enemies.get(i).getWorth());
+                                GameGUI.refreshMoney(player.getMoney());
                                 break;
                         }
                         GameGUI.refreshImage();
