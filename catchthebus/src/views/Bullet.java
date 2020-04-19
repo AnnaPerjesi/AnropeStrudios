@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package catchthebus;
+package views;
 
-import java.awt.Graphics;
+import views.Enemy;
+import views.Sprite;
 import java.awt.Image;
 import java.awt.Rectangle;
-import javax.swing.ImageIcon;
 
 /**
  *

@@ -1,5 +1,6 @@
-package catchthebus;
+package views;
 
+import views.Sprite;
 import java.awt.Image;
 
 public class Bus extends Sprite {

@@ -1,33 +1,23 @@
-package catchthebus;
+package views;
 
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
+import model.Player;
 
 public class Tower extends Sprite {
 
-    private int buyingCost;
+    private final int buyingCost;
     private int refundCost;
     private int upgradeCost;
     private int level = 1;
     private final int maxlevel = 10;
-    /*IS IT ENOUHG?*/
-
-    /**
-     * *************************************
-     */
     private final double lastAttack;
-    /*COMMENT*/
-
     private double range;
     private double power;
-    private double modifierIncrease = 1.3; //range and attack increase by upgarde!
+    private final double modifierIncrease = 1.3; //range and attack increase by upgarde!
     private int timer = 0;
     private Enemy firstEnemy;
-
     private Bullet bullet;
 
     public Tower(int x, int y, int width, int height, double dmg, double range, Image image) {
@@ -42,6 +32,8 @@ public class Tower extends Sprite {
     /**
      * Method to create new Tower object
      *
+     * @param dmg
+     * @param range
      * @param image
      * @return
      */
@@ -51,21 +43,24 @@ public class Tower extends Sprite {
 
     /**
      * refund money to the player, when it sells tower
+     * @param player
      */
-    public void refundTower() {
-        Player.getPlayer().addMoney(refundCost);
+    public void refundTower(Player player) {
+        player.addMoney(refundCost);
     }
 
     /**
      * If the player has got enough money and the tower is not full -> UPGRADE
      * IT
      *
+     * @param tower
+     * @param player
      * @return
      */
-    public boolean upgrade(Tower tower) {
-        if (level < maxlevel && Player.getPlayer().getMoney() >= upgradeCost) {
+    public boolean upgrade(Tower tower, Player player) {
+        if (level < maxlevel && player.getMoney() >= upgradeCost) {
             level += 1;
-            Player.getPlayer().addMoney(-1 * upgradeCost);
+            player.addMoney(-1 * upgradeCost);
             if (level < 5) {
                 /*TODO*/
                 tower.setRange(getRange() * 1.3);
@@ -79,6 +74,48 @@ public class Tower extends Sprite {
         return false;
     }
 
+    public void shoot(ArrayList<Enemy> enemies, Bullet bullet) {
+        boolean found = false;
+        if (timer < 100) {
+            timer++;
+        } else {
+            bullet.show();
+            int i = 0;
+            while (!found && i < enemies.size()) {
+                Enemy enemy = enemies.get(i);
+                if (inRange(enemy)) {
+                    found = true;
+                    firstEnemy = enemy;
+                    bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
+                    firstEnemy.takeDamage(this.power);
+                    timer = 0;
+                }
+                i++;
+            }
+            //found = false;
+        }
+    }
+    
+    /**
+     *
+     * @param target
+     * @return
+     */
+    public boolean inRange(Enemy target) {
+        double x = Math.abs(target.getX() - this.x);
+        double y = Math.abs(target.getY() - this.y);
+
+        double z = Math.sqrt(x * x + y * y);
+
+        return (z < this.getRange());
+    }
+    
+    public boolean bulletCollide() {
+        Rectangle rect = new Rectangle(firstEnemy.getX(), firstEnemy.getY(), firstEnemy.getWidth(), firstEnemy.getHeight());
+        Rectangle otherRect = new Rectangle(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
+        return rect.intersects(otherRect);
+    }
+    
     public int getBuyingCost() {
         return buyingCost;
     }
@@ -123,51 +160,12 @@ public class Tower extends Sprite {
         return modifierIncrease;
     }
 
-    public void shoot(ArrayList<Enemy> enemies, Bullet bullet) {
-        boolean found = false;
-        if (timer < 100) {
-            timer++;
-        } else {
-            bullet.show();
-            int i = 0;
-            while (!found && i < enemies.size()) {
-                Enemy enemy = enemies.get(i);
-                if (inRange(enemy)) {
-                    found = true;
-                    firstEnemy = enemy;
-                    bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
-                    firstEnemy.takeDamage(this.power);
-                    timer = 0;
-                }
-                i++;
-            }
-            found = false;
-        }
-    }
 
-    /**
-     *
-     * @param target
-     * @return
-     */
-    public boolean inRange(Enemy target) {
-        double x = Math.abs(target.getX() - this.x);
-        double y = Math.abs(target.getY() - this.y);
-
-        double z = Math.sqrt(x * x + y * y);
-
-        return (z < this.getRange());
-    }
 
     public Bullet getBullet() {
         return this.bullet;
     }
 
-    public boolean bulletCollide() {
-        Rectangle rect = new Rectangle(firstEnemy.getX(), firstEnemy.getY(), firstEnemy.getWidth(), firstEnemy.getHeight());
-        Rectangle otherRect = new Rectangle(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
-        return rect.intersects(otherRect);
-    }
 
     public Enemy getFirstEnemy() {
         return firstEnemy;

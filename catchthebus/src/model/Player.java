@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package catchthebus;
+package model;
 
 
 public class Player {
-    private static int money = 0;
-    private static int lives;
+    private int money = 0;
+    private int lives;
     private final int STARTLIVES = 100;
     private final int STARTMONEY = 50;
-    private static Player player;
+    private Player player;
     
     public void reset(){
         this.lives = STARTLIVES;
         this.money = STARTMONEY;
     }
     
-    public static Player getPlayer(){
+    public Player getPlayer(){
         return player;
     }
     
@@ -31,17 +31,18 @@ public class Player {
         this.lives = this.lives - x;
         GameGUI.refreshLives(this.lives);
     }
+    
     public void addLife(int x){
         this.lives = this.lives + x;
         GameGUI.refreshLives(this.lives);
     }
 
-    public static int getMoney() {
-        return money;
+    public int getMoney() {
+        return this.money;
     }
 
-    public static int getLives() {
-        return lives;
+    public int getLives() {
+        return this.lives;
     }
 
     public void setMoney(int money) {

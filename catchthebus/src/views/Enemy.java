@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package catchthebus;
+package views;
 
-import catchthebus.Level.Pair;
+import views.Sprite;
+import views.Level.Pair;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;

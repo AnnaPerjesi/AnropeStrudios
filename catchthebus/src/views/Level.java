@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package catchthebus;
+package views;
 
+import views.Road;
+import views.Tower;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.BufferedReader;
@@ -12,8 +14,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import javax.swing.ImageIcon;
 
 /**

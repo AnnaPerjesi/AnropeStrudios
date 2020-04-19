@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package catchthebus;
+package model;
 
+import views.*;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -26,10 +27,10 @@ public class GameEngine extends JPanel {
     private static boolean paused = false;
     private static boolean isOver = false;
     private int wave = 1;
-    private int levelNum = 1;
+    private int levelNum = 5;
     private Timer newFrameTimer;
     public boolean started = false;
-    public int speed = 1000;
+    public int speed = 500;
 
     private Level level;
     private static Player player;
@@ -198,7 +199,7 @@ public class GameEngine extends JPanel {
                 GameGUI.refreshWaves(wave);
                 restart();
                 enemies = startRound(wave);
-            } else if (isOver() && wave >= 10) {
+            } else if (isOver() && wave >= 10 && levelNum != 5) {
                 started = false;
                 wave = 1;
                 levelNum++;
@@ -237,12 +238,14 @@ public class GameEngine extends JPanel {
                 }
             }
 
-            if ((isOver() && wave >= 10 && levelNum == 5)) {
+            if ((isOver() && wave == 10 && levelNum == 5)) {
                 if ((JOptionPane.showConfirmDialog(null, "Do you want to start a New Game?", "YOU WON", JOptionPane.YES_NO_OPTION)) == JOptionPane.YES_OPTION) {
                     started = false;
                     setLevelNum(1);
                     wave = 1;
                     enemies = startRound(wave);
+                    realTowers.clear();
+                    bullets.clear();
                     player.setLives(100);
                     GameGUI.refreshLives(100);
                     player.setMoney(50);
