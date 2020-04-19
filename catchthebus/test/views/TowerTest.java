@@ -7,40 +7,38 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TowerTest {
-    
+
     @Test
     public void TestCreateTower() {
         Image img = new ImageIcon("src/data/pngs/crowgrey.png").getImage();
-        Tower tower = new Tower(200,200,50,50,20,20,img);
-        assertTrue("CreateTower x value",185 == tower.createTower(20,20,img).getX());
-        assertTrue("CreateTower y value",185 == tower.createTower(20,20,img).getY());
+        Tower tower = new Tower(200, 200, 50, 50, 20, 20, img);
+        assertTrue("CreateTower x value", 185 == tower.createTower(20, 20, img).getX());
+        assertTrue("CreateTower y value", 185 == tower.createTower(20, 20, img).getY());
     }
-    
+
     /*@Test
     public void TestRefundCost() {
         Player player = new Player(100,50);
     }*/
-    
-    /*@Test
+ /*@Test
     public voide TestUpgrade() {
     }*/
-    
     @Test
     public void TestInRange() {
         Image img = new ImageIcon("src/data/pngs/crowgrey.png").getImage();
-        Tower tower = new Tower(200,200,50,50,20,20,img);
+        Tower tower = new Tower(200, 200, 50, 50, 20, 20, img);
         Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
-        Enemy enemy = new Enemy(200, 200, 50, 50, itImage, 3, true, 10, 2);
+        Enemy enemy = new Enemy(200, 200, 50, 50, itImage, 3, 25, true, 3, 2);
         assertTrue("Enemy in range True", tower.inRange(enemy));
     }
-    
+
     @Test
     public void TestInRangeF() {
         Image img = new ImageIcon("src/data/pngs/crowgrey.png").getImage();
-        Tower tower = new Tower(200,200,50,50,20,20,img);
+        Tower tower = new Tower(200, 200, 50, 50, 20, 20, img);
         Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
-        Enemy enemy = new Enemy(500, 500, 50, 50, itImage, 3, true, 10, 2);
+        Enemy enemy = new Enemy(200, 200, 50, 50, itImage, 3, 25, true, 3, 2);
         assertFalse("Enemy in range False", tower.inRange(enemy));
     }
-    
+
 }
