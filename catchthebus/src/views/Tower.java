@@ -87,7 +87,9 @@ public class Tower extends Sprite {
                     found = true;
                     firstEnemy = enemy;
                     bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
-                    firstEnemy.takeDamage(this.power);
+                    if(bullet.getVisibility()){
+                        hit();
+                    }
                     timer = 0;
                 }
                 i++;
@@ -109,6 +111,9 @@ public class Tower extends Sprite {
         return (z < this.getRange());
     }
     
+    public void hit(){ //if the bullet collides with the enemy, it takes damage
+        firstEnemy.takeDamage(this.power);
+    }
     // GETTER - SETTER
     
     public int getBuyingCost() {
