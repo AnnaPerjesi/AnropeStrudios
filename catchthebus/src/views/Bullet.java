@@ -5,8 +5,6 @@
  */
 package views;
 
-import views.Enemy;
-import views.Sprite;
 import java.awt.Image;
 import java.awt.Rectangle;
 
