@@ -10,8 +10,8 @@ languages: # értékek listája (tömb)
 - German
 # több soros szöveg
 intro_multi: |
-asd asd asd asd
+multiple line
 introduction
 intro_single: >
-asd asd asd asd
+single line
 introduction
