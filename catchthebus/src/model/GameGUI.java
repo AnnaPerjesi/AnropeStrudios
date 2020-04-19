@@ -49,6 +49,7 @@ public class GameGUI extends JFrame {
         gameArea.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                towers = gameArea.getTowers();
                 if (!gameArea.getPaused()) {
                     if (gameArea.getShowTowers()) {
                         boolean found = false;

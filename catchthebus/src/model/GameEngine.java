@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GameEngine extends JPanel {
-
+    private final int maxWave = 10;
     private final int FPS = 60;
     private static boolean paused = false;
     private static boolean isOver = false;
@@ -25,7 +25,7 @@ public class GameEngine extends JPanel {
     private int levelNum = 1;
     private Timer newFrameTimer;
     public boolean started = false;
-    public int speed = 1000;
+    public int speed = 100;
 
     private Level level;
     private Player player;
@@ -121,14 +121,14 @@ public class GameEngine extends JPanel {
                 tower.draw(grphcs);
             }
         }
-        for(Enemy enemy : enemies){
+        for (Enemy enemy : enemies) {
             enemy.draw(grphcs);
         }
         for (Tower tower : realTowers) {
             tower.draw(grphcs);
         }
         for (Bullet bullet : bullets) {
-            if(bullet.getVisibility()){
+            if (bullet.getVisibility()) {
                 bullet.draw(grphcs);
             }
         }
@@ -146,7 +146,7 @@ public class GameEngine extends JPanel {
                     Tower tower = realTowers.get(i);
                     Bullet bullet = bullets.get(i);
                     tower.shoot(enemies, bullet);
-                    if(bullet.getHasDir()){
+                    if (bullet.getHasDir()) {
                         bullet.move(tower.getFirstEnemy());
                     }
                 }
@@ -196,22 +196,18 @@ public class GameEngine extends JPanel {
                 }
             }
             /*NEW MAYBE WRONG SOLUTION*/
-            if (isOver() && wave < 10) {
-                started = false;
-                wave++;
-                GameGUI.refreshWaves(wave);
-                restart();
-                enemies = startRound(wave);
-            } else if (isOver() && wave >= 10 && levelNum != 5) {
+            if (isOver() && wave < maxWave) {
+                nextWave();
+            } else if (isOver() && wave >= maxWave && levelNum != 5) {
                 started = false;
                 wave = 1;
                 levelNum++;
+                level.reset();
                 /*VALAMI bibi, nem tudom még mi*/
+                towers.clear();
                 realTowers.clear();
                 bullets.clear();
                 player.setMoney(50);
-                player.setLives(100);
-                GameGUI.refreshLives(100);
                 GameGUI.refreshMoney(50);
                 /**
                  * *******************************
@@ -241,7 +237,7 @@ public class GameEngine extends JPanel {
                 }
             }
 
-            if ((isOver() && wave == 10 && levelNum == 5)) {
+            if ((isOver() && wave == maxWave && levelNum == 5)) {
                 if ((JOptionPane.showConfirmDialog(null, "Do you want to start a New Game?", "YOU WON", JOptionPane.YES_NO_OPTION)) == JOptionPane.YES_OPTION) {
                     started = false;
                     setLevelNum(1);
@@ -263,6 +259,14 @@ public class GameEngine extends JPanel {
             repaint();
         }
 
+    }
+
+    public void nextWave() {
+        started = false;
+        wave++;
+        GameGUI.refreshWaves(wave);
+        //restart();
+        enemies = startRound(wave);
     }
 
     public boolean getPaused() {
@@ -292,7 +296,7 @@ public class GameEngine extends JPanel {
     }
 
     public void addTower(Tower tower, int type) {
-        
+
         { //tower
             Image img = new ImageIcon().getImage();
             if (type == 1) {
@@ -309,8 +313,8 @@ public class GameEngine extends JPanel {
             GameGUI.refreshMoney(player.getMoney());
             GameGUI.refreshImage();
             this.towers.remove(tower);
-        } 
-       { // Bullet for the tower
+        }
+        { // Bullet for the tower
             int bulletX = tower.getX() + 15;
             int bulletY = tower.getY() - 15;
             Bullet bullet = new Bullet(bulletX, bulletY, 20, 20, new ImageIcon("src/data/pngs/circle.png").getImage());
@@ -346,5 +350,9 @@ public class GameEngine extends JPanel {
 
     public int getWave() {
         return this.wave;
+    }
+
+    public ArrayList<Tower> getTowers() {
+        return this.towers;
     }
 }

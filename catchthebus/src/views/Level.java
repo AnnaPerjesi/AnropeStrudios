@@ -37,19 +37,19 @@ public final class Level {
                 if (type == 'r') {
                     Image image = new ImageIcon("src/data/pngs/road.png").getImage();
                     roads.add(new Road(x * ROAD_WIDTH, y * ROAD_HEIGHT, ROAD_WIDTH, ROAD_HEIGHT, image));
-                } else if ( type == '0') {
+                } else if (type == '0') {
                     Image image = new ImageIcon("src/data/pngs/x.png").getImage();
-                    towers.add(new Tower(x * ROAD_WIDTH+25,y * ROAD_HEIGHT+25 ,ROAD_WIDTH/2, ROAD_HEIGHT/2, 0, 0, image));
-                } else if ( type == 'b') {
-                    if (c == '3' || c == '4' ) {
+                    towers.add(new Tower(x * ROAD_WIDTH + 25, y * ROAD_HEIGHT + 25, ROAD_WIDTH / 2, ROAD_HEIGHT / 2, 0, 0, image));
+                } else if (type == 'b') {
+                    if (c == '3' || c == '4') {
                         Image busImage = new ImageIcon("src/data/pngs/bus_r.png").getImage();
-                        bus = new Bus(x * ROAD_WIDTH - 20,y * ROAD_HEIGHT - 90,100,300,busImage);
-                    } else if ( c == '2') {
+                        bus = new Bus(x * ROAD_WIDTH - 20, y * ROAD_HEIGHT - 90, 100, 300, busImage);
+                    } else if (c == '2') {
                         Image busImage = new ImageIcon("src/data/pngs/bus.png").getImage();
-                        bus = new Bus(x * ROAD_WIDTH - 100,y * ROAD_HEIGHT,300,100,busImage);
-                    } else if ( c == '1' || c == '5' ) {
+                        bus = new Bus(x * ROAD_WIDTH - 100, y * ROAD_HEIGHT, 300, 100, busImage);
+                    } else if (c == '1' || c == '5') {
                         Image busImage = new ImageIcon("src/data/pngs/bus.png").getImage();
-                        bus = new Bus(x * ROAD_WIDTH - 100,y * ROAD_HEIGHT - 40,300,100,busImage);
+                        bus = new Bus(x * ROAD_WIDTH - 100, y * ROAD_HEIGHT - 40, 300, 100, busImage);
                     }
                 }
                 x++;
@@ -67,19 +67,19 @@ public final class Level {
             String[] pair = line.split(",");
             int p0 = Integer.parseInt(pair[0]);
             int p1 = Integer.parseInt(pair[1]);
-            Pair p = new Pair(p0,p1);
+            Pair p = new Pair(p0, p1);
             coordinates.add(p);
         }
     }
-    
+
     public void draw(Graphics g) {
         for (Road road : roads) {
             road.draw(g);
         }
         bus.draw(g);
     }
-    
-     public class Pair {
+
+    public class Pair {
 
         private final int x;
         private final int y;
@@ -97,22 +97,26 @@ public final class Level {
             return y;
         }
     }
-     
+    public void reset(){
+        towers.clear();
+        roads.clear();
+        coordinates.clear();
+    }
+
     // GETTER - SETTER
-     
     public Bus getBus() {
         return this.bus;
     }
-    
+
     public String getDirections() {
         return directions;
     }
-    
-    public ArrayList<Pair> getCoordinates(){
-        
+
+    public ArrayList<Pair> getCoordinates() {
+
         return coordinates;
     }
-    
+
     public ArrayList<Tower> getAllTower() {
         return this.towers;
     }
