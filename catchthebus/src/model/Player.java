@@ -12,7 +12,12 @@ public class Player {
     private final int STARTLIVES = 100;
     private final int STARTMONEY = 50;
     private Player player;
-    
+
+    public Player(int lives, int money) {
+        this.lives = 100;
+        this.money = 50;
+    }
+   
     public void reset(){
         this.lives = STARTLIVES;
         this.money = STARTMONEY;
@@ -24,17 +29,17 @@ public class Player {
     
     public void addMoney(int amount){
         this.money += amount;
-        GameGUI.refreshMoney(this.money);
+        //GameGUI.refreshMoney(this.money);
     }
     
     public void decreaseLife(int x){
         this.lives = this.lives - x;
-        GameGUI.refreshLives(this.lives);
+       // GameGUI.refreshLives(this.lives);
     }
     
     public void addLife(int x){
         this.lives = this.lives + x;
-        GameGUI.refreshLives(this.lives);
+        //GameGUI.refreshLives(this.lives);
     }
 
     public int getMoney() {
@@ -51,5 +56,5 @@ public class Player {
 
     public void setLives(int lives) {
         this.lives = lives;
-    }      
+    }
 }
