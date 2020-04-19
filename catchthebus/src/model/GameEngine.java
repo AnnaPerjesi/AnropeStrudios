@@ -66,27 +66,27 @@ public class GameEngine extends JPanel {
                 switch (currencies[i]) {
                     case "p":
                         Image pregnantImage = new ImageIcon("src/data/pngs/pregnant.png").getImage();
-                        Enemy pregnant = new Enemy(225, startY, 50, 50, pregnantImage, 2, true, 5, 1);
+                        Enemy pregnant = new Enemy(225, startY, 50, 50, pregnantImage, 3, 40, true, 2, 1);
                         enemies.add(pregnant);
                         break;
                     case "i":
                         Image itImage = new ImageIcon("src/data/pngs/it_man.png").getImage();
-                        Enemy it = new Enemy(225, startY, 50, 50, itImage, 3, true, 10, 2);
+                        Enemy it = new Enemy(225, startY, 50, 50, itImage, 3, 25, true, 3, 2);
                         enemies.add(it);
                         break;
                     case "a":
                         Image manImage = new ImageIcon("src/data/pngs/man.png").getImage();
-                        Enemy man = new Enemy(225, startY, 50, 50, manImage, 2, true, 15, 3);
+                        Enemy man = new Enemy(225, startY, 50, 50, manImage, 2, 30, true, 2, 3);
                         enemies.add(man);
                         break;
                     case "s":
                         Image kidImage = new ImageIcon("src/data/pngs/kid.png").getImage();
-                        Enemy kid = new Enemy(225, startY, 50, 50, kidImage, 1, true, 5, 4);
+                        Enemy kid = new Enemy(225, startY, 50, 50, kidImage, 1, 15, true, 1, 4);
                         enemies.add(kid);
                         break;
                     case "b":
                         Image bossImage = new ImageIcon("src/data/pngs/boss.png").getImage();
-                        Enemy boss = new Enemy(225, startY, 50, 50, bossImage, 5, true, 25, 5);
+                        Enemy boss = new Enemy(225, startY, 50, 50, bossImage, 10, 100, true, 25, 5);
                         enemies.add(boss);
                         break;
                     default:

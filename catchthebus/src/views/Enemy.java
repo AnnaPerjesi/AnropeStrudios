@@ -19,9 +19,9 @@ public class Enemy extends Sprite {
     private double health;
     private int counterDir = 0;
 
-    public Enemy(int x, int y, int width, int height, Image image, int dmg, boolean isAlive, int worth, int type) {
+    public Enemy(int x, int y, int width, int height, Image image, int dmg,double health, boolean isAlive, int worth, int type) {
         super(x, y, width, height, image);
-        this.health = 20;
+        this.health = health;
         this.dmg = dmg;
         this.isAlive = isAlive;
         this.worth = worth;
