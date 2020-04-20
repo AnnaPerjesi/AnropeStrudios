@@ -323,7 +323,7 @@ public class GameGUI extends JFrame {
     }
 
     public static void refreshWaves(int w) {
-        roundCounter.setText(Integer.toString(w) + "/10 rounds");
+        roundCounter.setText(Integer.toString(w) + "/30 rounds");
     }
 
     public static void refreshLevel(int a) {
