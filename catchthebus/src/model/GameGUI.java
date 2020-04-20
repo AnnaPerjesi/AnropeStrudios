@@ -198,7 +198,7 @@ public class GameGUI extends JFrame {
                     }
                 }
             });
-            towerCost3 = new JLabel("30");
+            towerCost3 = new JLabel("20");
             towerCost3.setHorizontalAlignment(JLabel.CENTER);
             towerCost3.setBounds(1308, 835, 50, 20);
             towerCost3.setBorder(BorderFactory.createLineBorder(Color.black));
