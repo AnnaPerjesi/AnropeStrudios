@@ -36,7 +36,7 @@ public class GameStart extends JFrame {
         start = new JPanel();
         start.setBackground(new java.awt.Color(223, 197, 161));
 
-        anna = new JLabel("Perjési Anna - valami");
+        /*anna = new JLabel("Perjési Anna - valami");
         anna.setHorizontalAlignment(JLabel.CENTER);
         anna.setBounds(1145, 630, 300, 150);
 
@@ -46,7 +46,7 @@ public class GameStart extends JFrame {
 
         peti = new JLabel("Pukánszky Péter - valami");
         peti.setHorizontalAlignment(JLabel.CENTER);
-        peti.setBounds(1145, 660, 300, 150);
+        peti.setBounds(1145, 660, 300, 150);*/
 
         logo = new JLabel();
         logo.setIcon(new ImageIcon("src/data/pngs/proba.png"));
@@ -55,9 +55,10 @@ public class GameStart extends JFrame {
         logo.setBackground(new java.awt.Color(223,197,161,50));
         logo.setOpaque(true);
         
-        brand = new JLabel("Anrope Studios© - logo");
+        brand = new JLabel();
+        brand.setIcon(new ImageIcon("src/data/pngs/logo4.png"));
         brand.setHorizontalAlignment(JLabel.CENTER);
-        brand.setBounds(1145, 500, 300, 150);
+        brand.setBounds(500, 300, 1363, 770);
 
         bus = new JLabel();
         bus.setIcon(new ImageIcon("src/data/pngs/bus.png"));
@@ -109,9 +110,6 @@ public class GameStart extends JFrame {
         }
 
         start.setLayout(null);
-        start.add(anna);
-        start.add(robi);
-        start.add(peti);
         start.add(logo);
         start.add(brand);
         start.add(bus);
