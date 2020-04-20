@@ -282,7 +282,7 @@ public final class GameEngine extends JPanel {
                     tw = tower.createTower(15, 250, new ImageIcon("src/data/pngs/disabgrey.png").getImage());
                     break;
                 case 3:
-                    player.setMoney(player.getMoney() - 30);
+                    player.setMoney(player.getMoney() - 20);
                     tw = tower.createTower(20, 350, new ImageIcon("src/data/pngs/incoggrey.png").getImage());
                     break;
                 default:
