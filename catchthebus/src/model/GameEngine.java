@@ -202,7 +202,7 @@ public final class GameEngine extends JPanel {
             } else if (isOver() && wave >= maxWave && levelNum != 5) {
                 nextLevel();
             }
-            /*TODO fix this*/
+
             if (player.getLives() <= 0) {
                 enemies.clear();
                 if ((JOptionPane.showConfirmDialog(null, "Do you want to start a New Game?", "GAME OVER", JOptionPane.YES_NO_OPTION)) == JOptionPane.YES_OPTION) {
@@ -248,13 +248,13 @@ public final class GameEngine extends JPanel {
     public void nextWave() {
         started = false;
         wave++;
-        levelNum++;
         GameGUI.refreshWaves(wave);
         enemies = startRound(wave);
     }
 
     public void nextLevel() {
         started = false;
+        levelNum++;
         wave = 1;
         clearData();
         player.setMoney(50);
