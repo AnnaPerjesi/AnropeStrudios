@@ -20,7 +20,6 @@ public class Tower extends Sprite {
     private final double lastAttack;
     private double range;
     private double power;
-    private final double modifierIncrease = 1.3; //range and attack increase by upgarde!
     private int timer = 0;
     private Enemy firstEnemy;
     private Bullet bullet;
@@ -67,9 +66,9 @@ public class Tower extends Sprite {
         if (level < maxlevel && player.getMoney() >= upgradeCost) {
             level += 1;
             player.addMoney(-1 * upgradeCost);
-            if (level < 5) {
-                tower.setRange(getRange() * 1.3);
-                tower.setPower(getPower() * 1.3);
+            if (level != 5) {
+                tower.setRange(getRange() * 1.05);
+                tower.setPower(getPower() * 1.1);
             } else {
                 switch (type) {
                     case 2:
@@ -172,7 +171,7 @@ public class Tower extends Sprite {
     
 
     public int getLevel() {
-        return level;
+        return this.level;
     }
 
     public int getMaxlevel() {
@@ -184,7 +183,7 @@ public class Tower extends Sprite {
     }
 
     public double getRange() {
-        return range;
+        return this.range;
     }
 
     public void setRange(double range) {
@@ -197,10 +196,6 @@ public class Tower extends Sprite {
 
     public double getPower() {
         return power;
-    }
-
-    public double getModifierIncrease() {
-        return modifierIncrease;
     }
 
     public Bullet getBullet() {
