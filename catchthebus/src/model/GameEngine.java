@@ -258,7 +258,7 @@ public final class GameEngine extends JPanel {
 
         { //tower
             Tower tw;
-            switch (type) {
+            switch (type) {             
                 case 2:
                     player.setMoney(player.getMoney() - 15);
                     tw = tower.createTower(15, 250, new ImageIcon("src/data/pngs/disabgrey.png").getImage());
@@ -284,6 +284,30 @@ public final class GameEngine extends JPanel {
             Bullet bullet = new Bullet(bulletX, bulletY, 20, 20, new ImageIcon("src/data/pngs/circle.png").getImage());
             bullets.add(bullet);
         }
+    }
+    
+    public void sellTower(Tower tower, int type){
+        Tower tw;
+        switch (type) {             
+                case 2:
+                    player.setMoney(player.getMoney() + 15);
+                    tw = tower.createTower(0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
+                    break;
+                case 3:
+                    player.setMoney(player.getMoney() + 20);
+                    //towers.add(new Tower(x * ROAD_WIDTH + 25, y * ROAD_HEIGHT + 25, ROAD_WIDTH / 2, ROAD_HEIGHT / 2, 0, 0, image));
+                    tw = tower.createTower(0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
+                    break;
+                default:
+                    player.setMoney(player.getMoney() + 10);
+                    tw = tower.createTower(0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
+                    break;
+            }
+            towers.add(tw);
+            GameGUI.refreshMoney(player.getMoney());
+            GameGUI.refreshImage();
+            realTowers.remove(tower);
+        
     }
 
     public void setRange(int x, int y, int width, int height) {
