@@ -11,11 +11,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class GameGUI extends JFrame {
 
@@ -114,9 +114,10 @@ public class GameGUI extends JFrame {
                             twLevel.setText("Lvl: " + temp.getLevel());
                             twLevel.setFont(new Font("Courier New", Font.BOLD, 20));
                             twLevel.setOpaque(true);
-                            twLevel.setBackground(new java.awt.Color(220, 220, 220));
-                            twLevel.setBounds(upgradeLabel.getBounds().x+30, upgradeLabel.getBounds().y+15, 100, 60);
-                            twLevel.setBorder(null);
+                            twLevel.setBackground(new java.awt.Color(229, 223, 215));
+                            twLevel.setBounds(upgradeLabel.getBounds().x, upgradeLabel.getBounds().y, 200, 60);
+                            twLevel.setBorder(BorderFactory.createLineBorder(Color.black));
+                            twLevel.setHorizontalAlignment(SwingConstants.CENTER);
                             twLevel.setVisible(true);
                             
                             twPower.setText("Power: " + temp.getPower());
@@ -155,7 +156,7 @@ public class GameGUI extends JFrame {
                             xBtn.setOpaque(true);
                             xBtn.setBounds(upgradeLabel.getBounds().x+165, upgradeLabel.getBounds().y+5, 30, 30);
                             xBtn.setBorder(null);
-                            xBtn.setBackground(new java.awt.Color(220, 220, 220));
+                            xBtn.setBackground(new java.awt.Color(229, 223, 215));
                             xBtn.setVisible(true);
                             
                             xBtn.addActionListener(new ActionListener() {
