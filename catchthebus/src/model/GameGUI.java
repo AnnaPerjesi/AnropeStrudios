@@ -92,6 +92,9 @@ public class GameGUI extends JFrame {
                             upgradeLabel.setBorder(BorderFactory.createLineBorder(Color.black));
                             upgradeLabel.setVisible(true);
                             
+                            gameArea.setRange(temp.getX(),temp.getY(),temp.getWidth(),temp.getHeight());
+                            gameArea.setRangeVisible(true);
+                            
                             xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
                             xBtn.setOpaque(true);
                             xBtn.setBounds(upgradeLabel.getBounds().x+115, upgradeLabel.getBounds().y+5, 30, 30);
@@ -104,6 +107,7 @@ public class GameGUI extends JFrame {
                             public void actionPerformed(ActionEvent e) {
                                 upgradeLabel.setVisible(false);
                                 xBtn.setVisible(false);
+                                gameArea.setRangeVisible(false);
                                 }
                             });
                             gameArea.add(xBtn);
@@ -111,6 +115,7 @@ public class GameGUI extends JFrame {
                         } else {
                             upgradeLabel.setVisible(false);
                             xBtn.setVisible(false);
+                            gameArea.setRangeVisible(false);
                         }                    
                     }
                 }
