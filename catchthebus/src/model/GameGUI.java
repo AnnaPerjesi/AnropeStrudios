@@ -138,6 +138,7 @@ public class GameGUI extends JFrame {
                             delBtn.setBounds(upgradeLabel.getBounds().x+130, upgradeLabel.getBounds().y+230, 40, 40);
                             delBtn.setBackground(new java.awt.Color(220, 0, 0));
                             delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                            delBtn.setVisible(true);
                             
                             
                             upgBtn.setOpaque(true);
@@ -146,14 +147,15 @@ public class GameGUI extends JFrame {
                             upgBtn.setBounds(upgradeLabel.getBounds().x+30, upgradeLabel.getBounds().y+230, 80, 40);
                             upgBtn.setBackground(new java.awt.Color(153,130,96));
                             upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                            upgBtn.setVisible(true);
                             
                             xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
                             xBtn.setOpaque(true);
                             xBtn.setBounds(upgradeLabel.getBounds().x+165, upgradeLabel.getBounds().y+5, 30, 30);
                             xBtn.setBorder(null);
                             xBtn.setBackground(new java.awt.Color(220, 220, 220));
-                            
                             xBtn.setVisible(true);
+                            
                             xBtn.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
