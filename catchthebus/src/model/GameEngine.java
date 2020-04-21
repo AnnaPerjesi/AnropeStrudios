@@ -24,9 +24,9 @@ public final class GameEngine extends JPanel {
     private static boolean isOver = false;
     private int wave = 1;
     private int levelNum = 1;
-    private Timer newFrameTimer;
+    public Timer newFrameTimer;
     public boolean started = false;
-    public int speed = 800;
+    public int speed = 1000;
 
     private Level level;
     private Player player;
@@ -179,7 +179,9 @@ public final class GameEngine extends JPanel {
             }
             if (isOver() && wave < maxWave) {
                 nextWave();
+                GameGUI.goLevel();
             } else if (isOver() && wave >= maxWave && levelNum != 5) {
+                GameGUI.goLevel();
                 nextLevel();
             }
 
