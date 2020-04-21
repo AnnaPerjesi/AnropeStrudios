@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.BorderLayout;
 import views.Tower;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -43,7 +42,7 @@ public class GameGUI extends JFrame {
     private ArrayList<Tower> realTowers;
     private int type;
     Tower temp;
-    private int maxWave;
+    private final int maxWave;
     private JLabel upgradeLabel;
     private JButton xBtn;
 
