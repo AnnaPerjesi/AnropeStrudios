@@ -29,7 +29,9 @@ public class GameGUI extends JFrame {
     private static JLabel towerCost;
     private static JLabel towerCost2;
     private static JLabel towerCost3;
-    private final JButton startRound;
+    private static JButton startWave;
+    private static JButton fastWave;
+    private static JButton goLevel;
     private static JLabel roundCounter;
 
     //NEW
@@ -249,17 +251,61 @@ public class GameGUI extends JFrame {
 
         }
         { //start round 
-            startRound = new JButton();
-            startRound.setIcon(new ImageIcon("src/data/pngs/go.png"));
-            startRound.setBounds(1483, 730, 100, 100);
-            startRound.setBorder(null);
-            startRound.setBackground(null);
-            startRound.addActionListener(new ActionListener() {
+            startWave = new JButton();
+            startWave.setIcon(new ImageIcon("src/data/pngs/play.png"));
+            startWave.setOpaque(true);
+            startWave.setBounds(1483, 740, 90, 90);
+            startWave.setBorder(null);
+            startWave.setBackground(null);
+            
+            fastWave = new JButton();
+            fastWave.setIcon(new ImageIcon("src/data/pngs/play2.png"));
+            fastWave.setOpaque(true);
+            fastWave.setBounds(1483, 740, 90, 90);
+            fastWave.setBorder(null);
+            fastWave.setBackground(null);
+            
+            goLevel = new JButton();
+            goLevel.setIcon(new ImageIcon("src/data/pngs/go.png"));
+            goLevel.setOpaque(true);
+            goLevel.setBounds(1483, 740, 90, 90);
+            goLevel.setBorder(null);
+            goLevel.setBackground(null);
+            
+            goLevel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     gameArea.startTimer();
+                    goLevel.setVisible(false);
+                    startWave.setVisible(true);
+                    fastWave.setVisible(false);
                 }
             });
+            
+            startWave.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (gameArea.started) {
+                        gameArea.newFrameTimer.setDelay(300/60);
+                        startWave.setVisible(false);
+                        fastWave.setVisible(true);
+                    } else {
+                        gameArea.startTimer();
+                        startWave.setVisible(true);
+                        fastWave.setVisible(false);
+                    }
+                }
+            });
+            
+            fastWave.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gameArea.newFrameTimer.setDelay(16);
+                    fastWave.setVisible(false);
+                    startWave.setVisible(true);
+                }
+            });
+            
 
             roundCounter = new JLabel(Integer.toString(gameArea.getWave()) + "/" + maxWave + " rounds");
             roundCounter.setHorizontalAlignment(JLabel.CENTER);
@@ -327,7 +373,9 @@ public class GameGUI extends JFrame {
         gameArea.add(towerCost2);
         gameArea.add(tower3);
         gameArea.add(towerCost3);
-        gameArea.add(startRound);
+        gameArea.add(goLevel);
+        gameArea.add(startWave);
+        gameArea.add(fastWave);
         gameArea.add(roundCounter);
 
         frame = new JFrame("Catch The Bus ~ Anrope Studios©");
@@ -418,5 +466,12 @@ public class GameGUI extends JFrame {
         tower.setIcon(affordable(10, 1));
         tower2.setIcon(affordable(15, 2));
         tower3.setIcon(affordable(20, 3));
+    }
+    
+    public static void goLevel() {
+        gameArea.newFrameTimer.setDelay(1000/60);
+        goLevel.setVisible(true);
+        startWave.setVisible(false);
+        fastWave.setVisible(false);
     }
 }
