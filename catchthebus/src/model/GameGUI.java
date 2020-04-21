@@ -3,12 +3,15 @@ package model;
 import views.Tower;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,6 +48,11 @@ public class GameGUI extends JFrame {
     private final int maxWave;
     private JLabel upgradeLabel;
     private JButton xBtn;
+    private JButton delBtn;
+    private JButton upgBtn;
+    private JLabel twLevel;
+    private JLabel twPower;
+    private JLabel twRange;
 
     public GameGUI() {
         gameArea = new GameEngine();
@@ -52,7 +60,12 @@ public class GameGUI extends JFrame {
         towers = new ArrayList<>();
         realTowers = new ArrayList<>();
         upgradeLabel = new JLabel();
+        twLevel = new JLabel();
+        twPower = new JLabel();
+        twRange = new JLabel();
         xBtn = new JButton();
+        delBtn = new JButton();
+        upgBtn = new JButton("Upgrade");
         towers = gameArea.getLevel().getAllTower();
         gameArea.addMouseListener(new MouseAdapter() {
             @Override
@@ -70,12 +83,12 @@ public class GameGUI extends JFrame {
                             }
                         }
                         if (found) {
-                            realTowers.add(temp);
                             gameArea.addTower(temp, type);
                             gameArea.changeShowTower();
                         }
                     } else {
                         /*TODO upgrade*/
+                        realTowers = gameArea.getRealTowers();
                         boolean found = false;
                         int x = e.getX();
                         int y = e.getY();
@@ -88,13 +101,55 @@ public class GameGUI extends JFrame {
                         if (found) {
                             upgradeLabel.setOpaque(true);
                             upgradeLabel.setBackground(new java.awt.Color(220, 220, 220));
-                            upgradeLabel.setBounds(temp.getX()-150, temp.getY()-200, 150, 200);
+                            upgradeLabel.setBounds(temp.getX()-200, temp.getY()-300, 200, 300);
                             upgradeLabel.setBorder(BorderFactory.createLineBorder(Color.black));
                             upgradeLabel.setVisible(true);
                             
+                            /*Image img = new ImageIcon("src/data/pngs/circle_range.png").getImage();
+                            img = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                            ImageIcon imageIcon = new ImageIcon(img);*/
+                            
+                            twLevel.setText("Lvl: " + temp.getLevel());
+                            twLevel.setFont(new Font("Courier New", Font.BOLD, 20));
+                            twLevel.setOpaque(true);
+                            twLevel.setBackground(new java.awt.Color(220, 220, 220));
+                            twLevel.setBounds(upgradeLabel.getBounds().x+30, upgradeLabel.getBounds().y+15, 100, 60);
+                            twLevel.setBorder(null);
+                            twLevel.setVisible(true);
+                            
+                            twPower.setText("Power: " + temp.getPower());
+                            twPower.setFont(new Font("Courier New", Font.ITALIC, 16));
+                            twPower.setOpaque(true);
+                            twPower.setBackground(new java.awt.Color(220, 220, 220));
+                            twPower.setBounds(upgradeLabel.getBounds().x+30, upgradeLabel.getBounds().y+75, 150, 60);
+                            twPower.setBorder(null);
+                            twPower.setVisible(true);
+                            
+                            twRange.setText("Range: " + temp.getRange());
+                            twRange.setFont(new Font("Courier New", Font.ITALIC, 16));
+                            twRange.setOpaque(true);
+                            twRange.setBackground(new java.awt.Color(220, 220, 220));
+                            twRange.setBounds(upgradeLabel.getBounds().x+30, upgradeLabel.getBounds().y+135, 150, 60);
+                            twRange.setBorder(null);
+                            twRange.setVisible(true);
+                            
+                            delBtn.setIcon(new ImageIcon("src/data/pngs/bin.png"));
+                            delBtn.setOpaque(true);
+                            delBtn.setBounds(upgradeLabel.getBounds().x+130, upgradeLabel.getBounds().y+230, 40, 40);
+                            delBtn.setBackground(new java.awt.Color(220, 0, 0));
+                            delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                            
+                            
+                            upgBtn.setOpaque(true);
+                            upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
+                            upgBtn.setForeground(new java.awt.Color(233, 233, 233));
+                            upgBtn.setBounds(upgradeLabel.getBounds().x+30, upgradeLabel.getBounds().y+230, 80, 40);
+                            upgBtn.setBackground(new java.awt.Color(153,130,96));
+                            upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                            
                             xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
                             xBtn.setOpaque(true);
-                            xBtn.setBounds(upgradeLabel.getBounds().x+115, upgradeLabel.getBounds().y+5, 30, 30);
+                            xBtn.setBounds(upgradeLabel.getBounds().x+165, upgradeLabel.getBounds().y+5, 30, 30);
                             xBtn.setBorder(null);
                             xBtn.setBackground(new java.awt.Color(220, 220, 220));
                             
@@ -102,15 +157,23 @@ public class GameGUI extends JFrame {
                             xBtn.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
+                                twLevel.setVisible(false);
+                                twPower.setVisible(false);
+                                twRange.setVisible(false);
                                 upgradeLabel.setVisible(false);
                                 xBtn.setVisible(false);
+                                delBtn.setVisible(false);
+                                upgBtn.setVisible(false);
                                 }
-                            });
-                            gameArea.add(xBtn);
-                            gameArea.add(upgradeLabel);                           
+                            });                       
                         } else {
+                            twLevel.setVisible(false);
+                            twPower.setVisible(false);
+                            twRange.setVisible(false);
                             upgradeLabel.setVisible(false);
                             xBtn.setVisible(false);
+                            delBtn.setVisible(false);
+                            upgBtn.setVisible(false);
                         }                    
                     }
                 }
@@ -273,8 +336,6 @@ public class GameGUI extends JFrame {
         //NEW
         {/*PAUSE MENU*/
 
-            //Pbg   TODO: Áttetsző réteg minden fölé
-
             pBg = new JLabel();
             pBg.setBounds(0, 0, 1600, 900);
             pBg.setBackground(new java.awt.Color(10, 10, 10, 200));
@@ -287,7 +348,6 @@ public class GameGUI extends JFrame {
             pWindow.setBackground(new java.awt.Color(223, 197, 161, 150));
             pWindow.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             pWindow.setOpaque(true);
-            // pWindow.setOpaque(true);
 
             //resume btn
             pResume = new JButton("Resume");
@@ -315,6 +375,13 @@ public class GameGUI extends JFrame {
 
         }
         gameArea.setLayout(null);
+        gameArea.add(xBtn);
+        gameArea.add(delBtn);
+        gameArea.add(upgBtn);
+        gameArea.add(twLevel);
+        gameArea.add(twPower);
+        gameArea.add(twRange);
+        gameArea.add(upgradeLabel);
         gameArea.add(coin);
         gameArea.add(level);
         gameArea.add(heart);
