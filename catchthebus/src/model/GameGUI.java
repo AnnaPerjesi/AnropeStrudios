@@ -109,10 +109,11 @@ public class GameGUI extends JFrame {
                             });
                             /*TODO ha többször hívod elő az upgrade labelt akkor nem tűnik el*/
                             gameArea.add(xBtn);
-                            gameArea.add(upgradeLabel);
-                            
-                        }
-                        
+                            gameArea.add(upgradeLabel);                           
+                        } else {
+                            upgradeLabel.setVisible(false);
+                            xBtn.setVisible(false);
+                        }                     
                     }
                 }
             }

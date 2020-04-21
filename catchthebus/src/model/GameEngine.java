@@ -26,7 +26,7 @@ public final class GameEngine extends JPanel {
     private int levelNum = 1;
     private Timer newFrameTimer;
     public boolean started = false;
-    public int speed = 100;
+    public int speed = 800;
 
     private Level level;
     private Player player;
