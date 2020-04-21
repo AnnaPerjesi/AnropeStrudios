@@ -51,6 +51,8 @@ public class GameGUI extends JFrame {
         maxWave = gameArea.getMaxWave();
         towers = new ArrayList<>();
         realTowers = new ArrayList<>();
+        upgradeLabel = new JLabel();
+        xBtn = new JButton();
         towers = gameArea.getLevel().getAllTower();
         gameArea.addMouseListener(new MouseAdapter() {
             @Override
@@ -84,15 +86,12 @@ public class GameGUI extends JFrame {
                             }
                         }
                         if (found) {
-                            
-                            upgradeLabel = new JLabel();
                             upgradeLabel.setOpaque(true);
                             upgradeLabel.setBackground(new java.awt.Color(220, 220, 220));
                             upgradeLabel.setBounds(temp.getX()-150, temp.getY()-200, 150, 200);
                             upgradeLabel.setBorder(BorderFactory.createLineBorder(Color.black));
                             upgradeLabel.setVisible(true);
                             
-                            xBtn = new JButton();
                             xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
                             xBtn.setOpaque(true);
                             xBtn.setBounds(upgradeLabel.getBounds().x+115, upgradeLabel.getBounds().y+5, 30, 30);
@@ -107,13 +106,12 @@ public class GameGUI extends JFrame {
                                 xBtn.setVisible(false);
                                 }
                             });
-                            /*TODO ha többször hívod elő az upgrade labelt akkor nem tűnik el*/
                             gameArea.add(xBtn);
                             gameArea.add(upgradeLabel);                           
                         } else {
                             upgradeLabel.setVisible(false);
                             xBtn.setVisible(false);
-                        }                     
+                        }                    
                     }
                 }
             }
