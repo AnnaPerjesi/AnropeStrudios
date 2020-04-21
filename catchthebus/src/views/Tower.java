@@ -3,13 +3,18 @@ package views;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import model.GameGUI;
 import model.Player;
 
 public class Tower extends Sprite {
 
     private final int buyingCost;
     private int refundCost;
-    private int upgradeCost;
+    private int upgradeCost = 20;
+    private int upgradeCost1 = 50;
+    private int upgradeCost2 = 70;
+    private int upgradeCost3 = 90;
     private int level = 1;
     private final int maxlevel = 10;
     private final double lastAttack;
@@ -58,16 +63,32 @@ public class Tower extends Sprite {
      * @param player
      * @return
      */
-    public boolean upgrade(Tower tower, Player player) {
+    public boolean upgrade(Tower tower, Player player, int type) {
         if (level < maxlevel && player.getMoney() >= upgradeCost) {
             level += 1;
             player.addMoney(-1 * upgradeCost);
             if (level < 5) {
-                /*TODO*/
                 tower.setRange(getRange() * 1.3);
                 tower.setPower(getPower() * 1.3);
             } else {
-                /*TODO IDK which i have clicked on*/
+                switch (type) {
+                    case 2:
+                        //disab
+                        player.setMoney(player.getMoney() - getUpgradeCost2());
+                        
+                        break;
+                    case 3:
+                        //incog
+                        player.setMoney(player.getMoney() - getUpgradeCost3());
+                        
+                        break;
+                    default:
+                        //cigok
+                        player.setMoney(player.getMoney() - getUpgradeCost1());
+                        
+                        break;
+                }
+                GameGUI.refreshMoney(player.getMoney());
             }
             return true;
         }
@@ -124,9 +145,31 @@ public class Tower extends Sprite {
         return refundCost;
     }
 
-    public int getUpgradeCost() {
-        return upgradeCost;
+    public int getUpgradeCost1() {
+        return upgradeCost1;
     }
+
+    public int getUpgradeCost2() {
+        return upgradeCost2;
+    }
+
+    public int getUpgradeCost3() {
+        return upgradeCost3;
+    }
+
+    public void setUpgradeCost1(int upgradeCost1) {
+        this.upgradeCost1 = upgradeCost1;
+    }
+
+    public void setUpgradeCost2(int upgradeCost2) {
+        this.upgradeCost2 = upgradeCost2;
+    }
+
+    public void setUpgradeCost3(int upgradeCost3) {
+        this.upgradeCost3 = upgradeCost3;
+    }
+
+    
 
     public int getLevel() {
         return level;
