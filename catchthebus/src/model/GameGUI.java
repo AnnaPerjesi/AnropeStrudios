@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.BorderLayout;
 import views.Tower;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -39,14 +40,18 @@ public class GameGUI extends JFrame {
     private final JButton pExit;
     private static GameEngine gameArea;
     private ArrayList<Tower> towers;
+    private ArrayList<Tower> realTowers;
     private int type;
     Tower temp;
     private int maxWave;
+    private JLabel upgradeLabel;
+    private JButton xBtn;
 
     public GameGUI() {
         gameArea = new GameEngine();
         maxWave = gameArea.getMaxWave();
         towers = new ArrayList<>();
+        realTowers = new ArrayList<>();
         towers = gameArea.getLevel().getAllTower();
         gameArea.addMouseListener(new MouseAdapter() {
             @Override
@@ -64,12 +69,49 @@ public class GameGUI extends JFrame {
                             }
                         }
                         if (found) {
+                            realTowers.add(temp);
                             gameArea.addTower(temp, type);
                             gameArea.changeShowTower();
                         }
                     } else {
                         /*TODO upgrade*/
-
+                        boolean found = false;
+                        int x = e.getX();
+                        int y = e.getY();
+                        for (Tower tower : realTowers) {
+                            if (tower.getX() + 50 > x && tower.getX() < x && tower.getY() < y && tower.getY() + 50 > y) {
+                                temp = tower;
+                                found = true;
+                            }
+                        }
+                        if (found) {
+                            
+                            upgradeLabel = new JLabel();
+                            upgradeLabel.setOpaque(true);
+                            upgradeLabel.setBackground(new java.awt.Color(220, 220, 220));
+                            upgradeLabel.setBounds(temp.getX()-150, temp.getY()-200, 150, 200);
+                            upgradeLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+                            upgradeLabel.setVisible(true);
+                            
+                            xBtn = new JButton("X");
+                            xBtn.setOpaque(true);
+                            xBtn.setBackground(new java.awt.Color(250, 250, 250));
+                            xBtn.setBounds(upgradeLabel.getBounds().x+115, upgradeLabel.getBounds().y+15, 35, 35);
+                            
+                            xBtn.setVisible(true);
+                            xBtn.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                upgradeLabel.setVisible(false);
+                                xBtn.setVisible(false);
+                                }
+                            });
+                            /*TODO ha többször hívod elő az upgrade labelt akkor nem tűnik el*/
+                            gameArea.add(xBtn);
+                            gameArea.add(upgradeLabel);
+                            
+                        }
+                        
                     }
                 }
             }
