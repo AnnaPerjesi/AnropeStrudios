@@ -36,23 +36,11 @@ public class GameStart extends JFrame {
         start = new JPanel();
         start.setBackground(new java.awt.Color(223, 197, 161));
 
-        /*anna = new JLabel("Perjési Anna - valami");
-        anna.setHorizontalAlignment(JLabel.CENTER);
-        anna.setBounds(1145, 630, 300, 150);
-
-        robi = new JLabel("Csékei Róbert - CEO");
-        robi.setHorizontalAlignment(JLabel.CENTER);
-        robi.setBounds(1145, 600, 300, 150);
-
-        peti = new JLabel("Pukánszky Péter - valami");
-        peti.setHorizontalAlignment(JLabel.CENTER);
-        peti.setBounds(1145, 660, 300, 150);*/
-
         logo = new JLabel();
         logo.setIcon(new ImageIcon("src/data/pngs/proba.png"));
         logo.setHorizontalAlignment(JLabel.CENTER);
         logo.setBounds(380, 50, 910, 200);
-        logo.setBackground(new java.awt.Color(223,197,161,50));
+        logo.setBackground(new java.awt.Color(221,197,161,50));
         logo.setOpaque(true);
         
         brand = new JLabel();
@@ -67,12 +55,6 @@ public class GameStart extends JFrame {
         bus.setBorder(null);
         bus.setBackground(null);
 
-        /*  menuLabel = new JLabel();
-         menuLabel.setOpaque(true);
-         menuLabel.setBounds(600, 275, 400, 250);
-         menuLabel.setBackground(new java.awt.Color(245, 245, 245));
-         menuLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
-         */
         menuLabel = new JLabel();
         menuLabel.setBounds(600, 275, 400, 250);
         menuLabel.setBackground(new java.awt.Color(255,255,255,100));
@@ -84,7 +66,7 @@ public class GameStart extends JFrame {
             play.setBounds(725, 315, 150, 70);
             play.setBackground(new java.awt.Color(39, 39, 39));
             play.setForeground(new java.awt.Color(233, 233, 233));
-            play.setFont(new Font("Arial", Font.PLAIN, 30));
+            play.setFont(new Font("Courier New", Font.PLAIN, 30));
             //play.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             play.addActionListener(new ActionListener() {
                 @Override
@@ -100,7 +82,7 @@ public class GameStart extends JFrame {
             exit.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             exit.setBackground(new java.awt.Color(39, 39, 39));
             exit.setForeground(new java.awt.Color(233, 233, 233));
-            exit.setFont(new Font("Arial", Font.PLAIN, 30));
+            exit.setFont(new Font("Courier New", Font.PLAIN, 30));
             exit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

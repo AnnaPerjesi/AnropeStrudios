@@ -33,6 +33,7 @@ public final class GameEngine extends JPanel {
     private ArrayList<Tower> towers;
     private ArrayList<Tower> realTowers;
     private ArrayList<Bullet> bullets;
+    private Range range;
     private boolean showTowers = false;
     /*NEW*/
     private static ArrayList<Enemy> enemies;
@@ -41,6 +42,7 @@ public final class GameEngine extends JPanel {
         super();
         realTowers = new ArrayList<>();
         bullets = new ArrayList<>();
+        range = new Range(0,0,0,0, new ImageIcon("src/data/pngs/circle_range.png").getImage());
         player = new Player(100, 50);
         player.reset();
         restart();
@@ -122,6 +124,10 @@ public final class GameEngine extends JPanel {
                 tower.draw(grphcs);
             }
         }
+        //if(range.getVisible()){
+            //System.out.println("drawn");
+            range.draw(grphcs);
+        //}
         for (Enemy enemy : enemies) {
             enemy.draw(grphcs);
         }
@@ -164,32 +170,6 @@ public final class GameEngine extends JPanel {
                 });
                 for (int i = 0; i < enemies.size(); i++) {
                     if (!enemies.get(i).getAlive()) {
-                        /*switch (enemies.get(i).getType()) {
-                            case 1:
-                                player.addMoney(enemies.get(i).getWorth());
-                                GameGUI.refreshMoney(player.getMoney());
-                                break;
-                            case 2:
-                                player.addMoney(enemies.get(i).getWorth());
-                                GameGUI.refreshMoney(player.getMoney());
-                                break;
-                            case 3:
-                                player.addMoney(enemies.get(i).getWorth());
-                                GameGUI.refreshMoney(player.getMoney());
-                                break;
-                            case 4:
-                                player.addMoney(enemies.get(i).getWorth());
-                                GameGUI.refreshMoney(player.getMoney());
-                                break;
-                            case 5:
-                                player.addMoney(enemies.get(i).getWorth());
-                                GameGUI.refreshMoney(player.getMoney());
-                                break;
-                            default:
-                                player.addMoney(enemies.get(i).getWorth());
-                                GameGUI.refreshMoney(player.getMoney());
-                                break;
-                        }*/
                         player.addMoney(enemies.get(i).getWorth());
                         GameGUI.refreshMoney(player.getMoney());
                         GameGUI.refreshImage();
@@ -306,6 +286,16 @@ public final class GameEngine extends JPanel {
         }
     }
 
+    public void setRange(int x, int y, int width, int height) {
+        range.setX(100);
+        range.setY(100);
+        range.setWidth(1000);
+        range.setHeight(1000);
+        System.out.println(range.getX() + ", " + range.getY());
+        System.out.println(range.getVisible());
+        repaint();
+    }
+
     /*
     Getters
      */
@@ -321,10 +311,10 @@ public final class GameEngine extends JPanel {
         return levelNum;
     }
 
-    public int getMaxWave(){
+    public int getMaxWave() {
         return this.maxWave;
     }
-    
+
     public boolean getPaused() {
         return this.paused;
     }
@@ -336,6 +326,10 @@ public final class GameEngine extends JPanel {
     public int getPlayerMoney() {
         return this.player.getMoney();
     }
+    
+    public Range getRange(){
+        return this.range;
+    }
 
     public boolean getShowTowers() {
         return this.showTowers;
@@ -343,6 +337,10 @@ public final class GameEngine extends JPanel {
 
     public ArrayList<Tower> getTowers() {
         return this.towers;
+    }
+    
+    public ArrayList<Tower> getRealTowers() {
+        return this.realTowers;
     }
 
     public int getWave() {
@@ -365,7 +363,9 @@ public final class GameEngine extends JPanel {
     public static void setPaused(boolean paused) {
         GameEngine.paused = paused;
     }
-
+    public void setRangeVisible(boolean b){
+        range.setVisible(b);
+    }
     public void startTimer() {
         started = true;
     }
