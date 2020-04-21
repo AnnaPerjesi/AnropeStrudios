@@ -164,32 +164,6 @@ public final class GameEngine extends JPanel {
                 });
                 for (int i = 0; i < enemies.size(); i++) {
                     if (!enemies.get(i).getAlive()) {
-                        /*switch (enemies.get(i).getType()) {
-                            case 1:
-                                player.addMoney(enemies.get(i).getWorth());
-                                GameGUI.refreshMoney(player.getMoney());
-                                break;
-                            case 2:
-                                player.addMoney(enemies.get(i).getWorth());
-                                GameGUI.refreshMoney(player.getMoney());
-                                break;
-                            case 3:
-                                player.addMoney(enemies.get(i).getWorth());
-                                GameGUI.refreshMoney(player.getMoney());
-                                break;
-                            case 4:
-                                player.addMoney(enemies.get(i).getWorth());
-                                GameGUI.refreshMoney(player.getMoney());
-                                break;
-                            case 5:
-                                player.addMoney(enemies.get(i).getWorth());
-                                GameGUI.refreshMoney(player.getMoney());
-                                break;
-                            default:
-                                player.addMoney(enemies.get(i).getWorth());
-                                GameGUI.refreshMoney(player.getMoney());
-                                break;
-                        }*/
                         player.addMoney(enemies.get(i).getWorth());
                         GameGUI.refreshMoney(player.getMoney());
                         GameGUI.refreshImage();
@@ -341,6 +315,10 @@ public final class GameEngine extends JPanel {
 
     public ArrayList<Tower> getTowers() {
         return this.towers;
+    }
+    
+    public ArrayList<Tower> getRealTowers() {
+        return this.realTowers;
     }
 
     public int getWave() {
