@@ -124,10 +124,9 @@ public final class GameEngine extends JPanel {
                 tower.draw(grphcs);
             }
         }
-        //if(range.getVisible()){
-        //System.out.println("drawn");
+        if(range.getVisible()){
         range.draw(grphcs);
-        //}
+        }
         for (Enemy enemy : enemies) {
             enemy.draw(grphcs);
         }
