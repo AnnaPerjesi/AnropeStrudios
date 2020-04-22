@@ -24,9 +24,9 @@ public class Tower extends Sprite {
     private Enemy firstEnemy;
     private Bullet bullet;
 
-    public Tower(int x, int y, int width, int height, double dmg, double range, Image image) {
+    public Tower(int x, int y, int width, int height, double dmg, double range,int worth, Image image) {
         super(x, y, width, height, image);
-
+        this.refundCost = worth;
         this.buyingCost = 15;
         this.power = dmg;
         this.range = range;
@@ -41,8 +41,8 @@ public class Tower extends Sprite {
      * @param image
      * @return
      */
-    public Tower createTower(double dmg, double range, Image image) { //Creates real towers instead of X-es
-        return new Tower(x - 15, y - 15, 80, 80, dmg, range, image);
+    public Tower createTower(double dmg, double range,int worth, Image image) { //Creates real towers instead of X-es
+        return new Tower(x - 15, y - 15, 80, 80, dmg, range,worth, image);
     }
 
     /**
@@ -204,5 +204,8 @@ public class Tower extends Sprite {
 
     public Enemy getFirstEnemy() {
         return firstEnemy;
+    }
+    public Image getImage(){
+        return image;
     }
 }

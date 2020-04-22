@@ -42,7 +42,7 @@ public final class GameEngine extends JPanel {
         super();
         realTowers = new ArrayList<>();
         bullets = new ArrayList<>();
-        range = new Range(0,0,0,0, new ImageIcon("src/data/pngs/circle_range.png").getImage());
+        range = new Range(0, 0, 0, 0, new ImageIcon("src/data/pngs/circle_range.png").getImage());
         player = new Player(100, 50);
         player.reset();
         restart();
@@ -125,8 +125,8 @@ public final class GameEngine extends JPanel {
             }
         }
         //if(range.getVisible()){
-            //System.out.println("drawn");
-            range.draw(grphcs);
+        //System.out.println("drawn");
+        range.draw(grphcs);
         //}
         for (Enemy enemy : enemies) {
             enemy.draw(grphcs);
@@ -258,18 +258,18 @@ public final class GameEngine extends JPanel {
 
         { //tower
             Tower tw;
-            switch (type) {             
+            switch (type) {
                 case 2:
                     player.setMoney(player.getMoney() - 15);
-                    tw = tower.createTower(15, 250, new ImageIcon("src/data/pngs/disabgrey.png").getImage());
+                    tw = tower.createTower(15, 250, 10, new ImageIcon("src/data/pngs/disabgrey.png").getImage());
                     break;
                 case 3:
                     player.setMoney(player.getMoney() - 20);
-                    tw = tower.createTower(20, 350, new ImageIcon("src/data/pngs/incoggrey.png").getImage());
+                    tw = tower.createTower(20, 350, 15, new ImageIcon("src/data/pngs/incoggrey.png").getImage());
                     break;
                 default:
                     player.setMoney(player.getMoney() - 10);
-                    tw = tower.createTower(10, 150, new ImageIcon("src/data/pngs/crowgrey.png").getImage());
+                    tw = tower.createTower(10, 150, 20, new ImageIcon("src/data/pngs/crowgrey.png").getImage());
                     break;
             }
             realTowers.add(tw);
@@ -285,34 +285,19 @@ public final class GameEngine extends JPanel {
             bullets.add(bullet);
         }
     }
+
     /*BUG--> 1 kattintásnál 1x hajtja végre, 2. kattintásnál 2x, 3.nál 3x ..stb*/
-    public void sellTower(Tower tower, int type){
-        Tower tw;
-        switch (type) {             
-                case 2:
-                    System.out.println("3 pénz az eladás előtt " + player.getMoney());
-                    player.addMoney(15);
-                    System.out.println("3 pénz az eladás után " + player.getMoney());
-                    tw = tower.createTower(0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
-                    break;
-                case 3:
-                    System.out.println("2 pénz az eladás előtt " + player.getMoney());
-                    player.addMoney(20);
-                    System.out.println("2 pénz az eladás után " + player.getMoney());
-                    tw = tower.createTower(0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
-                    break;
-                default:
-                    System.out.println("1 pénz az eladás előtt " + player.getMoney());
-                    player.addMoney(10);
-                    System.out.println("1 pénz az eladás után " + player.getMoney());
-                    tw = tower.createTower(0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
-                    break;
-            }
-            towers.add(tw);
-            GameGUI.refreshMoney(player.getMoney());
-            GameGUI.refreshImage();
-            realTowers.remove(tower);
+    public void sellTower(Tower tower, int type) {
+        System.out.println(realTowers.size());
+        realTowers.remove(tower);
+        System.out.println(realTowers.size());
+        Tower tw = tw = new Tower(tower.getX() + 15, tower.getY() + 15, 50, 50, 0, 0,0, new ImageIcon("src/data/pngs/x.png").getImage());
         
+        player.addMoney(tower.getRefundCost());
+        System.out.println("Pénz eladás után " + player.getMoney());
+        towers.add(tw);
+        GameGUI.refreshMoney(player.getMoney());
+        GameGUI.refreshImage();
     }
 
     public void setRange(int x, int y, int width, int height) {
@@ -355,8 +340,8 @@ public final class GameEngine extends JPanel {
     public int getPlayerMoney() {
         return this.player.getMoney();
     }
-    
-    public Range getRange(){
+
+    public Range getRange() {
         return this.range;
     }
 
@@ -367,7 +352,7 @@ public final class GameEngine extends JPanel {
     public ArrayList<Tower> getTowers() {
         return this.towers;
     }
-    
+
     public ArrayList<Tower> getRealTowers() {
         return this.realTowers;
     }
@@ -392,9 +377,11 @@ public final class GameEngine extends JPanel {
     public static void setPaused(boolean paused) {
         GameEngine.paused = paused;
     }
-    public void setRangeVisible(boolean b){
+
+    public void setRangeVisible(boolean b) {
         range.setVisible(b);
     }
+
     public void startTimer() {
         started = true;
     }

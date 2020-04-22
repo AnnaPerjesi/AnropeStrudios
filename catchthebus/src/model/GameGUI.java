@@ -146,8 +146,8 @@ public class GameGUI extends JFrame {
                             delBtn.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
+                                System.out.println("Pénz eladás előtt " + gameArea.getPlayerMoney());
                                 gameArea.sellTower(temp, type);
-                                
                                 twLevel.setVisible(false);
                                 twPower.setVisible(false);
                                 twRange.setVisible(false);
@@ -194,7 +194,8 @@ public class GameGUI extends JFrame {
                             xBtn.setVisible(false);
                             delBtn.setVisible(false);
                             upgBtn.setVisible(false);
-                        }                    
+                        }  
+                        found = false;
                     }
                 }
             }
