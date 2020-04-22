@@ -5,5 +5,5 @@
  00000000rrrrr0 
  0rrrrr00r00000 
  0r000r00r0    
- 0r0 0rrrr0     
+  r  0rrrr0     
   b            

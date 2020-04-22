@@ -112,7 +112,7 @@ public class GameGUI extends JFrame {
                             img = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
                             ImageIcon imageIcon = new ImageIcon(img);*/
                             
-                            gameArea.setRange(temp.getX(),temp.getY(),temp.getWidth(),temp.getHeight());
+                            gameArea.setRange(temp);
                             gameArea.setRangeVisible(true);
                             
                             twLevel.setText("Lvl: " + temp.getLevel());
@@ -258,7 +258,6 @@ public class GameGUI extends JFrame {
         delBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Pénz eladás előtt " + gameArea.getPlayerMoney());
                 twLevel.setVisible(false);
                 twPower.setVisible(false);
                 twRange.setVisible(false);

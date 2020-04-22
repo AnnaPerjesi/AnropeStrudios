@@ -284,29 +284,29 @@ public final class GameEngine extends JPanel {
             bullets.add(bullet);
         }
     }
-
-    /*BUG--> 1 kattintásnál 1x hajtja végre, 2. kattintásnál 2x, 3.nál 3x ..stb*/
+    
     public void sellTower(Tower tower, int type) {
-        System.out.println(realTowers.size());
-        bullets.remove(tower.getBullet());
-        realTowers.remove(tower);
-        System.out.println(realTowers.size());
+        int c = 0;
+        for (int i=0; i<realTowers.size(); i++) {
+            if ( realTowers.get(i).equals(tower) ) {
+                c = i;
+            }
+        }
+        bullets.remove(bullets.get(c));
+        realTowers.remove(realTowers.get(c));
         Tower tw = new Tower(tower.getX() + 15, tower.getY() + 15, 50, 50, 0, 0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
 
         player.addMoney(tower.getRefundCost());
-        System.out.println("Pénz eladás után " + player.getMoney());
         towers.add(tw);
         GameGUI.refreshMoney(player.getMoney());
         GameGUI.refreshImage();
     }
 
-    public void setRange(int x, int y, int width, int height) {
-        range.setX(100);
-        range.setY(100);
-        range.setWidth(1000);
-        range.setHeight(1000);
-        System.out.println(range.getX() + ", " + range.getY());
-        System.out.println(range.getVisible());
+    public void setRange(Tower tower) {
+        range.setX(tower.getX()-(int)tower.getRange()+40);
+        range.setY(tower.getY()-(int)tower.getRange()+40);
+        range.setWidth((int)tower.getRange()*2);
+        range.setHeight((int)tower.getRange()*2);
         repaint();
     }
 
