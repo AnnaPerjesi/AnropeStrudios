@@ -102,103 +102,343 @@ public class GameGUI extends JFrame {
                             }
                         }
                         if (found) {
-                            upgradeLabel.setOpaque(true);
-                            upgradeLabel.setBackground(new java.awt.Color(220, 220, 220));
-                            upgradeLabel.setBounds(temp.getX() - 200, temp.getY() - 300, 200, 300);
-                            upgradeLabel.setBorder(BorderFactory.createLineBorder(Color.black));
-                            upgradeLabel.setVisible(true);
+                            System.out.println("x " + e.getX() + " y " + e.getY());
+                            if(e.getX()> 200 && e.getY()>300){
+                                upgradeLabel.setOpaque(true);
+                                upgradeLabel.setBackground(new java.awt.Color(220, 220, 220));
+                                upgradeLabel.setBounds(temp.getX() - 200, temp.getY() - 300, 200, 300);
+                                upgradeLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+                                upgradeLabel.setVisible(true);
 
-                            /*Image img = new ImageIcon("src/data/pngs/circle_range.png").getImage();
-                            img = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-                            ImageIcon imageIcon = new ImageIcon(img);*/
-                            
-                            gameArea.setRange(temp);
-                            gameArea.setRangeVisible(true);
-                            
-                            twLevel.setText("Lvl: " + temp.getLevel());
-                            twLevel.setFont(new Font("Courier New", Font.BOLD, 20));
-                            twLevel.setOpaque(true);
-                            twLevel.setBackground(new java.awt.Color(229, 223, 215));
-                            twLevel.setBounds(upgradeLabel.getBounds().x, upgradeLabel.getBounds().y, 200, 60);
-                            twLevel.setBorder(BorderFactory.createLineBorder(Color.black));
-                            twLevel.setHorizontalAlignment(SwingConstants.CENTER);
-                            twLevel.setVisible(true);
+                                /*Image img = new ImageIcon("src/data/pngs/circle_range.png").getImage();
+                                img = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                                ImageIcon imageIcon = new ImageIcon(img);*/
 
-                            twPower.setText("Power: " + (int)temp.getPower() + " (+" + ")");
-                            twPower.setFont(new Font("Courier New", Font.ITALIC, 16));
-                            twPower.setOpaque(true);
-                            twPower.setBackground(new java.awt.Color(220, 220, 220));
-                            twPower.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 75, 150, 40);
-                            twPower.setBorder(null);
-                            twPower.setVisible(true);
+                                gameArea.setRange(temp);
+                                gameArea.setRangeVisible(true);
 
-                            twRange.setText("Range: " + (int)temp.getRange() + " (+" + ")");
-                            twRange.setFont(new Font("Courier New", Font.ITALIC, 16));
-                            twRange.setOpaque(true);
-                            twRange.setBackground(new java.awt.Color(220, 220, 220));
-                            twRange.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 115, 150, 40);
-                            twRange.setBorder(null);
-                            twRange.setVisible(true);
-                            
-                            twCost.setText("Cost: " + temp.getRefundCost() + " (+" + ")");
-                            twCost.setFont(new Font("Courier New", Font.ITALIC, 16));
-                            twCost.setOpaque(true);
-                            twCost.setBackground(new java.awt.Color(220, 220, 220));
-                            twCost.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 155, 150, 40);
-                            twCost.setBorder(null);
-                            twCost.setVisible(true);
+                                twLevel.setText("Lvl: " + temp.getLevel());
+                                twLevel.setFont(new Font("Courier New", Font.BOLD, 20));
+                                twLevel.setOpaque(true);
+                                twLevel.setBackground(new java.awt.Color(229, 223, 215));
+                                twLevel.setBounds(upgradeLabel.getBounds().x, upgradeLabel.getBounds().y, 200, 60);
+                                twLevel.setBorder(BorderFactory.createLineBorder(Color.black));
+                                twLevel.setHorizontalAlignment(SwingConstants.CENTER);
+                                twLevel.setVisible(true);
 
-                            delBtn.setIcon(new ImageIcon("src/data/pngs/bin.png"));
-                            delBtn.setOpaque(true);
-                            delBtn.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 230, 40, 40);
-                            delBtn.setBackground(new java.awt.Color(220, 0, 0));
-                            delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
-                            delBtn.setVisible(true);
-                            /*BUG rengeteg*/
+                                twPower.setText("Power: " + (int)temp.getPower() + " (+" + ")");
+                                twPower.setFont(new Font("Courier New", Font.ITALIC, 16));
+                                twPower.setOpaque(true);
+                                twPower.setBackground(new java.awt.Color(220, 220, 220));
+                                twPower.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 75, 150, 40);
+                                twPower.setBorder(null);
+                                twPower.setVisible(true);
 
-                            /**
-                             * ************************************
-                             */
-                            upgBtn.setOpaque(true);
-                            upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
-                            upgBtn.setForeground(new java.awt.Color(233, 233, 233));
-                            upgBtn.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 230, 80, 40);
-                            upgBtn.setBackground(new java.awt.Color(153, 130, 96));
-                            upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
-                            upgBtn.setVisible(true);
+                                twRange.setText("Range: " + (int)temp.getRange() + " (+" + ")");
+                                twRange.setFont(new Font("Courier New", Font.ITALIC, 16));
+                                twRange.setOpaque(true);
+                                twRange.setBackground(new java.awt.Color(220, 220, 220));
+                                twRange.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 115, 150, 40);
+                                twRange.setBorder(null);
+                                twRange.setVisible(true);
 
-                            xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
-                            xBtn.setOpaque(true);
-                            xBtn.setBounds(upgradeLabel.getBounds().x + 165, upgradeLabel.getBounds().y + 5, 30, 30);
-                            xBtn.setBorder(null);
-                            xBtn.setBackground(new java.awt.Color(229, 223, 215));
-                            xBtn.setVisible(true);
+                                twCost.setText("Cost: " + temp.getRefundCost() + " (+" + ")");
+                                twCost.setFont(new Font("Courier New", Font.ITALIC, 16));
+                                twCost.setOpaque(true);
+                                twCost.setBackground(new java.awt.Color(220, 220, 220));
+                                twCost.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 155, 150, 40);
+                                twCost.setBorder(null);
+                                twCost.setVisible(true);
 
-                            xBtn.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    twLevel.setVisible(false);
-                                    twPower.setVisible(false);
-                                    twRange.setVisible(false);
-                                    twCost.setVisible(false);
-                                    upgradeLabel.setVisible(false);
-                                    xBtn.setVisible(false);
-                                    delBtn.setVisible(false);
-                                    upgBtn.setVisible(false);
-                                    gameArea.setRangeVisible(false);
-                                }
-                            });
-                        } else {
-                            twLevel.setVisible(false);
-                            twPower.setVisible(false);
-                            twRange.setVisible(false);
-                            twCost.setVisible(false);
-                            upgradeLabel.setVisible(false);
-                            xBtn.setVisible(false);
-                            delBtn.setVisible(false);
-                            upgBtn.setVisible(false);
-                            gameArea.setRangeVisible(false);
-                        }
+                                delBtn.setIcon(new ImageIcon("src/data/pngs/bin.png"));
+                                delBtn.setOpaque(true);
+                                delBtn.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 230, 40, 40);
+                                delBtn.setBackground(new java.awt.Color(220, 0, 0));
+                                delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                                delBtn.setVisible(true);
+                                /*BUG rengeteg*/
+
+                                /**
+                                 * ************************************
+                                 */
+                                upgBtn.setOpaque(true);
+                                upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
+                                upgBtn.setForeground(new java.awt.Color(233, 233, 233));
+                                upgBtn.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 230, 80, 40);
+                                upgBtn.setBackground(new java.awt.Color(153, 130, 96));
+                                upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                                upgBtn.setVisible(true);
+
+                                xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
+                                xBtn.setOpaque(true);
+                                xBtn.setBounds(upgradeLabel.getBounds().x + 165, upgradeLabel.getBounds().y + 5, 30, 30);
+                                xBtn.setBorder(null);
+                                xBtn.setBackground(new java.awt.Color(229, 223, 215));
+                                xBtn.setVisible(true);
+
+                                xBtn.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        twLevel.setVisible(false);
+                                        twPower.setVisible(false);
+                                        twRange.setVisible(false);
+                                        twCost.setVisible(false);
+                                        upgradeLabel.setVisible(false);
+                                        xBtn.setVisible(false);
+                                        delBtn.setVisible(false);
+                                        upgBtn.setVisible(false);
+                                        gameArea.setRangeVisible(false);
+                                    }
+                                });
+                            } else if(e.getX() < 400 && e.getY()< 350){
+                                upgradeLabel.setOpaque(true);
+                                upgradeLabel.setBackground(new java.awt.Color(220, 220, 220));
+                                upgradeLabel.setBounds(temp.getX() + 75, temp.getY() + 75, 200, 300);
+                                upgradeLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+                                upgradeLabel.setVisible(true);
+
+                                gameArea.setRange(temp);
+                                gameArea.setRangeVisible(true);
+
+                                twLevel.setText("Lvl: " + temp.getLevel());
+                                twLevel.setFont(new Font("Courier New", Font.BOLD, 20));
+                                twLevel.setOpaque(true);
+                                twLevel.setBackground(new java.awt.Color(229, 223, 215));
+                                twLevel.setBounds(upgradeLabel.getBounds().x, upgradeLabel.getBounds().y, 200, 60);
+                                twLevel.setBorder(BorderFactory.createLineBorder(Color.black));
+                                twLevel.setHorizontalAlignment(SwingConstants.CENTER);
+                                twLevel.setVisible(true);
+
+                                twPower.setText("Power: " + (int)temp.getPower() + " (+" + ")");
+                                twPower.setFont(new Font("Courier New", Font.ITALIC, 16));
+                                twPower.setOpaque(true);
+                                twPower.setBackground(new java.awt.Color(220, 220, 220));
+                                twPower.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 75, 150, 40);
+                                twPower.setBorder(null);
+                                twPower.setVisible(true);
+
+                                twRange.setText("Range: " + (int)temp.getRange() + " (+" + ")");
+                                twRange.setFont(new Font("Courier New", Font.ITALIC, 16));
+                                twRange.setOpaque(true);
+                                twRange.setBackground(new java.awt.Color(220, 220, 220));
+                                twRange.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 115, 150, 40);
+                                twRange.setBorder(null);
+                                twRange.setVisible(true);
+
+                                twCost.setText("Cost: " + temp.getRefundCost() + " (+" + ")");
+                                twCost.setFont(new Font("Courier New", Font.ITALIC, 16));
+                                twCost.setOpaque(true);
+                                twCost.setBackground(new java.awt.Color(220, 220, 220));
+                                twCost.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 155, 150, 40);
+                                twCost.setBorder(null);
+                                twCost.setVisible(true);
+
+                                delBtn.setIcon(new ImageIcon("src/data/pngs/bin.png"));
+                                delBtn.setOpaque(true);
+                                delBtn.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 230, 40, 40);
+                                delBtn.setBackground(new java.awt.Color(220, 0, 0));
+                                delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                                delBtn.setVisible(true);
+
+                                upgBtn.setOpaque(true);
+                                upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
+                                upgBtn.setForeground(new java.awt.Color(233, 233, 233));
+                                upgBtn.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 230, 80, 40);
+                                upgBtn.setBackground(new java.awt.Color(153, 130, 96));
+                                upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                                upgBtn.setVisible(true);
+
+                                xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
+                                xBtn.setOpaque(true);
+                                xBtn.setBounds(upgradeLabel.getBounds().x + 165, upgradeLabel.getBounds().y + 5, 30, 30);
+                                xBtn.setBorder(null);
+                                xBtn.setBackground(new java.awt.Color(229, 223, 215));
+                                xBtn.setVisible(true);
+
+                                xBtn.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        twLevel.setVisible(false);
+                                        twPower.setVisible(false);
+                                        twRange.setVisible(false);
+                                        twCost.setVisible(false);
+                                        upgradeLabel.setVisible(false);
+                                        xBtn.setVisible(false);
+                                        delBtn.setVisible(false);
+                                        upgBtn.setVisible(false);
+                                        gameArea.setRangeVisible(false);
+                                    }
+                                }); 
+                            } else if(e.getX() > 300 && e.getY() < 350){
+                                upgradeLabel.setOpaque(true);
+                                upgradeLabel.setBackground(new java.awt.Color(220, 220, 220));
+                                upgradeLabel.setBounds(temp.getX() -180, temp.getY() + 80, 200, 300);
+                                upgradeLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+                                upgradeLabel.setVisible(true);
+
+                                gameArea.setRange(temp);
+                                gameArea.setRangeVisible(true);
+
+                                twLevel.setText("Lvl: " + temp.getLevel());
+                                twLevel.setFont(new Font("Courier New", Font.BOLD, 20));
+                                twLevel.setOpaque(true);
+                                twLevel.setBackground(new java.awt.Color(229, 223, 215));
+                                twLevel.setBounds(upgradeLabel.getBounds().x, upgradeLabel.getBounds().y, 200, 60);
+                                twLevel.setBorder(BorderFactory.createLineBorder(Color.black));
+                                twLevel.setHorizontalAlignment(SwingConstants.CENTER);
+                                twLevel.setVisible(true);
+
+                                twPower.setText("Power: " + (int)temp.getPower() + " (+" + ")");
+                                twPower.setFont(new Font("Courier New", Font.ITALIC, 16));
+                                twPower.setOpaque(true);
+                                twPower.setBackground(new java.awt.Color(220, 220, 220));
+                                twPower.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 75, 150, 40);
+                                twPower.setBorder(null);
+                                twPower.setVisible(true);
+
+                                twRange.setText("Range: " + (int)temp.getRange() + " (+" + ")");
+                                twRange.setFont(new Font("Courier New", Font.ITALIC, 16));
+                                twRange.setOpaque(true);
+                                twRange.setBackground(new java.awt.Color(220, 220, 220));
+                                twRange.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 115, 150, 40);
+                                twRange.setBorder(null);
+                                twRange.setVisible(true);
+
+                                twCost.setText("Cost: " + temp.getRefundCost() + " (+" + ")");
+                                twCost.setFont(new Font("Courier New", Font.ITALIC, 16));
+                                twCost.setOpaque(true);
+                                twCost.setBackground(new java.awt.Color(220, 220, 220));
+                                twCost.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 155, 150, 40);
+                                twCost.setBorder(null);
+                                twCost.setVisible(true);
+
+                                delBtn.setIcon(new ImageIcon("src/data/pngs/bin.png"));
+                                delBtn.setOpaque(true);
+                                delBtn.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 230, 40, 40);
+                                delBtn.setBackground(new java.awt.Color(220, 0, 0));
+                                delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                                delBtn.setVisible(true);
+
+                                upgBtn.setOpaque(true);
+                                upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
+                                upgBtn.setForeground(new java.awt.Color(233, 233, 233));
+                                upgBtn.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 230, 80, 40);
+                                upgBtn.setBackground(new java.awt.Color(153, 130, 96));
+                                upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                                upgBtn.setVisible(true);
+
+                                xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
+                                xBtn.setOpaque(true);
+                                xBtn.setBounds(upgradeLabel.getBounds().x + 165, upgradeLabel.getBounds().y + 5, 30, 30);
+                                xBtn.setBorder(null);
+                                xBtn.setBackground(new java.awt.Color(229, 223, 215));
+                                xBtn.setVisible(true);
+
+                                xBtn.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        twLevel.setVisible(false);
+                                        twPower.setVisible(false);
+                                        twRange.setVisible(false);
+                                        twCost.setVisible(false);
+                                        upgradeLabel.setVisible(false);
+                                        xBtn.setVisible(false);
+                                        delBtn.setVisible(false);
+                                        upgBtn.setVisible(false);
+                                        gameArea.setRangeVisible(false);
+                                    }
+                                }); 
+                            } else if(e.getX() < 350 && e.getY() > 300){
+                                upgradeLabel.setOpaque(true);
+                                upgradeLabel.setBackground(new java.awt.Color(220, 220, 220));
+                                upgradeLabel.setBounds(temp.getX() + 80, temp.getY() - 295, 200, 300);
+                                upgradeLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+                                upgradeLabel.setVisible(true);
+
+                                gameArea.setRange(temp);
+                                gameArea.setRangeVisible(true);
+
+                                twLevel.setText("Lvl: " + temp.getLevel());
+                                twLevel.setFont(new Font("Courier New", Font.BOLD, 20));
+                                twLevel.setOpaque(true);
+                                twLevel.setBackground(new java.awt.Color(229, 223, 215));
+                                twLevel.setBounds(upgradeLabel.getBounds().x, upgradeLabel.getBounds().y, 200, 60);
+                                twLevel.setBorder(BorderFactory.createLineBorder(Color.black));
+                                twLevel.setHorizontalAlignment(SwingConstants.CENTER);
+                                twLevel.setVisible(true);
+
+                                twPower.setText("Power: " + (int)temp.getPower() + " (+" + ")");
+                                twPower.setFont(new Font("Courier New", Font.ITALIC, 16));
+                                twPower.setOpaque(true);
+                                twPower.setBackground(new java.awt.Color(220, 220, 220));
+                                twPower.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 75, 150, 40);
+                                twPower.setBorder(null);
+                                twPower.setVisible(true);
+
+                                twRange.setText("Range: " + (int)temp.getRange() + " (+" + ")");
+                                twRange.setFont(new Font("Courier New", Font.ITALIC, 16));
+                                twRange.setOpaque(true);
+                                twRange.setBackground(new java.awt.Color(220, 220, 220));
+                                twRange.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 115, 150, 40);
+                                twRange.setBorder(null);
+                                twRange.setVisible(true);
+
+                                twCost.setText("Cost: " + temp.getRefundCost() + " (+" + ")");
+                                twCost.setFont(new Font("Courier New", Font.ITALIC, 16));
+                                twCost.setOpaque(true);
+                                twCost.setBackground(new java.awt.Color(220, 220, 220));
+                                twCost.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 155, 150, 40);
+                                twCost.setBorder(null);
+                                twCost.setVisible(true);
+
+                                delBtn.setIcon(new ImageIcon("src/data/pngs/bin.png"));
+                                delBtn.setOpaque(true);
+                                delBtn.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 230, 40, 40);
+                                delBtn.setBackground(new java.awt.Color(220, 0, 0));
+                                delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                                delBtn.setVisible(true);
+
+                                upgBtn.setOpaque(true);
+                                upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
+                                upgBtn.setForeground(new java.awt.Color(233, 233, 233));
+                                upgBtn.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 230, 80, 40);
+                                upgBtn.setBackground(new java.awt.Color(153, 130, 96));
+                                upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                                upgBtn.setVisible(true);
+
+                                xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
+                                xBtn.setOpaque(true);
+                                xBtn.setBounds(upgradeLabel.getBounds().x + 165, upgradeLabel.getBounds().y + 5, 30, 30);
+                                xBtn.setBorder(null);
+                                xBtn.setBackground(new java.awt.Color(229, 223, 215));
+                                xBtn.setVisible(true);
+
+                                xBtn.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        twLevel.setVisible(false);
+                                        twPower.setVisible(false);
+                                        twRange.setVisible(false);
+                                        twCost.setVisible(false);
+                                        upgradeLabel.setVisible(false);
+                                        xBtn.setVisible(false);
+                                        delBtn.setVisible(false);
+                                        upgBtn.setVisible(false);
+                                        gameArea.setRangeVisible(false);
+                                    }
+                                }); 
+                            } 
+                        }else {
+                                twLevel.setVisible(false);
+                                twPower.setVisible(false);
+                                twRange.setVisible(false);
+                                twCost.setVisible(false);
+                                upgradeLabel.setVisible(false);
+                                xBtn.setVisible(false);
+                                delBtn.setVisible(false);
+                                upgBtn.setVisible(false);
+                                gameArea.setRangeVisible(false);
+                            }
                     }
                 }
             }
