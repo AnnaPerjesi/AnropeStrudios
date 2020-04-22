@@ -102,14 +102,13 @@ public class GameGUI extends JFrame {
                         if (found) {
                             upgradeLabel.setOpaque(true);
                             upgradeLabel.setBackground(new java.awt.Color(220, 220, 220));
-                            upgradeLabel.setBounds(temp.getX()-200, temp.getY()-300, 200, 300);
+                            upgradeLabel.setBounds(temp.getX() - 200, temp.getY() - 300, 200, 300);
                             upgradeLabel.setBorder(BorderFactory.createLineBorder(Color.black));
                             upgradeLabel.setVisible(true);
-                            
+
                             /*Image img = new ImageIcon("src/data/pngs/circle_range.png").getImage();
                             img = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
                             ImageIcon imageIcon = new ImageIcon(img);*/
-                            
                             twLevel.setText("Lvl: " + temp.getLevel());
                             twLevel.setFont(new Font("Courier New", Font.BOLD, 20));
                             twLevel.setOpaque(true);
@@ -118,73 +117,61 @@ public class GameGUI extends JFrame {
                             twLevel.setBorder(BorderFactory.createLineBorder(Color.black));
                             twLevel.setHorizontalAlignment(SwingConstants.CENTER);
                             twLevel.setVisible(true);
-                            
+
                             twPower.setText("Power: " + temp.getPower());
                             twPower.setFont(new Font("Courier New", Font.ITALIC, 16));
                             twPower.setOpaque(true);
                             twPower.setBackground(new java.awt.Color(220, 220, 220));
-                            twPower.setBounds(upgradeLabel.getBounds().x+30, upgradeLabel.getBounds().y+75, 150, 60);
+                            twPower.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 75, 150, 60);
                             twPower.setBorder(null);
                             twPower.setVisible(true);
-                            
+
                             twRange.setText("Range: " + temp.getRange());
                             twRange.setFont(new Font("Courier New", Font.ITALIC, 16));
                             twRange.setOpaque(true);
                             twRange.setBackground(new java.awt.Color(220, 220, 220));
-                            twRange.setBounds(upgradeLabel.getBounds().x+30, upgradeLabel.getBounds().y+135, 150, 60);
+                            twRange.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 135, 150, 60);
                             twRange.setBorder(null);
                             twRange.setVisible(true);
-                            
+
                             delBtn.setIcon(new ImageIcon("src/data/pngs/bin.png"));
                             delBtn.setOpaque(true);
-                            delBtn.setBounds(upgradeLabel.getBounds().x+130, upgradeLabel.getBounds().y+230, 40, 40);
+                            delBtn.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 230, 40, 40);
                             delBtn.setBackground(new java.awt.Color(220, 0, 0));
                             delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
                             delBtn.setVisible(true);
                             /*BUG rengeteg*/
-                            delBtn.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                System.out.println("Pénz eladás előtt " + gameArea.getPlayerMoney());
-                                gameArea.sellTower(temp, type);
-                                twLevel.setVisible(false);
-                                twPower.setVisible(false);
-                                twRange.setVisible(false);
-                                upgradeLabel.setVisible(false);
-                                xBtn.setVisible(false);
-                                delBtn.setVisible(false);
-                                upgBtn.setVisible(false);
-                                }
-                            });
-                            /***************************************/
-                            
+
+                            /**
+                             * ************************************
+                             */
                             upgBtn.setOpaque(true);
                             upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
                             upgBtn.setForeground(new java.awt.Color(233, 233, 233));
-                            upgBtn.setBounds(upgradeLabel.getBounds().x+30, upgradeLabel.getBounds().y+230, 80, 40);
-                            upgBtn.setBackground(new java.awt.Color(153,130,96));
+                            upgBtn.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 230, 80, 40);
+                            upgBtn.setBackground(new java.awt.Color(153, 130, 96));
                             upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
                             upgBtn.setVisible(true);
-                            
+
                             xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
                             xBtn.setOpaque(true);
-                            xBtn.setBounds(upgradeLabel.getBounds().x+165, upgradeLabel.getBounds().y+5, 30, 30);
+                            xBtn.setBounds(upgradeLabel.getBounds().x + 165, upgradeLabel.getBounds().y + 5, 30, 30);
                             xBtn.setBorder(null);
                             xBtn.setBackground(new java.awt.Color(229, 223, 215));
                             xBtn.setVisible(true);
-                            
+
                             xBtn.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                twLevel.setVisible(false);
-                                twPower.setVisible(false);
-                                twRange.setVisible(false);
-                                upgradeLabel.setVisible(false);
-                                xBtn.setVisible(false);
-                                delBtn.setVisible(false);
-                                upgBtn.setVisible(false);
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    twLevel.setVisible(false);
+                                    twPower.setVisible(false);
+                                    twRange.setVisible(false);
+                                    upgradeLabel.setVisible(false);
+                                    xBtn.setVisible(false);
+                                    delBtn.setVisible(false);
+                                    upgBtn.setVisible(false);
                                 }
-                            });                       
+                            });
                         } else {
                             twLevel.setVisible(false);
                             twPower.setVisible(false);
@@ -193,7 +180,7 @@ public class GameGUI extends JFrame {
                             xBtn.setVisible(false);
                             delBtn.setVisible(false);
                             upgBtn.setVisible(false);
-                        }  
+                        }
                         found = false;
                     }
                 }
@@ -251,6 +238,20 @@ public class GameGUI extends JFrame {
                 }
             });
         }
+        delBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Pénz eladás előtt " + gameArea.getPlayerMoney());
+                twLevel.setVisible(false);
+                twPower.setVisible(false);
+                twRange.setVisible(false);
+                upgradeLabel.setVisible(false);
+                xBtn.setVisible(false);
+                delBtn.setVisible(false);
+                upgBtn.setVisible(false);
+                gameArea.sellTower(temp, type);
+            }
+        });
 
         {//Level Label
             level = new JLabel("Level " + Integer.toString(gameArea.getLevelNum()));
@@ -339,21 +340,21 @@ public class GameGUI extends JFrame {
             startWave.setBounds(1483, 740, 90, 90);
             startWave.setBorder(null);
             startWave.setBackground(null);
-            
+
             fastWave = new JButton();
             fastWave.setIcon(new ImageIcon("src/data/pngs/play2.png"));
             fastWave.setOpaque(true);
             fastWave.setBounds(1483, 740, 90, 90);
             fastWave.setBorder(null);
             fastWave.setBackground(null);
-            
+
             goLevel = new JButton();
             goLevel.setIcon(new ImageIcon("src/data/pngs/go.png"));
             goLevel.setOpaque(true);
             goLevel.setBounds(1483, 740, 90, 90);
             goLevel.setBorder(null);
             goLevel.setBackground(null);
-            
+
             goLevel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -363,12 +364,12 @@ public class GameGUI extends JFrame {
                     fastWave.setVisible(false);
                 }
             });
-            
+
             startWave.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (gameArea.started) {
-                        gameArea.newFrameTimer.setDelay(300/60);
+                        gameArea.newFrameTimer.setDelay(300 / 60);
                         startWave.setVisible(false);
                         fastWave.setVisible(true);
                     } else {
@@ -378,7 +379,7 @@ public class GameGUI extends JFrame {
                     }
                 }
             });
-            
+
             fastWave.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -387,7 +388,6 @@ public class GameGUI extends JFrame {
                     startWave.setVisible(true);
                 }
             });
-            
 
             roundCounter = new JLabel(Integer.toString(gameArea.getWave()) + "/" + maxWave + " rounds");
             roundCounter.setHorizontalAlignment(JLabel.CENTER);
@@ -553,9 +553,9 @@ public class GameGUI extends JFrame {
         tower2.setIcon(affordable(15, 2));
         tower3.setIcon(affordable(20, 3));
     }
-    
+
     public static void goLevel() {
-        gameArea.newFrameTimer.setDelay(1000/60);
+        gameArea.newFrameTimer.setDelay(1000 / 60);
         goLevel.setVisible(true);
         startWave.setVisible(false);
         fastWave.setVisible(false);

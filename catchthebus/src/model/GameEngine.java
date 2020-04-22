@@ -261,15 +261,15 @@ public final class GameEngine extends JPanel {
             switch (type) {
                 case 2:
                     player.setMoney(player.getMoney() - 15);
-                    tw = tower.createTower(15, 250, 10, new ImageIcon("src/data/pngs/disabgrey.png").getImage());
+                    tw = tower.createTower(15, 250, 15, new ImageIcon("src/data/pngs/disabgrey.png").getImage());
                     break;
                 case 3:
                     player.setMoney(player.getMoney() - 20);
-                    tw = tower.createTower(20, 350, 15, new ImageIcon("src/data/pngs/incoggrey.png").getImage());
+                    tw = tower.createTower(20, 350, 20, new ImageIcon("src/data/pngs/incoggrey.png").getImage());
                     break;
                 default:
                     player.setMoney(player.getMoney() - 10);
-                    tw = tower.createTower(10, 150, 20, new ImageIcon("src/data/pngs/crowgrey.png").getImage());
+                    tw = tower.createTower(10, 150, 10, new ImageIcon("src/data/pngs/crowgrey.png").getImage());
                     break;
             }
             realTowers.add(tw);
@@ -289,10 +289,11 @@ public final class GameEngine extends JPanel {
     /*BUG--> 1 kattintásnál 1x hajtja végre, 2. kattintásnál 2x, 3.nál 3x ..stb*/
     public void sellTower(Tower tower, int type) {
         System.out.println(realTowers.size());
+        bullets.remove(tower.getBullet());
         realTowers.remove(tower);
         System.out.println(realTowers.size());
-        Tower tw = tw = new Tower(tower.getX() + 15, tower.getY() + 15, 50, 50, 0, 0,0, new ImageIcon("src/data/pngs/x.png").getImage());
-        
+        Tower tw = new Tower(tower.getX() + 15, tower.getY() + 15, 50, 50, 0, 0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
+
         player.addMoney(tower.getRefundCost());
         System.out.println("Pénz eladás után " + player.getMoney());
         towers.add(tw);
