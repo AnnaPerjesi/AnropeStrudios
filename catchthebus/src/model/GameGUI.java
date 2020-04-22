@@ -219,8 +219,8 @@ public class GameGUI extends JFrame {
 
         {//Money Label
             coin = new JLabel();
-            coin.setIcon(new ImageIcon("src/data/pngs/coin.png"));
-            coin.setBounds(820, 25, 30, 30);
+            coin.setIcon(new ImageIcon("src/data/pngs/dollar.png"));
+            coin.setBounds(820, 25, 35, 30);
             coin.setBorder(null);
             coin.setBackground(null);
 
@@ -255,6 +255,7 @@ public class GameGUI extends JFrame {
         {//Level Label
             level = new JLabel("Level " + Integer.toString(gameArea.getLevelNum()));
             level.setHorizontalAlignment(JLabel.CENTER);
+            level.setFont(new Font("Courier New", Font.BOLD, 14));
             level.setBounds(10, 20, 100, 40);
             level.setOpaque(true);
             level.setBorder(BorderFactory.createLineBorder(Color.black, 1));
