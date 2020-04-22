@@ -109,6 +109,10 @@ public class GameGUI extends JFrame {
                             /*Image img = new ImageIcon("src/data/pngs/circle_range.png").getImage();
                             img = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
                             ImageIcon imageIcon = new ImageIcon(img);*/
+                            
+                            gameArea.setRange(temp.getX(),temp.getY(),temp.getWidth(),temp.getHeight());
+                            gameArea.setRangeVisible(true);
+                            
                             twLevel.setText("Lvl: " + temp.getLevel());
                             twLevel.setFont(new Font("Courier New", Font.BOLD, 20));
                             twLevel.setOpaque(true);
@@ -170,6 +174,7 @@ public class GameGUI extends JFrame {
                                     xBtn.setVisible(false);
                                     delBtn.setVisible(false);
                                     upgBtn.setVisible(false);
+                                    gameArea.setRangeVisible(false);
                                 }
                             });
                         } else {
@@ -180,8 +185,8 @@ public class GameGUI extends JFrame {
                             xBtn.setVisible(false);
                             delBtn.setVisible(false);
                             upgBtn.setVisible(false);
+                            gameArea.setRangeVisible(false);
                         }
-                        found = false;
                     }
                 }
             }
@@ -249,6 +254,7 @@ public class GameGUI extends JFrame {
                 xBtn.setVisible(false);
                 delBtn.setVisible(false);
                 upgBtn.setVisible(false);
+                gameArea.setRangeVisible(false);
                 gameArea.sellTower(temp, type);
             }
         });
