@@ -2,7 +2,6 @@ package views;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import model.Player;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

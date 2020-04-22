@@ -54,6 +54,7 @@ public class GameGUI extends JFrame {
     private JLabel twLevel;
     private JLabel twPower;
     private JLabel twRange;
+    private JLabel twCost;
 
     public GameGUI() {
         gameArea = new GameEngine();
@@ -64,6 +65,7 @@ public class GameGUI extends JFrame {
         twLevel = new JLabel();
         twPower = new JLabel();
         twRange = new JLabel();
+        twCost = new JLabel();
         xBtn = new JButton();
         delBtn = new JButton();
         upgBtn = new JButton("Upgrade");
@@ -118,21 +120,29 @@ public class GameGUI extends JFrame {
                             twLevel.setHorizontalAlignment(SwingConstants.CENTER);
                             twLevel.setVisible(true);
 
-                            twPower.setText("Power: " + temp.getPower());
+                            twPower.setText("Power: " + (int)temp.getPower() + " (+" + ")");
                             twPower.setFont(new Font("Courier New", Font.ITALIC, 16));
                             twPower.setOpaque(true);
                             twPower.setBackground(new java.awt.Color(220, 220, 220));
-                            twPower.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 75, 150, 60);
+                            twPower.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 75, 150, 40);
                             twPower.setBorder(null);
                             twPower.setVisible(true);
 
-                            twRange.setText("Range: " + temp.getRange());
+                            twRange.setText("Range: " + (int)temp.getRange() + " (+" + ")");
                             twRange.setFont(new Font("Courier New", Font.ITALIC, 16));
                             twRange.setOpaque(true);
                             twRange.setBackground(new java.awt.Color(220, 220, 220));
-                            twRange.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 135, 150, 60);
+                            twRange.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 115, 150, 40);
                             twRange.setBorder(null);
                             twRange.setVisible(true);
+                            
+                            twCost.setText("Cost: " + temp.getRefundCost() + " (+" + ")");
+                            twCost.setFont(new Font("Courier New", Font.ITALIC, 16));
+                            twCost.setOpaque(true);
+                            twCost.setBackground(new java.awt.Color(220, 220, 220));
+                            twCost.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 155, 150, 40);
+                            twCost.setBorder(null);
+                            twCost.setVisible(true);
 
                             delBtn.setIcon(new ImageIcon("src/data/pngs/bin.png"));
                             delBtn.setOpaque(true);
@@ -166,6 +176,7 @@ public class GameGUI extends JFrame {
                                     twLevel.setVisible(false);
                                     twPower.setVisible(false);
                                     twRange.setVisible(false);
+                                    twCost.setVisible(false);
                                     upgradeLabel.setVisible(false);
                                     xBtn.setVisible(false);
                                     delBtn.setVisible(false);
@@ -176,6 +187,7 @@ public class GameGUI extends JFrame {
                             twLevel.setVisible(false);
                             twPower.setVisible(false);
                             twRange.setVisible(false);
+                            twCost.setVisible(false);
                             upgradeLabel.setVisible(false);
                             xBtn.setVisible(false);
                             delBtn.setVisible(false);
@@ -245,6 +257,7 @@ public class GameGUI extends JFrame {
                 twLevel.setVisible(false);
                 twPower.setVisible(false);
                 twRange.setVisible(false);
+                twCost.setVisible(false);
                 upgradeLabel.setVisible(false);
                 xBtn.setVisible(false);
                 delBtn.setVisible(false);
@@ -446,6 +459,7 @@ public class GameGUI extends JFrame {
         gameArea.add(twLevel);
         gameArea.add(twPower);
         gameArea.add(twRange);
+        gameArea.add(twCost);
         gameArea.add(upgradeLabel);
         gameArea.add(coin);
         gameArea.add(level);
