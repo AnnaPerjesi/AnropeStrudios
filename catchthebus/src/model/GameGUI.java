@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class GameGUI extends JFrame {
 
@@ -112,9 +113,10 @@ public class GameGUI extends JFrame {
                             twLevel.setText("Lvl: " + temp.getLevel());
                             twLevel.setFont(new Font("Courier New", Font.BOLD, 20));
                             twLevel.setOpaque(true);
-                            twLevel.setBackground(new java.awt.Color(220, 220, 220));
-                            twLevel.setBounds(upgradeLabel.getBounds().x+30, upgradeLabel.getBounds().y+15, 100, 60);
-                            twLevel.setBorder(null);
+                            twLevel.setBackground(new java.awt.Color(229, 223, 215));
+                            twLevel.setBounds(upgradeLabel.getBounds().x, upgradeLabel.getBounds().y, 200, 60);
+                            twLevel.setBorder(BorderFactory.createLineBorder(Color.black));
+                            twLevel.setHorizontalAlignment(SwingConstants.CENTER);
                             twLevel.setVisible(true);
                             
                             twPower.setText("Power: " + temp.getPower());
@@ -138,7 +140,23 @@ public class GameGUI extends JFrame {
                             delBtn.setBounds(upgradeLabel.getBounds().x+130, upgradeLabel.getBounds().y+230, 40, 40);
                             delBtn.setBackground(new java.awt.Color(220, 0, 0));
                             delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
-                            
+                            delBtn.setVisible(true);
+                            /*BUG rengeteg*/
+                            delBtn.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                gameArea.sellTower(temp, type);
+                                
+                                twLevel.setVisible(false);
+                                twPower.setVisible(false);
+                                twRange.setVisible(false);
+                                upgradeLabel.setVisible(false);
+                                xBtn.setVisible(false);
+                                delBtn.setVisible(false);
+                                upgBtn.setVisible(false);
+                                }
+                            });
+                            /***************************************/
                             
                             upgBtn.setOpaque(true);
                             upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
@@ -146,14 +164,15 @@ public class GameGUI extends JFrame {
                             upgBtn.setBounds(upgradeLabel.getBounds().x+30, upgradeLabel.getBounds().y+230, 80, 40);
                             upgBtn.setBackground(new java.awt.Color(153,130,96));
                             upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                            upgBtn.setVisible(true);
                             
                             xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
                             xBtn.setOpaque(true);
                             xBtn.setBounds(upgradeLabel.getBounds().x+165, upgradeLabel.getBounds().y+5, 30, 30);
                             xBtn.setBorder(null);
-                            xBtn.setBackground(new java.awt.Color(220, 220, 220));
-                            
+                            xBtn.setBackground(new java.awt.Color(229, 223, 215));
                             xBtn.setVisible(true);
+                            
                             xBtn.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
@@ -199,8 +218,8 @@ public class GameGUI extends JFrame {
 
         {//Money Label
             coin = new JLabel();
-            coin.setIcon(new ImageIcon("src/data/pngs/coin.png"));
-            coin.setBounds(820, 25, 30, 30);
+            coin.setIcon(new ImageIcon("src/data/pngs/dollar.png"));
+            coin.setBounds(820, 25, 35, 30);
             coin.setBorder(null);
             coin.setBackground(null);
 
@@ -235,6 +254,7 @@ public class GameGUI extends JFrame {
         {//Level Label
             level = new JLabel("Level " + Integer.toString(gameArea.getLevelNum()));
             level.setHorizontalAlignment(JLabel.CENTER);
+            level.setFont(new Font("Courier New", Font.BOLD, 14));
             level.setBounds(10, 20, 100, 40);
             level.setOpaque(true);
             level.setBorder(BorderFactory.createLineBorder(Color.black, 1));

@@ -258,7 +258,7 @@ public final class GameEngine extends JPanel {
 
         { //tower
             Tower tw;
-            switch (type) {
+            switch (type) {             
                 case 2:
                     player.setMoney(player.getMoney() - 15);
                     tw = tower.createTower(15, 250, new ImageIcon("src/data/pngs/disabgrey.png").getImage());
@@ -284,6 +284,35 @@ public final class GameEngine extends JPanel {
             Bullet bullet = new Bullet(bulletX, bulletY, 20, 20, new ImageIcon("src/data/pngs/circle.png").getImage());
             bullets.add(bullet);
         }
+    }
+    /*BUG--> 1 kattintásnál 1x hajtja végre, 2. kattintásnál 2x, 3.nál 3x ..stb*/
+    public void sellTower(Tower tower, int type){
+        Tower tw;
+        switch (type) {             
+                case 2:
+                    System.out.println("3 pénz az eladás előtt " + player.getMoney());
+                    player.addMoney(15);
+                    System.out.println("3 pénz az eladás után " + player.getMoney());
+                    tw = tower.createTower(0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
+                    break;
+                case 3:
+                    System.out.println("2 pénz az eladás előtt " + player.getMoney());
+                    player.addMoney(20);
+                    System.out.println("2 pénz az eladás után " + player.getMoney());
+                    tw = tower.createTower(0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
+                    break;
+                default:
+                    System.out.println("1 pénz az eladás előtt " + player.getMoney());
+                    player.addMoney(10);
+                    System.out.println("1 pénz az eladás után " + player.getMoney());
+                    tw = tower.createTower(0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
+                    break;
+            }
+            towers.add(tw);
+            GameGUI.refreshMoney(player.getMoney());
+            GameGUI.refreshImage();
+            realTowers.remove(tower);
+        
     }
 
     public void setRange(int x, int y, int width, int height) {
