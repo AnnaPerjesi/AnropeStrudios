@@ -285,21 +285,26 @@ public final class GameEngine extends JPanel {
             bullets.add(bullet);
         }
     }
-    
+    /*BUG--> 1 kattintásnál 1x hajtja végre, 2. kattintásnál 2x, 3.nál 3x ..stb*/
     public void sellTower(Tower tower, int type){
         Tower tw;
         switch (type) {             
                 case 2:
-                    player.setMoney(player.getMoney() + 15);
+                    System.out.println("3 pénz az eladás előtt " + player.getMoney());
+                    player.addMoney(15);
+                    System.out.println("3 pénz az eladás után " + player.getMoney());
                     tw = tower.createTower(0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
                     break;
                 case 3:
-                    player.setMoney(player.getMoney() + 20);
-                    //towers.add(new Tower(x * ROAD_WIDTH + 25, y * ROAD_HEIGHT + 25, ROAD_WIDTH / 2, ROAD_HEIGHT / 2, 0, 0, image));
+                    System.out.println("2 pénz az eladás előtt " + player.getMoney());
+                    player.addMoney(20);
+                    System.out.println("2 pénz az eladás után " + player.getMoney());
                     tw = tower.createTower(0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
                     break;
                 default:
-                    player.setMoney(player.getMoney() + 10);
+                    System.out.println("1 pénz az eladás előtt " + player.getMoney());
+                    player.addMoney(10);
+                    System.out.println("1 pénz az eladás után " + player.getMoney());
                     tw = tower.createTower(0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
                     break;
             }
