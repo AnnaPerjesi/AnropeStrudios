@@ -273,6 +273,7 @@ public class GameGUI extends JFrame {
 
         {//Level Label
             level = new JLabel("Level " + Integer.toString(gameArea.getLevelNum()));
+            level.setFont(new Font("Courier New", Font.BOLD, 20));
             level.setHorizontalAlignment(JLabel.CENTER);
             level.setFont(new Font("Courier New", Font.BOLD, 14));
             level.setBounds(10, 20, 100, 40);
@@ -434,6 +435,7 @@ public class GameGUI extends JFrame {
 
             //resume btn
             pResume = new JButton("Resume");
+            pResume.setFont(new Font("Courier New", Font.BOLD, 20));
             pResume.setBounds(600, 375, 400, 50);
             pResume.setBackground(new java.awt.Color(189, 189, 189));
             pResume.setHorizontalAlignment(JLabel.CENTER);//NEW
@@ -446,6 +448,7 @@ public class GameGUI extends JFrame {
 
             //exit btn
             pExit = new JButton("Exit");
+            pExit.setFont(new Font("Courier New", Font.BOLD, 20));
             pExit.setBounds(600, 475, 400, 50);
             pExit.setBackground(new java.awt.Color(189, 189, 189));
             pExit.setHorizontalAlignment(JLabel.CENTER);
