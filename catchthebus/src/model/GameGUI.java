@@ -142,12 +142,12 @@ public class GameGUI extends JFrame {
                             delBtn.setBackground(new java.awt.Color(220, 0, 0));
                             delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
                             delBtn.setVisible(true);
-                            /*Lehet nem csak ennyi*/
+                            /*BUG rengeteg*/
                             delBtn.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                //realTowers.remove(temp);
                                 gameArea.sellTower(temp, type);
+                                
                                 twLevel.setVisible(false);
                                 twPower.setVisible(false);
                                 twRange.setVisible(false);
