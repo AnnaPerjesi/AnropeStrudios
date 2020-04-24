@@ -103,7 +103,7 @@ public class Tower extends Sprite {
                         if (evolvePath == 1) {
                             //1. evolve
                             level += 1;
-                        } else if(evolvePath == 2){
+                        } else if (evolvePath == 2) {
                             //2. evolve
                             level += 1;
                         }
@@ -144,8 +144,8 @@ public class Tower extends Sprite {
                 i++;
             }
         }
-        if(countShoot == 5){
-            
+        if (countShoot == 5) {
+
         }
     }
 
