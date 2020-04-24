@@ -15,7 +15,7 @@ public class Tower extends Sprite {
     private int upgradeCost1 = 50;
     private int upgradeCost2 = 70;
     private int upgradeCost3 = 90;
-    private int level = 1;
+    private int level = 5;
     private final int maxlevel = 10;
     private final double lastAttack;
     private double range;
@@ -23,6 +23,7 @@ public class Tower extends Sprite {
     private int timer = 0;
     private Enemy firstEnemy;
     private Bullet bullet;
+    private int countShoot = 0;
 
     public Tower(int x, int y, int width, int height, double dmg, double range,int worth, Image image) {
         super(x, y, width, height, image);
@@ -66,9 +67,8 @@ public class Tower extends Sprite {
             level += 1;
             player.addMoney(-1 * upgradeCost);
             if (level != 5) {
-                tower.setRange(getRange() * 1.05);
                 tower.setPower(getPower() * 1.1);
-            } else {
+            } else {//evolve kulonleges fejlesztesek amik veglegesek
                 switch (type) {
                     case 2:
                         //disab
@@ -104,6 +104,7 @@ public class Tower extends Sprite {
         if (timer < 100) {
             timer++;
         } else {
+            countShoot++;
             bullet.show();
             int i = 0;
             while (!found && i < enemies.size()) {
@@ -119,6 +120,9 @@ public class Tower extends Sprite {
                 }
                 i++;
             }
+        }
+        if(countShoot == 5){
+            
         }
     }
 
