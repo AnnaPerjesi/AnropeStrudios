@@ -76,29 +76,36 @@ public class Tower extends Sprite {
             if (level != 5) {
                 this.setPower(getPower() * 1.1);
             } else {
+                //level += 1;
                 switch (this.type) {
                     case 2:
                         //disab
                         if (evolvePath == 1) {
                             //1. evolve
+                            level += 1;
                         } else {
                             //2. evolve
+                            level += 1;
                         }
                         break;
                     case 3:
                         //incog
                         if (evolvePath == 1) {
                             //1. evolve
+                            level += 1;
                         } else {
                             //2. evolve
+                            level += 1;
                         }
                         break;
                     default:
                         //cigok
                         if (evolvePath == 1) {
                             //1. evolve
-                        } else {
+                            level += 1;
+                        } else if(evolvePath == 2){
                             //2. evolve
+                            level += 1;
                         }
                         break;
                 }
@@ -120,6 +127,7 @@ public class Tower extends Sprite {
         if (timer < 100) {
             timer++;
         } else {
+            countShoot++;
             bullet.show();
             int i = 0;
             while (!found && i < enemies.size()) {
@@ -135,6 +143,9 @@ public class Tower extends Sprite {
                 }
                 i++;
             }
+        }
+        if(countShoot == 5){
+            
         }
     }
 
