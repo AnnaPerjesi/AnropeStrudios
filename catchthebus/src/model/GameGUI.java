@@ -161,6 +161,7 @@ public class GameGUI extends JFrame {
                                 /**
                                  * ************************************
                                  */
+                                if(temp.getLevel() != 5){
                                 upgBtn.setOpaque(true);
                                 upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
                                 upgBtn.setForeground(new java.awt.Color(233, 233, 233));
@@ -168,7 +169,16 @@ public class GameGUI extends JFrame {
                                 upgBtn.setBackground(new java.awt.Color(153, 130, 96));
                                 upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
                                 upgBtn.setVisible(true);
-
+                                }else{
+                                upgBtn.setOpaque(true);
+                                upgBtn.setText("EXTRA");
+                                upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
+                                upgBtn.setForeground(new java.awt.Color(233, 233, 233));
+                                upgBtn.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 230, 80, 40);
+                                upgBtn.setBackground(new java.awt.Color(65,42,42));
+                                upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                                upgBtn.setVisible(true);
+                                }
                                 xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
                                 xBtn.setOpaque(true);
                                 xBtn.setBounds(upgradeLabel.getBounds().x + 165, upgradeLabel.getBounds().y + 5, 30, 30);
@@ -240,6 +250,7 @@ public class GameGUI extends JFrame {
                                 delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
                                 delBtn.setVisible(true);
 
+                                if(temp.getLevel() != 5){
                                 upgBtn.setOpaque(true);
                                 upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
                                 upgBtn.setForeground(new java.awt.Color(233, 233, 233));
@@ -247,6 +258,16 @@ public class GameGUI extends JFrame {
                                 upgBtn.setBackground(new java.awt.Color(153, 130, 96));
                                 upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
                                 upgBtn.setVisible(true);
+                                }else{
+                                upgBtn.setOpaque(true);
+                                upgBtn.setText("EXTRA");
+                                upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
+                                upgBtn.setForeground(new java.awt.Color(233, 233, 233));
+                                upgBtn.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 230, 80, 40);
+                                upgBtn.setBackground(new java.awt.Color(65,42,42));
+                                upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                                upgBtn.setVisible(true);
+                                }
 
                                 xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
                                 xBtn.setOpaque(true);
@@ -275,7 +296,7 @@ public class GameGUI extends JFrame {
                                 upgradeLabel.setBounds(temp.getX() -180, temp.getY() + 80, 200, 300);
                                 upgradeLabel.setBorder(BorderFactory.createLineBorder(Color.black));
                                 upgradeLabel.setVisible(true);
-
+                                
                                 gameArea.setRange(temp);
                                 gameArea.setRangeVisible(true);
 
@@ -319,6 +340,7 @@ public class GameGUI extends JFrame {
                                 delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
                                 delBtn.setVisible(true);
 
+                                if(temp.getLevel() != 5){
                                 upgBtn.setOpaque(true);
                                 upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
                                 upgBtn.setForeground(new java.awt.Color(233, 233, 233));
@@ -326,6 +348,16 @@ public class GameGUI extends JFrame {
                                 upgBtn.setBackground(new java.awt.Color(153, 130, 96));
                                 upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
                                 upgBtn.setVisible(true);
+                                }else{
+                                upgBtn.setOpaque(true);
+                                upgBtn.setText("EXTRA");
+                                upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
+                                upgBtn.setForeground(new java.awt.Color(233, 233, 233));
+                                upgBtn.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 230, 80, 40);
+                                upgBtn.setBackground(new java.awt.Color(65,42,42));
+                                upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                                upgBtn.setVisible(true);
+                                }
 
                                 xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
                                 xBtn.setOpaque(true);
@@ -398,6 +430,7 @@ public class GameGUI extends JFrame {
                                 delBtn.setBorder(BorderFactory.createLineBorder(Color.black));
                                 delBtn.setVisible(true);
 
+                                if(temp.getLevel() != 5){
                                 upgBtn.setOpaque(true);
                                 upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
                                 upgBtn.setForeground(new java.awt.Color(233, 233, 233));
@@ -405,6 +438,16 @@ public class GameGUI extends JFrame {
                                 upgBtn.setBackground(new java.awt.Color(153, 130, 96));
                                 upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
                                 upgBtn.setVisible(true);
+                                }else{
+                                upgBtn.setOpaque(true);
+                                upgBtn.setText("EXTRA");
+                                upgBtn.setFont(new Font("Courier New", Font.BOLD, 14));
+                                upgBtn.setForeground(new java.awt.Color(233, 233, 233));
+                                upgBtn.setBounds(upgradeLabel.getBounds().x + 30, upgradeLabel.getBounds().y + 230, 80, 40);
+                                upgBtn.setBackground(new java.awt.Color(65,42,42));
+                                upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
+                                upgBtn.setVisible(true);
+                                }
 
                                 xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
                                 xBtn.setOpaque(true);
