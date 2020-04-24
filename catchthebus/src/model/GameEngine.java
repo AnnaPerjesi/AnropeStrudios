@@ -51,7 +51,12 @@ public final class GameEngine extends JPanel {
         newFrameTimer = new Timer(speed / FPS, new NewFrameListener());
         newFrameTimer.start();
     }
-
+    
+    /**
+     * Read in enemies from txts
+     * @param line
+     * @return 
+     */
     public ArrayList<Enemy> startRound(int line) {
         ArrayList<Enemy> enemies = new ArrayList();
         try {
@@ -104,7 +109,10 @@ public final class GameEngine extends JPanel {
         }
         return enemies;
     }
-
+    
+    /**
+     * Load a newLevel
+     */
     public void restart() {
         try {
             level = new Level("src/data/level" + getLevelNum() + ".txt", "src/data/coordinates" + getLevelNum() + ".txt");
@@ -225,14 +233,20 @@ public final class GameEngine extends JPanel {
         }
 
     }
-
+    
+    /**
+     * Load new wave until it reaches 30 wave then new lvl loads
+     */
     public void nextWave() {
         started = false;
         wave++;
         GameGUI.refreshWaves(wave);
         enemies = startRound(wave);
     }
-
+    
+    /**
+     * Load new level, if it reaches 5 then lvl 1 again
+     */
     public void nextLevel() {
         started = false;
         levelNum++;
@@ -246,6 +260,9 @@ public final class GameEngine extends JPanel {
         enemies = startRound(wave);
     }
 
+    /**
+     * Clear level/towers/realTowers/bullets arraylists so new level can start
+     */
     public void clearData() {
         level.reset();
         towers.clear();
@@ -253,6 +270,11 @@ public final class GameEngine extends JPanel {
         bullets.clear();
     }
 
+    /**
+     * Depends on tower type it creats new towers and its bullets on frame and decrease Player money
+     * @param tower
+     * @param type 
+     */
     public void addTower(Tower tower, int type) {
 
         { //tower
@@ -285,6 +307,11 @@ public final class GameEngine extends JPanel {
         }
     }
     
+    /**
+     * Depends tower's type, towers disappear from screen and player gets money
+     * @param tower
+     * @param type 
+     */
     public void sellTower(Tower tower, int type) {
         int c = 0;
         for (int i=0; i<realTowers.size(); i++) {
@@ -301,7 +328,11 @@ public final class GameEngine extends JPanel {
         GameGUI.refreshMoney(player.getMoney());
         GameGUI.refreshImage();
     }
-
+    
+    /**
+     * Set the towers range
+     * @param tower 
+     */
     public void setRange(Tower tower) {
         range.setX(tower.getX()-(int)tower.getRange()+40);
         range.setY(tower.getY()-(int)tower.getRange()+40);
@@ -348,11 +379,19 @@ public final class GameEngine extends JPanel {
     public boolean getShowTowers() {
         return this.showTowers;
     }
-
+    
+    /**
+     * gives back places of X
+     * @return 
+     */
     public ArrayList<Tower> getTowers() {
         return this.towers;
     }
-
+    
+    /**
+     * Gives back REAL towers not places of X
+     * @return 
+     */
     public ArrayList<Tower> getRealTowers() {
         return this.realTowers;
     }
@@ -363,6 +402,9 @@ public final class GameEngine extends JPanel {
 
     /*
     Setters
+     */
+    /**
+     * See places where can be towers or not
      */
     public void changeShowTower() {
         if (!paused) {

@@ -5,8 +5,8 @@
  */
 package model;
 
-
 public class Player {
+
     private int money = 0;
     private int lives;
     private final int STARTLIVES = 100;
@@ -17,29 +17,42 @@ public class Player {
         this.lives = 100;
         this.money = 50;
     }
-   
-    public void reset(){
+
+    /**
+     * Return to start condition lives=100, money = 50
+     */
+    public void reset() {
         this.lives = STARTLIVES;
         this.money = STARTMONEY;
     }
-    
-    public Player getPlayer(){
-        return player;
-    }
-    
-    public void addMoney(int amount){
+
+    /**
+     * increase Player's money
+     *
+     * @param amount
+     */
+    public void addMoney(int amount) {
         this.money += amount;
-        //GameGUI.refreshMoney(this.money);
     }
-    
-    public void decreaseLife(int x){
+
+    /**
+     * Decrease Player's money
+     * @param x 
+     */
+    public void decreaseLife(int x) {
         this.lives = this.lives - x;
-       // GameGUI.refreshLives(this.lives);
     }
-    
-    public void addLife(int x){
+
+    /**
+     * Increase Player's lives
+     * @param x 
+     */
+    public void addLife(int x) {
         this.lives = this.lives + x;
-        //GameGUI.refreshLives(this.lives);
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public int getMoney() {

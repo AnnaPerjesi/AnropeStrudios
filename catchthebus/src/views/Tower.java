@@ -55,8 +55,7 @@ public class Tower extends Sprite {
     }
 
     /**
-     * If the player has got enough money and the tower is not full -> UPGRADE
-     * IT
+     * If the player has got enough money and the tower is not at max lvl -> UPGRADE
      *
      * @param tower
      * @param player
@@ -93,6 +92,12 @@ public class Tower extends Sprite {
         }
         return false;
     }
+    
+    /**
+     * Depends on timer, tower shoot bullet to the first enemy that is in tower's range
+     * @param enemies
+     * @param bullet 
+     */
 
     public void shoot(ArrayList<Enemy> enemies, Bullet bullet) {
         boolean found = false;
@@ -118,7 +123,7 @@ public class Tower extends Sprite {
     }
 
     /**
-     *
+     * Enemy is in tower's range or not
      * @param target
      * @return
      */
@@ -131,7 +136,10 @@ public class Tower extends Sprite {
         return (z < this.getRange());
     }
     
-    public void hit(){ //if the bullet collides with the enemy, it takes damage
+    /**
+     * if the bullet collides with the enemy, it takes damage
+     */
+    public void hit(){
         firstEnemy.takeDamage(this.power);
     }
     // GETTER - SETTER

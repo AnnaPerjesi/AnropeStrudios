@@ -25,6 +25,13 @@ public final class Level {
         loadCoordinates(fileName);
     }
 
+    /**
+     * Load the board from file and place the correct pictures on the frame
+     * @param levelPath
+     * @param c
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void loadLevel(String levelPath, char c) throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(levelPath));
         roads = new ArrayList<>();
@@ -57,7 +64,13 @@ public final class Level {
             y++;
         }
     }
-
+    
+    /**
+     * Get coordinates and directions from file and makes pair from coordinates
+     * @param fileName
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void loadCoordinates(String fileName) throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileName));
         coordinates = new ArrayList<>();
@@ -97,6 +110,10 @@ public final class Level {
             return y;
         }
     }
+    
+    /**
+     * Reset the game, clear the towers/road/coordinates arraylists
+     */
     public void reset(){
         towers.clear();
         roads.clear();

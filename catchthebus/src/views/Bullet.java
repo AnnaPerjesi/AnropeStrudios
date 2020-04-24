@@ -19,12 +19,20 @@ public class Bullet extends Sprite {
         visible = false;
         hasDir = false;
     }
+    
+    /**
+     * Make bullet visible
+     */
 
     @Override
     public void show() {
         visible = true;
     }
-
+    
+    /**
+     * Bullet moovement, depends on directions, It follows the enemy
+     * @param enemy 
+     */
     public void move(Enemy enemy) {
         dirX = enemy.getX();
         dirY = enemy.getY();
@@ -44,6 +52,10 @@ public class Bullet extends Sprite {
             hit();
         }
     }
+    
+    /**
+     * Bullet hit cath the enemy
+     */
 
     public void hit() {
         visible = false;
@@ -51,6 +63,12 @@ public class Bullet extends Sprite {
         y = defY;
         hasDir = false;
     }
+    
+    /**
+     * Bullet colled with enemy
+     * @param enemy
+     * @return 
+     */
 
     public boolean collideEnemy(Enemy enemy) {
         Rectangle rect = new Rectangle(x, y, width, height);

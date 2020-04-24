@@ -102,7 +102,7 @@ public class GameGUI extends JFrame {
                             }
                         }
                         if (found) {
-                            System.out.println("x " + e.getX() + " y " + e.getY());
+                           // System.out.println("x " + e.getX() + " y " + e.getY());
                             if(e.getX()> 200 && e.getY()>300){
                                 upgradeLabel.setOpaque(true);
                                 upgradeLabel.setBackground(new java.awt.Color(220, 220, 220));
