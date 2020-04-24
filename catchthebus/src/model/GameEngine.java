@@ -282,15 +282,15 @@ public final class GameEngine extends JPanel {
             switch (type) {
                 case 2:
                     player.setMoney(player.getMoney() - 15);
-                    tw = tower.createTower(15, 250, 15, new ImageIcon("src/data/pngs/disabgrey.png").getImage());
+                    tw = tower.createTower(15, 250, 15,type, new ImageIcon("src/data/pngs/disabgrey.png").getImage());
                     break;
                 case 3:
                     player.setMoney(player.getMoney() - 20);
-                    tw = tower.createTower(20, 350, 20, new ImageIcon("src/data/pngs/incoggrey.png").getImage());
+                    tw = tower.createTower(20, 350, 20,type, new ImageIcon("src/data/pngs/incoggrey.png").getImage());
                     break;
                 default:
                     player.setMoney(player.getMoney() - 10);
-                    tw = tower.createTower(10, 150, 10, new ImageIcon("src/data/pngs/crowgrey.png").getImage());
+                    tw = tower.createTower(10, 150, 10,type, new ImageIcon("src/data/pngs/crowgrey.png").getImage());
                     break;
             }
             realTowers.add(tw);
@@ -321,7 +321,7 @@ public final class GameEngine extends JPanel {
         }
         bullets.remove(bullets.get(c));
         realTowers.remove(realTowers.get(c));
-        Tower tw = new Tower(tower.getX() + 15, tower.getY() + 15, 50, 50, 0, 0, 0, new ImageIcon("src/data/pngs/x.png").getImage());
+        Tower tw = new Tower(tower.getX() + 15, tower.getY() + 15, 50, 50, 0, 0, 0,0, new ImageIcon("src/data/pngs/x.png").getImage());
 
         player.addMoney(tower.getRefundCost());
         towers.add(tw);
@@ -394,6 +394,9 @@ public final class GameEngine extends JPanel {
      */
     public ArrayList<Tower> getRealTowers() {
         return this.realTowers;
+    }
+    public Player getPlayer(){
+        return this.player;
     }
 
     public int getWave() {

@@ -11,26 +11,31 @@ public class Tower extends Sprite {
 
     private final int buyingCost;
     private int refundCost;
-    private int upgradeCost = 20;
-    private int upgradeCost1 = 50;
-    private int upgradeCost2 = 70;
-    private int upgradeCost3 = 90;
-    private int level = 1;
-    private final int maxlevel = 10;
+    private int upgradeCost;
+    private int level;
+    private final int maxlevel;
     private final double lastAttack;
     private double range;
     private double power;
-    private int timer = 0;
+    private int timer;
     private Enemy firstEnemy;
     private Bullet bullet;
+    private int type;
+    private int countShoot;
 
-    public Tower(int x, int y, int width, int height, double dmg, double range,int worth, Image image) {
+    public Tower(int x, int y, int width, int height, double dmg, double range, int worth, int type, Image image) {
         super(x, y, width, height, image);
         this.refundCost = worth;
         this.buyingCost = 15;
         this.power = dmg;
         this.range = range;
         this.lastAttack = 0;
+        this.countShoot = 0;
+        this.type = type;
+        this.timer = 0;
+        this.level = 1;
+        this.maxlevel = 10;
+        this.setBasicUpgradeCost(type);
     }
 
     /**
@@ -41,8 +46,8 @@ public class Tower extends Sprite {
      * @param image
      * @return
      */
-    public Tower createTower(double dmg, double range,int worth, Image image) { //Creates real towers instead of X-es
-        return new Tower(x - 15, y - 15, 80, 80, dmg, range,worth, image);
+    public Tower createTower(double dmg, double range, int worth, int type, Image image) { //Creates real towers instead of X-es
+        return new Tower(x - 15, y - 15, 80, 80, dmg, range, worth, type, image);
     }
 
     /**
@@ -55,50 +60,61 @@ public class Tower extends Sprite {
     }
 
     /**
-     * If the player has got enough money and the tower is not at max lvl -> UPGRADE
+     * If the player has got enough money and the tower is not at max lvl ->
+     * UPGRADE
      *
      * @param tower
      * @param player
      * @return
      */
-    public boolean upgrade(Tower tower, Player player, int type) {
-        if (level < maxlevel && player.getMoney() >= upgradeCost) {
+    public boolean upgrade(Player player, int evolvePath) {
+        if (level < maxlevel && player.getMoney() >= this.getUpgradeCost()) {
             level += 1;
-            player.addMoney(-1 * upgradeCost);
+            player.addMoney(-1 * this.getUpgradeCost());
+            this.setUpgradeCost((int) (this.getUpgradeCost() * this.getLevel() * 0.5));
+            this.increaseRefoundCost();
             if (level != 5) {
-                tower.setRange(getRange() * 1.05);
-                tower.setPower(getPower() * 1.1);
+                this.setPower(getPower() * 1.1);
             } else {
-                switch (type) {
+                switch (this.type) {
                     case 2:
                         //disab
-                        player.setMoney(player.getMoney() - getUpgradeCost2());
-                        
+                        if (evolvePath == 1) {
+                            //1. evolve
+                        } else {
+                            //2. evolve
+                        }
                         break;
                     case 3:
                         //incog
-                        player.setMoney(player.getMoney() - getUpgradeCost3());
-                        
+                        if (evolvePath == 1) {
+                            //1. evolve
+                        } else {
+                            //2. evolve
+                        }
                         break;
                     default:
                         //cigok
-                        player.setMoney(player.getMoney() - getUpgradeCost1());
-                        
+                        if (evolvePath == 1) {
+                            //1. evolve
+                        } else {
+                            //2. evolve
+                        }
                         break;
                 }
-                GameGUI.refreshMoney(player.getMoney());
             }
             return true;
         }
         return false;
     }
-    
-    /**
-     * Depends on timer, tower shoot bullet to the first enemy that is in tower's range
-     * @param enemies
-     * @param bullet 
-     */
 
+    /**
+     * Depends on timer, tower shoot bullet to the first enemy that is in
+     * tower's range
+     *
+     * @param enemies
+     * @param bullet
+     */
     public void shoot(ArrayList<Enemy> enemies, Bullet bullet) {
         boolean found = false;
         if (timer < 100) {
@@ -112,7 +128,7 @@ public class Tower extends Sprite {
                     found = true;
                     firstEnemy = enemy;
                     bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
-                    if(bullet.getVisibility()){
+                    if (bullet.getVisibility()) {
                         hit();
                     }
                     timer = 0;
@@ -124,6 +140,7 @@ public class Tower extends Sprite {
 
     /**
      * Enemy is in tower's range or not
+     *
      * @param target
      * @return
      */
@@ -135,15 +152,15 @@ public class Tower extends Sprite {
 
         return (z < this.getRange());
     }
-    
+
     /**
      * if the bullet collides with the enemy, it takes damage
      */
-    public void hit(){
+    public void hit() {
         firstEnemy.takeDamage(this.power);
     }
     // GETTER - SETTER
-    
+
     public int getBuyingCost() {
         return buyingCost;
     }
@@ -152,31 +169,31 @@ public class Tower extends Sprite {
         return refundCost;
     }
 
-    public int getUpgradeCost1() {
-        return upgradeCost1;
+    public int getUpgradeCost() {
+        return this.upgradeCost;
     }
 
-    public int getUpgradeCost2() {
-        return upgradeCost2;
+    public void setBasicUpgradeCost(int type) {
+        switch (this.type) {
+            default:
+                this.upgradeCost = 0;
+                break;
+            case 1:
+                this.upgradeCost = 6;
+                break;
+            case 2:
+                this.upgradeCost = 10;
+                break;
+            case 3:
+                this.upgradeCost = 15;
+                break;
+
+        }
     }
 
-    public int getUpgradeCost3() {
-        return upgradeCost3;
+    public void setUpgradeCost(int upgradeCost) {
+        this.upgradeCost = upgradeCost;
     }
-
-    public void setUpgradeCost1(int upgradeCost1) {
-        this.upgradeCost1 = upgradeCost1;
-    }
-
-    public void setUpgradeCost2(int upgradeCost2) {
-        this.upgradeCost2 = upgradeCost2;
-    }
-
-    public void setUpgradeCost3(int upgradeCost3) {
-        this.upgradeCost3 = upgradeCost3;
-    }
-
-    
 
     public int getLevel() {
         return this.level;
@@ -213,8 +230,13 @@ public class Tower extends Sprite {
     public Enemy getFirstEnemy() {
         return firstEnemy;
     }
-    public Image getImage(){
+
+    public Image getImage() {
         return image;
     }
-    
+
+    public void increaseRefoundCost() {
+        this.refundCost += (this.getUpgradeCost() / 2);
+    }
+
 }
