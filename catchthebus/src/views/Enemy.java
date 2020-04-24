@@ -33,6 +33,11 @@ public class Enemy extends Sprite {
         g.drawImage(image, x, y, width, height, null);
     }
 
+    /**
+     * Move enemies along to directions (from file) and coordinates (from file)
+     * @param cords
+     * @param dir 
+     */
     public void move(ArrayList<Pair> cords, String dir) {
         this.x += velx;
         this.y += vely;
@@ -71,10 +76,18 @@ public class Enemy extends Sprite {
         return rect.intersects(otherRect);
     }
 
+    /**
+     * If X and Y coordinates are equal then Enemy should change direction
+     * @param cords
+     * @return 
+     */
     public boolean turn(ArrayList<Pair> cords) {
         return (cords.get(counterDir).getX() == this.x && cords.get(counterDir).getY() == this.y);
     }
     
+    /**
+     * Enemy isn't alive anymore
+     */
     public void kill(){
         this.isAlive = false;
     }
