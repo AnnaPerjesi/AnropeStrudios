@@ -1,10 +1,7 @@
 package views;
 
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
-import model.GameGUI;
 import model.Player;
 
 public class Tower extends Sprite {
@@ -84,7 +81,7 @@ public class Tower extends Sprite {
                             //1. evolve
                             //FAGYASZT
                             level += 1;
-                        } else {
+                        } else if(evolvePath == 2){
                             //2. evolve
                             //LASSÍT
                             level += 1;
@@ -99,7 +96,7 @@ public class Tower extends Sprite {
                                 firstEnemy.kill();
                             }
                             level += 1;
-                        } else {
+                        } else if(evolvePath == 2){
                             //2. evolve
                             //SASSZEM
                             this.setRange(this.getRange()*2);
@@ -107,7 +104,7 @@ public class Tower extends Sprite {
                         }
                         break;
                     default:
-                        //cigok
+                        //afromagyarok
                         if (evolvePath == 1) {
                             //1. evolve
                             //MINDENKIT ÖL
