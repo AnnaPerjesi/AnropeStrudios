@@ -252,7 +252,7 @@ public class GameGUI extends JFrame {
                                 twLevel.setHorizontalAlignment(SwingConstants.CENTER);
                                 twLevel.setVisible(true);
 
-                                twPower.setText("Power: " + (int)temp.getPower() + " (+" + temp.getPower() * 0.1 + ")");
+                                twPower.setText("Power: " + (int)temp.getPower() + " (+" +(Math.round((temp.getPower() * 0.1) * 10) / 10.0)+ ")");
                                 twPower.setFont(new Font("Courier New", Font.ITALIC, 16));
                                 twPower.setOpaque(true);
                                 twPower.setBackground(new java.awt.Color(220, 220, 220));
@@ -373,7 +373,7 @@ public class GameGUI extends JFrame {
                                 twLevel.setHorizontalAlignment(SwingConstants.CENTER);
                                 twLevel.setVisible(true);
 
-                                twPower.setText("Power: " + (int)temp.getPower() + " (+" + temp.getPower() * 0.1 + ")");
+                                twPower.setText("Power: " + (int)temp.getPower() + " (+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
                                 twPower.setFont(new Font("Courier New", Font.ITALIC, 16));
                                 twPower.setOpaque(true);
                                 twPower.setBackground(new java.awt.Color(220, 220, 220));
@@ -494,7 +494,7 @@ public class GameGUI extends JFrame {
                                 twLevel.setHorizontalAlignment(SwingConstants.CENTER);
                                 twLevel.setVisible(true);
 
-                                twPower.setText("Power: " + (int)temp.getPower() + " (+" + temp.getPower() * 0.1 + ")");
+                                twPower.setText("Power: " + (int)temp.getPower() + " (+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
                                 twPower.setFont(new Font("Courier New", Font.ITALIC, 16));
                                 twPower.setOpaque(true);
                                 twPower.setBackground(new java.awt.Color(220, 220, 220));
@@ -683,7 +683,7 @@ public class GameGUI extends JFrame {
         evolveBtn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                temp.upgrade(gameArea.getPlayer(),1);
+                temp.upgrade(gameArea.getPlayer(),2);
                 twLevel.setText("Lvl: " + temp.getLevel());
                 twPower.setText("Power: " + (int) temp.getPower() + " (+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
                 twRange.setText("Range: " + (int) temp.getRange());
