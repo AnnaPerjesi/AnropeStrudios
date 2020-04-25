@@ -82,9 +82,11 @@ public class Tower extends Sprite {
                         //disab
                         if (evolvePath == 1) {
                             //1. evolve
+                            //FAGYASZT
                             level += 1;
                         } else {
                             //2. evolve
+                            //LASSÍT
                             level += 1;
                         }
                         break;
@@ -92,9 +94,15 @@ public class Tower extends Sprite {
                         //incog
                         if (evolvePath == 1) {
                             //1. evolve
+                            /*MINDEN 5. lövésnél azonnal öl*/
+                            if(getCountShoot() == 5){
+                                firstEnemy.kill();
+                            }
                             level += 1;
                         } else {
                             //2. evolve
+                            //SASSZEM
+                            this.setRange(this.getRange()*2);
                             level += 1;
                         }
                         break;
@@ -102,9 +110,12 @@ public class Tower extends Sprite {
                         //cigok
                         if (evolvePath == 1) {
                             //1. evolve
+                            //MINDENKIT ÖL
                             level += 1;
                         } else if (evolvePath == 2) {
                             //2. evolve
+                            //DUPLA SEBZÉS
+                            this.setPower(this.getPower()*2);
                             level += 1;
                         }
                         break;
@@ -127,13 +138,14 @@ public class Tower extends Sprite {
         if (timer < 100) {
             timer++;
         } else {
-            countShoot++;
+            
             bullet.show();
             int i = 0;
             while (!found && i < enemies.size()) {
                 Enemy enemy = enemies.get(i);
                 if (inRange(enemy)) {
                     found = true;
+                    countShoot++;
                     firstEnemy = enemy;
                     bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
                     if (bullet.getVisibility()) {
@@ -144,8 +156,8 @@ public class Tower extends Sprite {
                 i++;
             }
         }
-        if (countShoot == 5) {
-
+        if (countShoot >= 5) {
+            countShoot = 0;
         }
     }
 
@@ -248,6 +260,10 @@ public class Tower extends Sprite {
 
     public void increaseRefoundCost() {
         this.refundCost += (this.getUpgradeCost() / 2);
+    }
+/*NEW*/
+    private int getCountShoot() {
+        return countShoot;
     }
 
 }
