@@ -259,8 +259,12 @@ public class Tower extends Sprite {
         this.refundCost += (this.getUpgradeCost() / 2);
     }
 /*NEW*/
-    private int getCountShoot() {
+    public int getCountShoot() {
         return countShoot;
+    }
+    
+    public int getType(){
+        return type;
     }
 
 }

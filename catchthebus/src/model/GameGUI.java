@@ -57,20 +57,12 @@ public class GameGUI extends JFrame {
     private JLabel twPower;
     private JLabel twRange;
     private JLabel twCost;
+    private JLabel twRefCost;
 
+    //upgrade label
     private int uLabelX;
     private int uLabelY;
 
-    /*
-    private int uLevelX;
-    private int uLevelY;
-    private int uPowerX;
-    private int uPowerY;
-    private int uRangeX;
-    private int uRangeY;
-    private int uCostX;
-    private int uCostY;
-     */
     public GameGUI() {
         gameArea = new GameEngine();
         maxWave = gameArea.getMaxWave();
@@ -81,6 +73,7 @@ public class GameGUI extends JFrame {
         twPower = new JLabel();
         twRange = new JLabel();
         twCost = new JLabel();
+        twRefCost = new JLabel();
         xBtn = new JButton();
         delBtn = new JButton();
         upgBtn = new JButton("Upgrade");
@@ -154,13 +147,21 @@ public class GameGUI extends JFrame {
                             twRange.setBorder(null);
                             twRange.setVisible(true);
 
-                            twCost.setText("Cost: " + temp.getRefundCost());
+                            twCost.setText("Cost: " + temp.getUpgradeCost());
                             twCost.setFont(new Font("Courier New", Font.ITALIC, 16));
                             twCost.setOpaque(true);
                             twCost.setBackground(new java.awt.Color(220, 220, 220));
                             twCost.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 155, 150, 40);
                             twCost.setBorder(null);
                             twCost.setVisible(true);
+
+                            twRefCost.setText("(+" + temp.getRefundCost() + ")");
+                            twRefCost.setFont(new Font("Courier New", Font.ITALIC, 12));
+                            twRefCost.setOpaque(true);
+                            twRefCost.setBackground(new java.awt.Color(220, 220, 220));
+                            twRefCost.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 275, 40, 20);
+                            twRefCost.setBorder(null);
+                            twRefCost.setVisible(true);
 
                             delBtn.setIcon(new ImageIcon("src/data/pngs/bin.png"));
                             delBtn.setOpaque(true);
@@ -178,7 +179,7 @@ public class GameGUI extends JFrame {
                                 upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
                                 upgBtn.setVisible(true);
                             } else {
-                                switch (type) {
+                                switch (temp.getType()) {
                                     case 2: {
                                         evolveBtn1.setText("FAGYASZT");
                                         evolveBtn2.setText("LASSÍT");
@@ -213,6 +214,7 @@ public class GameGUI extends JFrame {
                                 evolveBtn2.setVisible(true);
 
                                 delBtn.setBounds(upgradeLabel.getBounds().x + 145, upgradeLabel.getBounds().y + 220, 40, 40);
+                                twRefCost.setBounds(upgradeLabel.getBounds().x + 145, upgradeLabel.getBounds().y + 260, 40, 20);
 
                             }
                             xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
@@ -229,6 +231,7 @@ public class GameGUI extends JFrame {
                                     twPower.setVisible(false);
                                     twRange.setVisible(false);
                                     twCost.setVisible(false);
+                                    twRefCost.setVisible(false);
                                     upgradeLabel.setVisible(false);
                                     xBtn.setVisible(false);
                                     delBtn.setVisible(false);
@@ -243,6 +246,7 @@ public class GameGUI extends JFrame {
                             twPower.setVisible(false);
                             twRange.setVisible(false);
                             twCost.setVisible(false);
+                            twRefCost.setVisible(false);
                             upgradeLabel.setVisible(false);
                             xBtn.setVisible(false);
                             delBtn.setVisible(false);
@@ -293,13 +297,11 @@ public class GameGUI extends JFrame {
 
         {//Pause Button
             pause = new JButton();
-            //pause.setBorder(BorderFactory.createLineBorder(Color.black));
             pause.setIcon(new ImageIcon("src/data/pngs/pause.png"));
             pause.setBounds(1540, 20, 40, 40);
             pause.setBorder(null);
             pause.setBackground(null);
 
-            //NEW
             pause.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -318,6 +320,9 @@ public class GameGUI extends JFrame {
                 xBtn.setVisible(false);
                 delBtn.setVisible(false);
                 upgBtn.setVisible(false);
+                twRefCost.setVisible(false);
+                evolveBtn1.setVisible(false);
+                evolveBtn2.setVisible(false);
                 gameArea.setRangeVisible(false);
                 gameArea.sellTower(temp, type);
             }
@@ -329,17 +334,15 @@ public class GameGUI extends JFrame {
                 twLevel.setText("Lvl: " + temp.getLevel());
                 twPower.setText("Power: " + (int) temp.getPower() + "\n(+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
                 twRange.setText("Range: " + (int) temp.getRange());
-                twCost.setText("Cost: " + temp.getRefundCost());
+                twCost.setText("Cost: " + temp.getUpgradeCost());
+                twRefCost.setText("(+" + temp.getRefundCost()+")");
                 refreshMoney(gameArea.getPlayerMoney());
                 if (temp.getLevel() == 5) {
                     upgBtn.setVisible(false);
                     evolveBtn1.setVisible(true);
                     evolveBtn2.setVisible(true);
-                } else {
-                    upgBtn.setVisible(true);
-                    evolveBtn1.setVisible(false);
-                    evolveBtn2.setVisible(false);
                 }
+                refreshImage();
             }
         });
         evolveBtn1.addActionListener(new ActionListener() {
@@ -349,7 +352,9 @@ public class GameGUI extends JFrame {
                 twLevel.setText("Lvl: " + temp.getLevel());
                 twPower.setText("Power: " + (int) temp.getPower() + " (+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
                 twRange.setText("Range: " + (int) temp.getRange());
-                twCost.setText("Cost: " + temp.getRefundCost());
+                twCost.setText("Cost: " + temp.getUpgradeCost());
+                twRefCost.setText("(+" + temp.getRefundCost()+")");
+                refreshImage();
             }
         });
         evolveBtn2.addActionListener(new ActionListener() {
@@ -359,7 +364,9 @@ public class GameGUI extends JFrame {
                 twLevel.setText("Lvl: " + temp.getLevel());
                 twPower.setText("Power: " + (int) temp.getPower() + " (+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
                 twRange.setText("Range: " + (int) temp.getRange());
-                twCost.setText("Cost: " + temp.getRefundCost());
+                twCost.setText("Cost: " + temp.getUpgradeCost());
+                twRefCost.setText("(+" + temp.getRefundCost()+")");
+                refreshImage();
             }
         });
 
@@ -509,7 +516,6 @@ public class GameGUI extends JFrame {
 
         }
 
-        //NEW
         {/*PAUSE MENU*/
 
             pBg = new JLabel();
@@ -562,6 +568,7 @@ public class GameGUI extends JFrame {
         gameArea.add(twPower);
         gameArea.add(twRange);
         gameArea.add(twCost);
+        gameArea.add(twRefCost);
         gameArea.add(upgradeLabel);
         gameArea.add(coin);
         gameArea.add(level);
@@ -591,7 +598,6 @@ public class GameGUI extends JFrame {
         frame.setVisible(true);
     }
 
-    //NEW
     public void pauseGame() {
         gameArea.setPaused(true);  //Megállítja a játékot
         gameArea.remove(pause);
@@ -601,7 +607,6 @@ public class GameGUI extends JFrame {
 
     }
 
-    //NEW
     public void resumeGame() {
         gameArea.setPaused(false);  //Elindítja a játékot
         gameArea.remove(pWindow);
