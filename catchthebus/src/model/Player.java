@@ -10,7 +10,7 @@ public class Player {
     private int money = 0;
     private int lives;
     private final int STARTLIVES = 100;
-    private final int STARTMONEY = 50;
+    private final int STARTMONEY = 500;
     private Player player;
 
     public Player(int lives, int money) {

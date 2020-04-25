@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-
 public class Enemy extends Sprite {
 
     private int speed = 5;
@@ -18,14 +17,18 @@ public class Enemy extends Sprite {
     private boolean isAlive;
     private double health;
     private int counterDir = 0;
+    private int timer;
+    private int tempVelX;
+    private int tempVelY;
 
-    public Enemy(int x, int y, int width, int height, Image image, int dmg,double health, boolean isAlive, int worth, int type) {
+    public Enemy(int x, int y, int width, int height, Image image, int dmg, double health, boolean isAlive, int worth, int type) {
         super(x, y, width, height, image);
         this.health = health;
         this.dmg = dmg;
         this.isAlive = isAlive;
         this.worth = worth;
         this.type = type;
+        this.timer = 0;
     }
 
     @Override
@@ -35,13 +38,29 @@ public class Enemy extends Sprite {
 
     /**
      * Move enemies along to directions (from file) and coordinates (from file)
+     *
      * @param cords
-     * @param dir 
+     * @param dir
      */
     public void move(ArrayList<Pair> cords, String dir) {
         this.x += velx;
         this.y += vely;
-
+        if (this.timer > 0) {
+            if (velx != 0 && vely != 0) {
+                tempVelX = velx;
+                tempVelY = vely;
+                velx = 0;
+                vely = 0;
+            }
+            this.timer--;
+            speed = 0;
+        } else {
+            if (velx == 0 && vely == 0) {
+                velx = tempVelX;
+                vely = tempVelY;
+            }
+            speed = 5;
+        }
         if (turn(cords)) {
             switch (dir.charAt(counterDir)) {
                 case 'r':
@@ -63,12 +82,14 @@ public class Enemy extends Sprite {
             }
             counterDir++;
         }
+
     }
-    
+
     /**
      * Method tells us if enemies cathed the bus or not
+     *
      * @param bus
-     * @return 
+     * @return
      */
     public boolean collidesBus(Bus bus) {
         Rectangle rect = new Rectangle(x, y, width, height);
@@ -78,50 +99,57 @@ public class Enemy extends Sprite {
 
     /**
      * If X and Y coordinates are equal then Enemy should change direction
+     *
      * @param cords
-     * @return 
+     * @return
      */
     public boolean turn(ArrayList<Pair> cords) {
         return (cords.get(counterDir).getX() == this.x && cords.get(counterDir).getY() == this.y);
     }
-    
+
     /**
      * Enemy isn't alive anymore
      */
-    public void kill(){
+    public void kill() {
         this.isAlive = false;
     }
-    
+
     /**
      * Enemy get damage from tower (bullet) and this decrese it's health
-     * @param damage 
+     *
+     * @param damage
      */
     public void takeDamage(double damage) {
         this.health -= damage;
         this.isAlive = (this.health > 0);
     }
-    
+
     // GETTER - SETTER
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-    
+
     public boolean getAlive() {
         return this.isAlive;
     }
-    public double getHealth(){
+
+    public double getHealth() {
         return this.health;
     }
 
     public int getDmg() {
         return this.dmg;
     }
-    
+
     public int getWorth() {
         return this.worth;
     }
-    
+
     public int getType() {
         return this.type;
+    }
+
+    public void setTimer(int time) {
+        this.timer = time;
     }
 }

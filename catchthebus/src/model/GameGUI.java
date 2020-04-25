@@ -156,7 +156,7 @@ public class GameGUI extends JFrame {
                             twCost.setVisible(true);
 
                             twRefCost.setText("(+" + temp.getRefundCost() + ")");
-                            twRefCost.setFont(new Font("Courier New", Font.ITALIC, 12));
+                            twRefCost.setFont(new Font("Courier New", Font.ITALIC, 10));
                             twRefCost.setOpaque(true);
                             twRefCost.setBackground(new java.awt.Color(220, 220, 220));
                             twRefCost.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 275, 40, 20);
@@ -304,11 +304,11 @@ public class GameGUI extends JFrame {
                     twPower.setText("Power: " + (int) temp.getPower() + "\n(+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
                     twRange.setText("Range: " + (int) temp.getRange());
                     twCost.setText("Cost: " + temp.getUpgradeCost());
-                    twRefCost.setText("(+" + temp.getRefundCost()+")");
+                    twRefCost.setText("(+" + temp.getRefundCost() + ")");
                     refreshMoney(gameArea.getPlayerMoney());
                     if (temp.getLevel() == 5) {
                         upgBtn.setVisible(false);
-                        switch (type) {
+                        switch (temp.getType()) {
                             case 2: {
                                 evolveBtn1.setText("FAGYASZT");
                                 evolveBtn2.setText("LASSÍT");
@@ -342,8 +342,10 @@ public class GameGUI extends JFrame {
                         evolveBtn2.setBorder(BorderFactory.createLineBorder(Color.black));
                         evolveBtn2.setVisible(true);
                         delBtn.setBounds(upgradeLabel.getBounds().x + 145, upgradeLabel.getBounds().y + 220, 40, 40);
+                        twRefCost.setBounds(upgradeLabel.getBounds().x + 145, upgradeLabel.getBounds().y + 260, 40, 20);
                     }
-                refreshImage();
+                    refreshImage();
+                }
             }
         });
         evolveBtn1.addActionListener(new ActionListener() {
@@ -355,11 +357,12 @@ public class GameGUI extends JFrame {
                     twPower.setText("Power: " + (int) temp.getPower() + " (+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
                     twRange.setText("Range: " + (int) temp.getRange());
                     twCost.setText("Cost: " + temp.getUpgradeCost());
-                    twRefCost.setText("(+" + temp.getRefundCost()+")");
+                    twRefCost.setText("(+" + temp.getRefundCost() + ")");
                     upgBtn.setVisible(true);
                     evolveBtn1.setVisible(false);
                     evolveBtn2.setVisible(false);
                     delBtn.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 230, 40, 40);
+                    twRefCost.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 275, 40, 20);
                 }
                 refreshImage();
             }
@@ -373,11 +376,12 @@ public class GameGUI extends JFrame {
                     twPower.setText("Power: " + (int) temp.getPower() + " (+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
                     twRange.setText("Range: " + (int) temp.getRange());
                     twCost.setText("Cost: " + temp.getUpgradeCost());
-                    twRefCost.setText("(+" + temp.getRefundCost()+")");
+                    twRefCost.setText("(+" + temp.getRefundCost() + ")");
                     upgBtn.setVisible(true);
                     evolveBtn1.setVisible(false);
                     evolveBtn2.setVisible(false);
                     delBtn.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 230, 40, 40);
+                    twRefCost.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 275, 40, 20);
                 }
                 refreshImage();
             }

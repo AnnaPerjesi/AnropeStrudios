@@ -19,6 +19,9 @@ public class Tower extends Sprite {
     private Bullet bullet;
     private int type;
     private int countShoot;
+    private boolean evolved;
+    private int evolvedPath;
+    private int timeShoot;
 
     public Tower(int x, int y, int width, int height, double dmg, double range, int worth, int type, Image image) {
         super(x, y, width, height, image);
@@ -33,6 +36,9 @@ public class Tower extends Sprite {
         this.level = 1;
         this.maxlevel = 10;
         this.setBasicUpgradeCost(type);
+        this.evolved = false;
+        this.evolvedPath = 0;
+        this.timeShoot = 100;
     }
 
     /**
@@ -66,25 +72,23 @@ public class Tower extends Sprite {
      */
     public boolean upgrade(Player player, int evolvePath) {
         if (level < maxlevel && player.getMoney() >= this.getUpgradeCost()) {
-            level += 1;
-            player.addMoney(-1 * this.getUpgradeCost());
-            this.setUpgradeCost((int) (this.getUpgradeCost() * this.getLevel() * 0.5));
-            this.increaseRefoundCost();
             if (level != 5) {
                 this.setPower(getPower() * 1.1);
             } else {
-                //level += 1;
-                switch (this.type) {
+                switch (this.getType()) {
                     case 2:
                         //disab
                         if (evolvePath == 1) {
                             //1. evolve
                             //FAGYASZT
-                            level += 1;
-                        } else if(evolvePath == 2){
+                            this.setPower(0);
+                            evolved = true;
+                        } else if (evolvePath == 2) {
                             //2. evolve
                             //LASSÍT
-                            level += 1;
+                            this.setPower(getPower() / 3);
+                            timeShoot = 10;
+                            evolved = true;
                         }
                         break;
                     case 3:
@@ -92,32 +96,34 @@ public class Tower extends Sprite {
                         if (evolvePath == 1) {
                             //1. evolve
                             /*MINDEN 5. lövésnél azonnal öl*/
-                            if(getCountShoot() == 5){
-                                firstEnemy.kill();
-                            }
-                            level += 1;
-                        } else if(evolvePath == 2){
+                            evolved = true;
+                        } else if (evolvePath == 2) {
                             //2. evolve
                             //SASSZEM
-                            this.setRange(this.getRange()*2);
-                            level += 1;
+                            this.setRange(getRange() * 2.0);
+
                         }
                         break;
-                    default:
+                    case 1:
                         //afromagyarok
                         if (evolvePath == 1) {
                             //1. evolve
                             //MINDENKIT ÖL
-                            level += 1;
+                            this.setPower(getPower() * 0.2);
+                            evolved = true;
                         } else if (evolvePath == 2) {
                             //2. evolve
                             //DUPLA SEBZÉS
-                            this.setPower(this.getPower()*2);
-                            level += 1;
+                            this.setPower(getPower() * 2.0);
                         }
                         break;
                 }
+                this.evolvedPath = evolvePath;
             }
+            level += 1;
+            player.addMoney(-1 * this.getUpgradeCost());
+            this.setUpgradeCost((int) (this.getUpgradeCost() * this.getLevel() * 0.5));
+            this.increaseRefoundCost();
             return true;
         }
         return false;
@@ -132,29 +138,119 @@ public class Tower extends Sprite {
      */
     public void shoot(ArrayList<Enemy> enemies, Bullet bullet) {
         boolean found = false;
-        if (timer < 100) {
+        if (timer < timeShoot) {
             timer++;
         } else {
-            
-            bullet.show();
-            int i = 0;
-            while (!found && i < enemies.size()) {
-                Enemy enemy = enemies.get(i);
-                if (inRange(enemy)) {
-                    found = true;
-                    countShoot++;
-                    firstEnemy = enemy;
-                    bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
-                    if (bullet.getVisibility()) {
-                        hit();
+            if (!evolved) {
+                bullet.show();
+                int i = 0;
+                while (!found && i < enemies.size()) {
+                    Enemy enemy = enemies.get(i);
+                    if (inRange(enemy)) {
+                        found = true;
+                        firstEnemy = enemy;
+                        bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
+                        if (bullet.getVisibility()) {
+                            hit();
+                        }
+                        timer = 0;
+                    }
+                    i++;
+                }
+            } else {
+
+                if (evolvedPath == 1) {
+                    int i;
+                    switch (this.getType()) {
+                        
+                        case 1:
+                            //MINDENKIT SEBEZ - DONE
+                            for (Enemy enemy : enemies) {
+                                enemy.takeDamage(this.getPower());
+                            }
+                            break;
+                        case 2:
+                            //FAGYASZT
+                            bullet.show();
+                            i = 0;
+                            while (!found && i < enemies.size()) {
+                                Enemy enemy = enemies.get(i);
+                                if (inRange(enemy)) {
+                                    found = true;
+                                    firstEnemy = enemy;
+                                    bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
+                                    if (bullet.getVisibility()) {
+                                        firstEnemy.setTimer(30);
+                                        hit();
+                                    }
+                                }
+                                i++;
+                            }
+                            break;
+
+                        case 3:
+                            //MINDEN ÖTÖDIK EGYBŐL ÖL
+                            if (countShoot != 5) {
+                                bullet.show();
+                                i = 0;
+                                while (!found && i < enemies.size()) {
+                                    Enemy enemy = enemies.get(i);
+                                    if (inRange(enemy)) {
+                                        found = true;
+                                        countShoot++;
+                                        firstEnemy = enemy;
+                                        bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
+                                        if (bullet.getVisibility()) {
+                                            hit();
+                                        }
+                                    }
+                                    i++;
+                                }
+                            } else {
+                                bullet.show();
+                                i = 0;
+                                while (!found && i < enemies.size()) {
+                                    Enemy enemy = enemies.get(i);
+                                    if (inRange(enemy)) {
+                                        found = true;
+                                        countShoot++;
+                                        firstEnemy = enemy;
+                                        bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
+                                        if (bullet.getVisibility()) {
+                                            hit();
+                                            firstEnemy.kill();
+                                        }
+                                    }
+                                    i++;
+                                }
+                            }
+                            break;
                     }
                     timer = 0;
+                    found = false;
+                } else {
+                    switch (this.getType()) {
+                        case 2:
+                            //Gyorsan lő
+                            bullet.show();
+                            int i = 0;
+                            while (!found && i < enemies.size()) {
+                                Enemy enemy = enemies.get(i);
+                                if (inRange(enemy)) {
+                                    found = true;
+                                    firstEnemy = enemy;
+                                    bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
+                                    if (bullet.getVisibility()) {
+                                        hit();
+                                    }
+                                    timer = 0;
+                                }
+                                i++;
+                            }
+                            break;
+                    }
                 }
-                i++;
             }
-        }
-        if (countShoot >= 5) {
-            countShoot = 0;
         }
     }
 
@@ -258,12 +354,13 @@ public class Tower extends Sprite {
     public void increaseRefoundCost() {
         this.refundCost += (this.getUpgradeCost() / 2);
     }
-/*NEW*/
+
+    /*NEW*/
     public int getCountShoot() {
         return countShoot;
     }
-    
-    public int getType(){
+
+    public int getType() {
         return type;
     }
 
