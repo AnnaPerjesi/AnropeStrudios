@@ -43,23 +43,11 @@ public class Enemy extends Sprite {
      * @param dir
      */
     public void move(ArrayList<Pair> cords, String dir) {
-        this.x += velx;
-        this.y += vely;
         if (this.timer > 0) {
-            if (velx != 0 && vely != 0) {
-                tempVelX = velx;
-                tempVelY = vely;
-                velx = 0;
-                vely = 0;
-            }
             this.timer--;
-            speed = 0;
         } else {
-            if (velx == 0 && vely == 0) {
-                velx = tempVelX;
-                vely = tempVelY;
-            }
-            speed = 5;
+            this.x += velx;
+            this.y += vely;
         }
         if (turn(cords)) {
             switch (dir.charAt(counterDir)) {

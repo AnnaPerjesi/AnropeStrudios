@@ -85,7 +85,7 @@ public class Tower extends Sprite {
                             evolved = true;
                         } else if (evolvePath == 2) {
                             //2. evolve
-                            //LASSÍT
+                            //GYORSAN LŐ
                             this.setPower(getPower() / 3);
                             timeShoot = 10;
                             evolved = true;
@@ -170,7 +170,7 @@ public class Tower extends Sprite {
                             }
                             break;
                         case 2:
-                            //FAGYASZT
+                            //FAGYASZT - DONE
                             bullet.show();
                             i = 0;
                             while (!found && i < enemies.size()) {
@@ -180,7 +180,7 @@ public class Tower extends Sprite {
                                     firstEnemy = enemy;
                                     bullet.setHasDir(firstEnemy.getX(), firstEnemy.getY());
                                     if (bullet.getVisibility()) {
-                                        firstEnemy.setTimer(30);
+                                        firstEnemy.setTimer(50);
                                         hit();
                                     }
                                 }
@@ -189,7 +189,7 @@ public class Tower extends Sprite {
                             break;
 
                         case 3:
-                            //MINDEN ÖTÖDIK EGYBŐL ÖL
+                            //MINDEN ÖTÖDIK EGYBŐL ÖL - DONE
                             if (countShoot != 5) {
                                 bullet.show();
                                 i = 0;
@@ -231,7 +231,7 @@ public class Tower extends Sprite {
                 } else {
                     switch (this.getType()) {
                         case 2:
-                            //Gyorsan lő
+                            //GYORSAN SHOOT SHOOT - DONE
                             bullet.show();
                             int i = 0;
                             while (!found && i < enemies.size()) {

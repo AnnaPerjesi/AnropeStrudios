@@ -311,7 +311,7 @@ public class GameGUI extends JFrame {
                         switch (temp.getType()) {
                             case 2: {
                                 evolveBtn1.setText("FAGYASZT");
-                                evolveBtn2.setText("LASSÍT");
+                                evolveBtn2.setText("GYORS TÜZELŐ");
 
                                 break;
                             }
