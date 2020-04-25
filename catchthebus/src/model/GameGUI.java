@@ -178,42 +178,10 @@ public class GameGUI extends JFrame {
                                 upgBtn.setBorder(BorderFactory.createLineBorder(Color.black));
                                 upgBtn.setVisible(true);
                             } else {
-                                switch (type) {
-                                    case 2: {
-                                        evolveBtn1.setText("FAGYASZT");
-                                        evolveBtn2.setText("LASSÍT");
-
-                                        break;
-                                    }
-                                    case 3: {
-                                        evolveBtn1.setText("5. GYILKOS");
-                                        evolveBtn2.setText("SASSZEM");
-                                        break;
-                                    }
-                                    default: {
-                                        evolveBtn1.setText("MINDENKIT ÖL");
-                                        evolveBtn2.setText("DUPLA SEBZÉS");
-                                        break;
-                                    }
-                                }
-                                evolveBtn1.setOpaque(true);
-                                evolveBtn1.setFont(new Font("Courier New", Font.BOLD, 14));
-                                evolveBtn1.setForeground(new java.awt.Color(233, 233, 233));
-                                evolveBtn1.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 195, 115, 40);
-                                evolveBtn1.setBackground(new java.awt.Color(65, 42, 42));
-                                evolveBtn1.setBorder(BorderFactory.createLineBorder(Color.black));
                                 evolveBtn1.setVisible(true);
-
-                                evolveBtn2.setOpaque(true);
-                                evolveBtn2.setFont(new Font("Courier New", Font.BOLD, 14));
-                                evolveBtn2.setForeground(new java.awt.Color(233, 233, 233));
-                                evolveBtn2.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 245, 115, 40);
-                                evolveBtn2.setBackground(new java.awt.Color(65, 42, 42));
-                                evolveBtn2.setBorder(BorderFactory.createLineBorder(Color.black));
                                 evolveBtn2.setVisible(true);
-
+                                upgBtn.setVisible(false);
                                 delBtn.setBounds(upgradeLabel.getBounds().x + 145, upgradeLabel.getBounds().y + 220, 40, 40);
-
                             }
                             xBtn.setIcon(new ImageIcon("src/data/pngs/xBtn.png"));
                             xBtn.setOpaque(true);
@@ -327,41 +295,88 @@ public class GameGUI extends JFrame {
         upgBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                temp.upgrade(gameArea.getPlayer(), 0);
-                twLevel.setText("Lvl: " + temp.getLevel());
-                twPower.setText("Power: " + (int) temp.getPower() + "\n(+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
-                twRange.setText("Range: " + (int) temp.getRange());
-                twCost.setText("Cost: " + temp.getRefundCost());
-                refreshMoney(gameArea.getPlayerMoney());
-                if (temp.getLevel() == 5) {
-                    upgBtn.setVisible(false);
-                    evolveBtn1.setVisible(true);
-                    evolveBtn2.setVisible(true);
-                } else {
-                    upgBtn.setVisible(true);
-                    evolveBtn1.setVisible(false);
-                    evolveBtn2.setVisible(false);
+                if (gameArea.getPlayerMoney() >= temp.getUpgradeCost()) {
+                    temp.upgrade(gameArea.getPlayer(), 0);
+                    twLevel.setText("Lvl: " + temp.getLevel());
+                    twPower.setText("Power: " + (int) temp.getPower() + "\n(+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
+                    twRange.setText("Range: " + (int) temp.getRange());
+                    twCost.setText("Cost: " + temp.getRefundCost());
+                    refreshMoney(gameArea.getPlayerMoney());
+                    if (temp.getLevel() == 5) {
+                        upgBtn.setVisible(false);
+                        switch (type) {
+                            case 2: {
+                                evolveBtn1.setText("FAGYASZT");
+                                evolveBtn2.setText("LASSÍT");
+
+                                break;
+                            }
+                            case 3: {
+                                evolveBtn1.setText("5. GYILKOS");
+                                evolveBtn2.setText("SASSZEM");
+                                break;
+                            }
+                            default: {
+                                evolveBtn1.setText("MINDENKIT ÖL");
+                                evolveBtn2.setText("DUPLA SEBZÉS");
+                                break;
+                            }
+                        }
+                        evolveBtn1.setOpaque(true);
+                        evolveBtn1.setFont(new Font("Courier New", Font.BOLD, 14));
+                        evolveBtn1.setForeground(new java.awt.Color(233, 233, 233));
+                        evolveBtn1.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 195, 115, 40);
+                        evolveBtn1.setBackground(new java.awt.Color(65, 42, 42));
+                        evolveBtn1.setBorder(BorderFactory.createLineBorder(Color.black));
+                        evolveBtn1.setVisible(true);
+
+                        evolveBtn2.setOpaque(true);
+                        evolveBtn2.setFont(new Font("Courier New", Font.BOLD, 14));
+                        evolveBtn2.setForeground(new java.awt.Color(233, 233, 233));
+                        evolveBtn2.setBounds(upgradeLabel.getBounds().x + 15, upgradeLabel.getBounds().y + 245, 115, 40);
+                        evolveBtn2.setBackground(new java.awt.Color(65, 42, 42));
+                        evolveBtn2.setBorder(BorderFactory.createLineBorder(Color.black));
+                        evolveBtn2.setVisible(true);
+                        delBtn.setBounds(upgradeLabel.getBounds().x + 145, upgradeLabel.getBounds().y + 220, 40, 40);
+                    } /*else {
+                        upgBtn.setVisible(true);
+                        evolveBtn1.setVisible(false);
+                        evolveBtn2.setVisible(false);
+                        delBtn.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 230, 40, 40);
+                    }*/
                 }
             }
         });
         evolveBtn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                temp.upgrade(gameArea.getPlayer(), 1);
-                twLevel.setText("Lvl: " + temp.getLevel());
-                twPower.setText("Power: " + (int) temp.getPower() + " (+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
-                twRange.setText("Range: " + (int) temp.getRange());
-                twCost.setText("Cost: " + temp.getRefundCost());
+                if (gameArea.getPlayerMoney() >= temp.getUpgradeCost()) {
+                    temp.upgrade(gameArea.getPlayer(), 1);
+                    twLevel.setText("Lvl: " + temp.getLevel());
+                    twPower.setText("Power: " + (int) temp.getPower() + " (+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
+                    twRange.setText("Range: " + (int) temp.getRange());
+                    twCost.setText("Cost: " + temp.getRefundCost());
+                    upgBtn.setVisible(true);
+                    evolveBtn1.setVisible(false);
+                    evolveBtn2.setVisible(false);
+                    delBtn.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 230, 40, 40);
+                }
             }
         });
         evolveBtn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                temp.upgrade(gameArea.getPlayer(), 2);
-                twLevel.setText("Lvl: " + temp.getLevel());
-                twPower.setText("Power: " + (int) temp.getPower() + " (+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
-                twRange.setText("Range: " + (int) temp.getRange());
-                twCost.setText("Cost: " + temp.getRefundCost());
+                if (gameArea.getPlayerMoney() >= temp.getUpgradeCost()) {
+                    temp.upgrade(gameArea.getPlayer(), 2);
+                    twLevel.setText("Lvl: " + temp.getLevel());
+                    twPower.setText("Power: " + (int) temp.getPower() + " (+" + (Math.round((temp.getPower() * 0.1) * 10) / 10.0) + ")");
+                    twRange.setText("Range: " + (int) temp.getRange());
+                    twCost.setText("Cost: " + temp.getRefundCost());
+                    upgBtn.setVisible(true);
+                    evolveBtn1.setVisible(false);
+                    evolveBtn2.setVisible(false);
+                    delBtn.setBounds(upgradeLabel.getBounds().x + 130, upgradeLabel.getBounds().y + 230, 40, 40);
+                }
             }
         });
 
