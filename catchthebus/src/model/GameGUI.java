@@ -646,6 +646,8 @@ public class GameGUI extends JFrame {
                 xBtn.setVisible(false);
                 delBtn.setVisible(false);
                 upgBtn.setVisible(false);
+                evolveBtn1.setVisible(false);
+                evolveBtn2.setVisible(false);
                 gameArea.setRangeVisible(false);
                 gameArea.sellTower(temp, type);
             }
