@@ -100,7 +100,7 @@ public class Tower extends Sprite {
                             //1. evolve
                             /*MINDEN 5. lövésnél azonnal öl*/
                             evolved = true;
-                            this.image = new ImageIcon("src/data/pngs/bin.png").getImage();
+                            this.image = new ImageIcon("src/data/pngs/hs.png").getImage();
                         } else if (evolvePath == 2) {
                             //2. evolve
                             //SASSZEM
@@ -116,16 +116,20 @@ public class Tower extends Sprite {
                             //MINDENKIT ÖL
                             this.setPower(getPower() * 0.2);
                             evolved = true;
+                            this.image = new ImageIcon("src/data/pngs/mindenkitsebez.png").getImage();
                         } else if (evolvePath == 2) {
                             //2. evolve
                             //DUPLA SEBZÉS
                             this.setPower(getPower() * 2.0);
+                            this.image = new ImageIcon("src/data/pngs/duplasebzes.png").getImage();
                         }
                         break;
                 }
                 this.evolvedPath = evolvePath;
+                //level += 1;
             }
             level += 1;
+            
             player.addMoney(-1 * this.getUpgradeCost());
             this.setUpgradeCost((int) (this.getUpgradeCost() * this.getLevel() * 0.5));
             this.increaseRefoundCost();
@@ -368,6 +372,9 @@ public class Tower extends Sprite {
 
     public int getType() {
         return type;
+    }
+    public boolean getEvolved(){
+        return evolved;
     }
 
 }
