@@ -16,6 +16,10 @@ build_game:
   script:
     - ant compile
     - ant jar
+  artifacts:
+    paths:
+        - dist/CatchTheBus.jar
+    expire_in: 1 week
 
 # Test
 test_model:
