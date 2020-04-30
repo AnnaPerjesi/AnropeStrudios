@@ -2,6 +2,7 @@ package views;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import model.Player;
 
 public class Tower extends Sprite {
@@ -83,12 +84,14 @@ public class Tower extends Sprite {
                             //FAGYASZT
                             this.setPower(0);
                             evolved = true;
+                            this.image = new ImageIcon("src/data/pngs/frodisabgrey.png").getImage();
                         } else if (evolvePath == 2) {
                             //2. evolve
                             //GYORSAN LŐ
                             this.setPower(getPower() / 3);
                             timeShoot = 10;
                             evolved = true;
+                            this.image = new ImageIcon("src/data/pngs/gyorsdisab.png").getImage();
                         }
                         break;
                     case 3:
@@ -97,10 +100,12 @@ public class Tower extends Sprite {
                             //1. evolve
                             /*MINDEN 5. lövésnél azonnal öl*/
                             evolved = true;
+                            this.image = new ImageIcon("src/data/pngs/bin.png").getImage();
                         } else if (evolvePath == 2) {
                             //2. evolve
                             //SASSZEM
                             this.setRange(getRange() * 2.0);
+                            this.image = new ImageIcon("src/data/pngs/eye.png").getImage();
 
                         }
                         break;
@@ -219,6 +224,7 @@ public class Tower extends Sprite {
                                         if (bullet.getVisibility()) {
                                             hit();
                                             firstEnemy.kill();
+                                            countShoot = 0;
                                         }
                                     }
                                     i++;
