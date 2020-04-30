@@ -142,7 +142,7 @@ public final class GameEngine extends JPanel {
             tower.draw(grphcs);
         }
         for (Bullet bullet : bullets) {
-            if (bullet.getVisibility()) {
+            if (bullet.getVisibility() && enemies.size() > 0) {
                 bullet.draw(grphcs);
             }
         }

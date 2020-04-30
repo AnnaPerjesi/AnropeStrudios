@@ -38,6 +38,7 @@ public class GameStart extends JFrame {
 
         logo = new JLabel();
         logo.setIcon(new ImageIcon("src/data/pngs/proba.png"));
+        
         logo.setHorizontalAlignment(JLabel.CENTER);
         logo.setBounds(380, 50, 910, 200);
         logo.setBackground(new java.awt.Color(221,197,161,50));

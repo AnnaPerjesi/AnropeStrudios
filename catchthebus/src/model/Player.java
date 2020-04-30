@@ -10,12 +10,12 @@ public class Player {
     private int money = 0;
     private int lives;
     private final int STARTLIVES = 100;
-    private final int STARTMONEY = 500;
+    private final int STARTMONEY = 5000;
     private Player player;
 
     public Player(int lives, int money) {
-        this.lives = 100;
-        this.money = 50;
+        this.lives = lives;
+        this.money = money;
     }
 
     /**
